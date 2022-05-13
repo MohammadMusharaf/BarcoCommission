@@ -12,3 +12,5 @@
 /BarcoSales.DAO/bin/Debug/netcoreapp3.1
 /BarcoSales.Model/obj
 /BarcoSales.Model/bin/Debug/netcoreapp3.1
+/BarcoSales.Api/bin/Debug/net5.0
+/BarcoSales.Api/obj
