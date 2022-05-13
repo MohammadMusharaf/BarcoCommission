@@ -14,3 +14,5 @@
 /BarcoSales.Model/bin/Debug/netcoreapp3.1
 /BarcoSales.Api/bin/Debug/net5.0
 /BarcoSales.Api/obj
+/BarcoSales.Repository/bin/Debug/netcoreapp3.1
+/BarcoSales.Repository/obj

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcoSales.Model", "BarcoSa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcoSales.DAO", "BarcoSales.DAO\BarcoSales.DAO.csproj", "{D2B35680-A6B9-41EF-A8CF-B1B365EC792D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcoSales.Repository", "BarcoSale.Repository\BarcoSales.Repository.csproj", "{91D53CB2-3528-4278-81C0-C229312829B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarcoSales.Repository", "BarcoSales.Repository\BarcoSales.Repository.csproj", "{16B0D9AA-0623-46A8-874D-2FCC85A3FC6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{D2B35680-A6B9-41EF-A8CF-B1B365EC792D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2B35680-A6B9-41EF-A8CF-B1B365EC792D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2B35680-A6B9-41EF-A8CF-B1B365EC792D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91D53CB2-3528-4278-81C0-C229312829B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91D53CB2-3528-4278-81C0-C229312829B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91D53CB2-3528-4278-81C0-C229312829B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91D53CB2-3528-4278-81C0-C229312829B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16B0D9AA-0623-46A8-874D-2FCC85A3FC6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16B0D9AA-0623-46A8-874D-2FCC85A3FC6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16B0D9AA-0623-46A8-874D-2FCC85A3FC6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16B0D9AA-0623-46A8-874D-2FCC85A3FC6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

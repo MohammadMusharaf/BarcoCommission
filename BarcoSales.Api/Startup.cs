@@ -1,5 +1,5 @@
 using BarcoSales.Repository;
-
+using BarcoSales.DAO;
 using BarcoSales.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BarcoSales.DAO;
 
 namespace Barco.Api
 {
