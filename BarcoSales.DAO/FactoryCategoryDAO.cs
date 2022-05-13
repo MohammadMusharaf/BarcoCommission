@@ -1,10 +1,11 @@
-﻿using BarcoSale.Repository;
+﻿using BarcoSales.Repository;
 using BarcoSales.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 
 namespace BarcoSales.DAO
 {

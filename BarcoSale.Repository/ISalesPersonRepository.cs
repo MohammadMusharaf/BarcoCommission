@@ -5,7 +5,7 @@ using System.Text;
 
 
 
-namespace BarcoSale.Repository
+namespace BarcoSales.Repository
 {
     public interface ISalesPersonRepository
     {

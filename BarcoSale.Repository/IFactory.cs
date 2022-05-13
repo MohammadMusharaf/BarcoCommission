@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BarcoSale.Repository
+namespace BarcoSales.Repository
 {
     public interface IFactory
     {

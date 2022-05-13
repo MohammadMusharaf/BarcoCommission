@@ -1,4 +1,4 @@
-﻿using BarcoSale.Repository;
+﻿using BarcoSales.Repository;
 using BarcoSales.Model;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

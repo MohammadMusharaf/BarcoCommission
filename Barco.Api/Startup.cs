@@ -1,4 +1,4 @@
-using BarcoSale.Repository;
+using BarcoSales.Repository;
 using BarcoSales.DAO;
 using BarcoSales.Model;
 using Microsoft.AspNetCore.Builder;

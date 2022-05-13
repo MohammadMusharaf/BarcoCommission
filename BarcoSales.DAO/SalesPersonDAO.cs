@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using BarcoSales.Model;
-using BarcoSale.Repository;
+using BarcoSales.Repository;
 
 using Npgsql;
 

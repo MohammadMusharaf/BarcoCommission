@@ -9,8 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BarcoSale.Repository\BarcoSale.Repository.csproj" />
-    <ProjectReference Include="..\BarcoSales.Model\BarcoSales.Model.csproj" />
+    <ProjectReference Include="..\BarcoSale.Repository\BarcoSales.Repository.csproj" />
   </ItemGroup>
 
 </Project>
