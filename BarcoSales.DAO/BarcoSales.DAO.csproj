@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BarcoSale.Repository\BarcoSale.Repository.csproj" />
+    <ProjectReference Include="..\BarcoSales.Model\BarcoSales.Model.csproj" />
+  </ItemGroup>
+
+</Project>

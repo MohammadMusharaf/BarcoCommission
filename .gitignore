@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/BarcoSalesCommission/v16
+/Barco.Api/bin/Debug/net5.0
+/Barco.Api/obj
+/BarcoSale.Repository/bin/Debug/netcoreapp3.1
+/.vs/BarcoSalesCommission
+/BarcoSale.Repository/obj
+/BarcoSales.DAO/obj
+/BarcoSales.DAO/bin/Debug/netcoreapp3.1
+/BarcoSales.Model/obj
+/BarcoSales.Model/bin/Debug/netcoreapp3.1
