@@ -30,11 +30,12 @@ namespace Barco.Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("api/Trasaction/AddTrasaction")]
-        public SalesTrasaction AddCustomer(SalesTrasaction salesTrasaction)
+        public SalesTrasaction AddTrasaction(SalesTrasaction salesTrasaction)
         {
 
             return salesTrasactionService.IAddSalesTrasaction(salesTrasaction);
         }
+
         [HttpPut]
         [Route("[action]")]
         [Route("api/Trasaction/EditTrasaction")]
