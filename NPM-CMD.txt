@@ -1,4 +1,6 @@
- npx create-react-app barcosales.ui
+npx create-react-app barcosalesreact.ui
+cd barcosalesreact.ui
+npm start
 
 
   npm start
@@ -18,3 +20,7 @@ We suggest that you begin by typing:
 
   cd barcosales.ui
   npm startS
+
+React Authentication Full Course | Login, Logout, Forgot and Reset Password
+
+https://www.youtube.com/watch?v=6sLh_5iFnFc
