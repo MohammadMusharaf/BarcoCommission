@@ -20,7 +20,7 @@ export default class nav extends Component {
             Sales Transaction
           </Link>
           <Link className="navbar-brand" to={"/commissionRules"}>
-            CommissionRules
+            Commission Rules
           </Link>
           <Link className="navbar-brand" to={"/factory"}>
             Factory
