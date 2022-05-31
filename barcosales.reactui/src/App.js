@@ -4,7 +4,11 @@ import SideBar from "./components/Sidebar/SideBar";
 import { BrowserRouter as Router, Route, Routes, Switch } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
+
 import Transaction from "./pages/SalesTransaction";
+import CalculateCommission from "./pages/CalculateCommission";
+import AddSales from "./pages/AddSales";
+
 import Salesman from "./pages/Salesman";
 import Users from "./pages/Users";
 import Customers from "./pages/Customers";
@@ -37,6 +41,8 @@ function App() {
    
           <Route exact path="/" element={<Dashboard />} />
           <Route exact path="/transaction" element={<Transaction />} />
+          <Route exact path="/transaction/calculate" element={<CalculateCommission />} />
+          <Route exact path="/transaction/addsales" element={<AddSales />} />
           <Route exact path="/customers" element={<Customers />} />
           <Route exact path='/customer/create' element={<CustomerCreate/>} />
           <Route exact path='/customer/update/:id' element={ <CustomerUpdate/>} />

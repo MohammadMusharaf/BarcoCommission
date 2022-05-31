@@ -22,7 +22,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
-export default function Transaction() {
+export default function CalculateCommission() {
 
   const [colDefs, setColDefs] = useState()
   const [data, setData] = useState()
@@ -100,18 +100,25 @@ export default function Transaction() {
 
           </Box>
           <Box>
-            <Link to="/transaction/addsales">
-              <Button variant="contained" color="primary">
-                Add New Sales
-              </Button>
-            </Link>
+
+            <Button variant="contained" color="primary">
+              Export to Excell
+            </Button>
+
+          </Box>
+          <Box>
+
+            <Button variant="contained" color="primary">
+              Export to PDF
+            </Button>
+
           </Box>
         </Box>
 
-        <input type="file" onChange={importExcel} />
 
 
-        <MaterialTable title="Sales Details" data={data} columns={colDefs} />
+
+        <MaterialTable title="Commission Details" data={data} columns={colDefs} />
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
 
         </Typography>
@@ -121,11 +128,11 @@ export default function Transaction() {
 
           </Box>
           <Box>
-            <Link to="/transaction/calculate">
-              <Button variant="contained" color="primary">
-                Calculate Sales Commission
-              </Button>
-            </Link>
+
+            <Button variant="contained" color="primary">
+              Save
+            </Button>
+
           </Box>
         </Box>
       </div>
