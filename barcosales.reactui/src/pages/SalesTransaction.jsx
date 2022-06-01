@@ -17,6 +17,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
+import Dropdownlist from "C:\\Users\\MohammadMusharaf\\source\\repos\\BarcoCommission\\barcosales.reactui\\src\\pages\\Dropdownlist";
+import { StyledEngineProvider } from '@mui/material/styles';
 
 
 
@@ -93,7 +95,19 @@ export default function Transaction() {
     <>
       <div  >
 
-        <h4>Calculate Sales Commission </h4>
+        <h4>Add Sales Commission </h4>
+
+        {/* <StyledEngineProvider injectFirst> */}
+
+        {/* </StyledEngineProvider> */}
+        <Box display="flex">
+          <Box flexGrow={1}>
+            <Dropdownlist />
+          </Box>
+          <Box>
+
+          </Box>
+        </Box>
 
         <Box display="flex">
           <Box flexGrow={1}>
