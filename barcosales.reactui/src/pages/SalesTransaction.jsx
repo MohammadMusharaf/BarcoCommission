@@ -1,6 +1,7 @@
-import React, { useState, Component } from 'react';
+import React, { useState, Component, useEffect } from 'react';
 import MaterialTable, { Column } from "@material-table/core";
 import { Link } from "react-router-dom";
+
 import * as XLSX from 'xlsx'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -17,8 +18,15 @@ import TableRow from '@material-ui/core/TableRow';
 import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 
-import Dropdownlist from "C:\\Users\\MohammadMusharaf\\source\\repos\\BarcoCommission\\barcosales.reactui\\src\\pages\\Dropdownlist";
+import PrintIcon from '@material-ui/icons/Print'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import { StyledEngineProvider } from '@mui/material/styles';
+
+import Dropdownlist from "./Dropdownlist";
+
+
+
 
 
 
@@ -26,8 +34,21 @@ import { StyledEngineProvider } from '@mui/material/styles';
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
 export default function Transaction() {
 
+  // const Transaction = (props) =>
+
+
+
   const [colDefs, setColDefs] = useState()
   const [data, setData] = useState()
+
+
+
+  // localStorage.setItem('colum', JSON.stringify(colDefs));
+
+
+  // localStorage.setItem('data', JSON.stringify(data));
+  localStorage.setItem('data', data);
+  localStorage.setItem('colDefs', colDefs);
 
   const getExention = (file) => {
     const parts = file.name.split('.')
@@ -46,6 +67,33 @@ export default function Transaction() {
 
     });
     return rows
+  }
+  const downloadExcel = () => {
+    const newData = data.map(row => {
+      delete row.tableData
+      return row
+    })
+    const workSheet = XLSX.utils.json_to_sheet(newData)
+    const workBook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workBook, workSheet, "CustomerSales")
+    //Buffer
+    XLSX.write(workBook, { bookType: "xlsx", type: "buffer" })
+    //Binary string
+    XLSX.write(workBook, { bookType: "xlsx", type: "binary" })
+    //Download
+    XLSX.writeFile(workBook, "CustomerSales.xlsx")
+
+
+  }
+  const downloadPdf = () => {
+    const doc = new jsPDF()
+    doc.text("Customer Sales", 20, 10)
+    doc.autoTable({
+      theme: "grid",
+      columns: colDefs.map(col => ({ ...col, dataKey: col.field })),
+      body: data
+    })
+    doc.save('table.pdf')
   }
 
   const importExcel = (e) => {
@@ -68,12 +116,20 @@ export default function Transaction() {
       const heads = headers.map(head => ({ title: head, field: head }))
       setColDefs(heads)
 
-      //removing header
       fileData.splice(0, 1)
 
 
       setData(convertToJson(headers, fileData))
+
+
+      localStorage.setItem('columns1', JSON.stringify(heads));
+      localStorage.setItem('data1', JSON.stringify(convertToJson(headers, fileData)));
+
+
+
     }
+
+
 
     if (file) {
       if (getExention(file)) {
@@ -86,6 +142,7 @@ export default function Transaction() {
       setData([])
       setColDefs([])
     }
+
   }
 
 
@@ -95,11 +152,7 @@ export default function Transaction() {
     <>
       <div  >
 
-        <h4>Add Sales Commission </h4>
 
-        {/* <StyledEngineProvider injectFirst> */}
-
-        {/* </StyledEngineProvider> */}
         <Box display="flex">
           <Box flexGrow={1}>
             <Dropdownlist />
@@ -124,8 +177,82 @@ export default function Transaction() {
 
         <input type="file" onChange={importExcel} />
 
+        <MaterialTable
+          title="Customer Sales Details"
 
-        <MaterialTable title="Sales Details" data={data} columns={colDefs} />
+          columns={colDefs}
+          data={data}
+          actions={[
+            // {
+            //   icon: () => <button >Export</button>,// you can pass icon too
+            //   tooltip: "Export to Excel",
+            //   onClick: () => downloadExcel(),
+            //   isFreeAction: true
+            // },
+            {
+              icon: () => <PrintIcon />,// you can pass icon too
+              tooltip: "Export to Pdf",
+              onClick: () => downloadPdf(),
+              isFreeAction: true
+            }
+          ]}
+
+          editable={{
+            onRowAdd: newData =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  setData([...data, newData]);
+
+                  resolve();
+                }, 1000)
+              }),
+            onRowUpdate: (newData, oldData) =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  const dataUpdate = [...data];
+                  const index = oldData.tableData.id;
+                  dataUpdate[index] = newData;
+                  setData([...dataUpdate]);
+
+                  resolve();
+                }, 1000)
+              }),
+            onRowDelete: oldData =>
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  const dataDelete = [...data];
+                  const index = oldData.tableData.id;
+                  dataDelete.splice(index, 1);
+                  setData([...dataDelete]);
+
+                  resolve()
+                }, 1000)
+              }),
+          }}
+          options={{
+            exportButton: true
+          }}
+
+        />
+
+        {/* 
+        <MaterialTable title="Sales Details" data={data} columns={colDefs}
+          actions={[
+            {
+              icon: () => <button >Export</button>,// you can pass icon too
+              tooltip: "Export to Excel",
+              onClick: () => downloadExcel(),
+              isFreeAction: true
+            },
+            {
+              icon: () => <PrintIcon />,// you can pass icon too
+              tooltip: "Export to Pdf",
+              onClick: () => downloadPdf(),
+              isFreeAction: true
+            }
+          ]}
+
+        /> */}
         <Typography component="h2" variant="h6" color="primary" gutterBottom>
 
         </Typography>
@@ -135,11 +262,13 @@ export default function Transaction() {
 
           </Box>
           <Box>
+            {/* <Link to={{ pathname: '/route', state: { foo: 'bar'} }}>My route</Link> */}
             <Link to="/transaction/calculate">
               <Button variant="contained" color="primary">
                 Calculate Sales Commission
               </Button>
             </Link>
+
           </Box>
         </Box>
       </div>
