@@ -31,8 +31,6 @@ export default function CalculateCommission(props) {
   // const [columns, setColDefs] = useState()
   // const [data, setData] = useState()
 
-
-
   // const data1 = [
   //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
   //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
@@ -50,15 +48,13 @@ export default function CalculateCommission(props) {
   const data = JSON.parse(localStorage.getItem('data1'))
   const columns = JSON.parse(localStorage.getItem('columns1'))
 
-  console.log(data)
-  //console.log(data1)
+  //console.log(data)
 
-  console.log(columns)
-
+  //console.log(columns)
 
   const downloadPdf = () => {
     const doc = new jsPDF()
-    doc.text("Customer Sales", 20, 10)
+    doc.text("Sales Commission Details", 20, 10)
     doc.autoTable({
       theme: "grid",
       columns: columns.map(col => ({ ...col, dataKey: col.field })),
@@ -67,25 +63,14 @@ export default function CalculateCommission(props) {
     doc.save('SalesCommission.pdf')
   }
 
-
-
-
-
   return (
-
     <>
-
       <div  >
-
         <h4>Calculated Sales Commission </h4>
-
-
         <MaterialTable title="Commission Details"
-
           columns={columns}
           data={data}
           actions={[
-
             {
               icon: () => <PrintIcon />,// you can pass icon too
               tooltip: "Export to Pdf",
@@ -94,9 +79,6 @@ export default function CalculateCommission(props) {
             }
           ]}
         />
-
-
-
       </div>
 
     </>
