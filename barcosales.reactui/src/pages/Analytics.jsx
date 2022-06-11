@@ -72,8 +72,8 @@ export default function Analytics(props) {
   return (
     <>
       <div  >
-        <h4>Calculated Sales Commission </h4>
-        <MaterialTable title="Commission Details"
+        <h3> Sales Commission Reports</h3>
+        <MaterialTable title=""
           columns={columns}
           data={data}
           actions={[

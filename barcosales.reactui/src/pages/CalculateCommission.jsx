@@ -65,7 +65,7 @@ export default function CalculateCommission(props) {
     <>
       <div  >
         <h4>Calculated Sales Commission </h4>
-        <MaterialTable title="Commission Details"
+        <MaterialTable title=""
           columns={columns}
           data={data}
           actions={[

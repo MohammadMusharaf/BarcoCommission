@@ -34,7 +34,18 @@ export default function Transaction() {
 
 
 
-  const [colDefs, setColDefs] = useState()
+  const [colDefs, setColDefs] = useState([
+    { title: "Sold-To Name", field: "Sold-To Name" },
+
+    { title: "Sold-To Address", field: "Sold-To Address" },
+    { title: "Sold-To State", field: "Sold-To State" },
+    { title: "Ship-To Name", field: "Ship-To Name" },
+    { title: "Ship-To Address", field: "Ship-To Address" },
+    { title: "Ship-To City", field: "Ship-To City" },
+    { title: "Ship-To State", field: "Ship-To State" },
+    { title: "Sale Amount", field: "Sale Amount" },
+
+  ])
   const [data, setData] = useState()
 
   // const data1 = [
@@ -67,18 +78,6 @@ export default function Transaction() {
     { customer: "Total for Principal", invoiceNo: " ", saleAmount: '$23,773.46', commRate: " ", grossComm: "$665.14", salesmanComm: "$332.57" }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   ];
 
   // const columns1 = [
@@ -99,17 +98,16 @@ export default function Transaction() {
   ];
 
 
+
   //   Customer 
   // Invoice No
   // Sale Amount
   // Gross Comm.Rate
   // Gross Comm.
   // Salesman. Comm
-
   // localStorage.setItem('colum', JSON.stringify(colDefs));
-
-
   // localStorage.setItem('data', JSON.stringify(data));
+
   localStorage.setItem('data', data1);
   localStorage.setItem('colDefs', columns1);
 
@@ -189,8 +187,6 @@ export default function Transaction() {
 
       setData(convertToJson(headers, fileData))
       // console.log(setData)
-
-
       // localStorage.setItem('columns1', JSON.stringify(columns));
       // localStorage.setItem('data1', JSON.stringify(convertToJson(columns, cdata)));
 
