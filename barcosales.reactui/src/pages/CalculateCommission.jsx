@@ -31,22 +31,20 @@ export default function CalculateCommission(props) {
   // const [columns, setColDefs] = useState()
   // const [data, setData] = useState()
 
-  // const data1 = [
-  //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-  // ];
 
-  // const columns1 = [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  // ];
+  const columns = [
+    { title: "Customer", field: "customer" },
+    // { title: "Invoice No", field: "invoiceNo" },
+    { title: "Sale Amount", field: "saleAmount" },
+    { title: "Gross CommRate", field: "commRate" },
+    { title: "Gross Comm", field: "grossComm" },
+    { title: "Salesman Comm", field: "salesmanComm" },
+  ];
 
-  // localStorage.setItem('data1', JSON.stringify(data1));
-  // localStorage.setItem('columns1', JSON.stringify(columns1));
+
 
   const data = JSON.parse(localStorage.getItem('data1'))
-  const columns = JSON.parse(localStorage.getItem('columns1'))
+  //const columns = JSON.parse(localStorage.getItem('columns1'))
 
   //console.log(data)
 
@@ -78,6 +76,17 @@ export default function CalculateCommission(props) {
               isFreeAction: true
             }
           ]}
+          options={{
+            sorting: true, search: true,
+            searchFieldAlignment: "right", searchAutoFocus: true, searchFieldVariant: "standard",
+            filtering: true, paging: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100], pageSize: 5,
+            paginationType: "stepped", showFirstLastPageButtons: false, paginationPosition: "both", exportButton: true,
+            exportAllData: true, exportFileName: "TableData", addRowPosition: "first", actionsColumnIndex: -1, selection: true,
+            showSelectAllCheckbox: false, showTextRowsSelected: false,
+            grouping: true, columnsButton: true,
+            rowStyle: (data, index) => index % 2 === 0 ? { background: "#f5f5f5" } : null,
+            headerStyle: { background: "#f44336", color: "#fff" }
+          }}
         />
       </div>
 

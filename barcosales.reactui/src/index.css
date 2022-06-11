@@ -64,8 +64,8 @@ html,
 }
 
 .auth-wrapper {
-  margin-top: 5%;
-  /* width: 450px; */
+  margin-top: 3%;
+  width: 60%;
   display: flex;
   justify-content: center;
   flex-direction: column;

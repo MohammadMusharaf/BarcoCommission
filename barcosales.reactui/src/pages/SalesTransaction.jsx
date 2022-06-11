@@ -98,6 +98,7 @@ export default function Transaction() {
     { title: "Salesman Comm", field: "salesmanComm" },
   ];
 
+
   //   Customer 
   // Invoice No
   // Sale Amount
@@ -124,6 +125,7 @@ export default function Transaction() {
       let rowData = {}
       row.forEach((element, index) => {
         // console.log(element);
+
         rowData[headers[index]] = element
       })
       rows.push(rowData)
@@ -214,7 +216,12 @@ export default function Transaction() {
 
   }
 
-
+  const handleClick = () => {
+    debugger;
+    console.log(data);
+    // transformer over data
+    //transformed data passed through local storage
+  }
 
   return (
 
@@ -299,7 +306,14 @@ export default function Transaction() {
               }),
           }}
           options={{
-            exportButton: true
+            sorting: true, search: true,
+            searchFieldAlignment: "right", searchAutoFocus: true, searchFieldVariant: "standard",
+            filtering: true, paging: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100], pageSize: 5,
+            paginationType: "stepped", showFirstLastPageButtons: false, paginationPosition: "both", exportButton: true,
+            exportAllData: true, exportFileName: "TableData", addRowPosition: "first", actionsColumnIndex: -1, selection: true,
+            showSelectAllCheckbox: false,
+            rowStyle: (data, index) => index % 2 === 0 ? { background: "#f5f5f5" } : null,
+            headerStyle: { background: "#f44336", color: "#fff" }
           }}
 
         />
@@ -333,7 +347,7 @@ export default function Transaction() {
           <Box>
             {/* <Link to={{ pathname: '/route', state: { foo: 'bar'} }}>My route</Link> */}
             <Link to="/transaction/calculate">
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={() => handleClick()}>
                 Calculate Sales Commission
               </Button>
             </Link>
