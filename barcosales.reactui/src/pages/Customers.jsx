@@ -45,10 +45,13 @@ export default function Customers() {
   }, [])
 
   const UsersGet = () => {
-    fetch("https://www.mecallapi.com/api/users")
+    fetch("http://localhost:57636/api/Customer/GetCustomer")
+    //fetch("https://www.mecallapi.com/api/users")
       .then(res => res.json())
       .then(
         (result) => {
+          debugger;
+          console.log(result);
           setUsers(result)
         }
       )
@@ -113,20 +116,20 @@ export default function Customers() {
               </TableHead>
               <TableBody>
                 {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="center">
+                  <TableRow key={user.CustId}>
+                    <TableCell align="right">{user.CustId}</TableCell>
+                    {/* <TableCell align="center">
                       <Box display="flex" justifyContent="center">
                         <Avatar src={user.avatar} />
                       </Box>
-                    </TableCell>
-                    <TableCell align="left">{user.fname}</TableCell>
-                    <TableCell align="left">{user.lname}</TableCell>
-                    <TableCell align="left">{user.username}</TableCell>
+                    </TableCell> */}
+                    <TableCell align="left">{user.CustName}</TableCell>
+                    <TableCell align="left">{user.CustCompanyName}</TableCell>
+                    <TableCell align="left">{user.CustCompanyCode}</TableCell>
                     <TableCell align="center">
                       <ButtonGroup color="primary" aria-label="outlined primary button group">
-                        <Button onClick={() => UpdateUser(user.id)}> Edit</Button>
-                        <Button onClick={() => UserDelete(user.id)}> Del</Button>
+                        <Button onClick={() => UpdateUser(user.CustId)}> Edit</Button>
+                        <Button onClick={() => UserDelete(user.CustId)}> Del</Button>
                       </ButtonGroup>
                     </TableCell>
                   </TableRow>

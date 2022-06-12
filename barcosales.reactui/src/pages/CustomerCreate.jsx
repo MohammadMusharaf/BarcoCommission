@@ -32,13 +32,19 @@ export default function CustomerCreate() {
   const handleSubmit = event => {
     event.preventDefault();
     var data = {
-      'fname': fname,
-      'lname': lname,
-      'username': username,
-      'email': email,
-      'avatar': avatar,
+      'custName': custName,
+      'custCompanyName': custCompanyName,
+      'custCompanyCode': custCompanyCode,
+      'custEmailId': custEmailId
+     // 'avatar': avatar,
     }
-    fetch('https://www.mecallapi.com/api/users/create', {
+
+    debugger;
+    console.log(data);
+    
+    fetch('http://localhost:57636/api/Customer/AddCustomer',
+   // fetch('https://www.mecallapi.com/api/users/create', 
+    {
       method: 'POST',
       headers: {
         Accept: 'application/form-data',
@@ -57,11 +63,11 @@ export default function CustomerCreate() {
       )
   }
 
-  const [fname, setFname] = useState('');
-  const [lname, setLname] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [custName, setCustName] = useState('');
+  const [custCompanyName, setCustCompanyName] = useState('');
+  const [custCompanyCode, setCustCompanyCode] = useState('');
+  const [custEmailId, setCustEmailId] = useState('');
+ // const [avatar, setAvatar] = useState('');
   return (
     <Container maxWidth="xs">
       <div className={classes.paper}>
@@ -72,14 +78,14 @@ export default function CustomerCreate() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="custName"
+                name="custName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                onChange={(e) => setFname(e.target.value)}
+                id="custName"
+                label="Customer Name"
+                onChange={(e) => setCustName(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -88,9 +94,9 @@ export default function CustomerCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                onChange={(e) => setLname(e.target.value)}
+                id="custCompanyName"
+                label="Company Name"
+                onChange={(e) => setCustCompanyName(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,9 +104,9 @@ export default function CustomerCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                id="custCompanyCode"
+                label="Company Code"
+                onChange={(e) => setCustCompanyCode(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -108,12 +114,12 @@ export default function CustomerCreate() {
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
+                id="custEmailId"
                 label="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setCustEmailId(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -122,7 +128,7 @@ export default function CustomerCreate() {
                 label="Avatar"
                 onChange={(e) => setAvatar(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Button
             type="submit"

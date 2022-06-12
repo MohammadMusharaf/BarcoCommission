@@ -78,12 +78,12 @@ namespace Barco.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My Test1 Api v1");
             });
-            app.UseStaticFiles(new StaticFileOptions
+    /*        app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
                    Path.Combine(Directory.GetCurrentDirectory(), "Photos")),
                 RequestPath = "/Photos"
-            });
+            });*/
         }
     }
 }
