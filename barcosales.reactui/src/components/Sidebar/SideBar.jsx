@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: "/analytics",
-    name: "Analytics",
+    name: "Commission Reports",
     icon: <BiAnalyse />,
   },
   {

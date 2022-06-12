@@ -24,7 +24,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import PrintIcon from '@material-ui/icons/Print'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-
+import Dropdownlist from "./Dropdownlist";
 
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
 export default function Analytics(props) {
@@ -73,6 +73,14 @@ export default function Analytics(props) {
     <>
       <div  >
         <h3> Sales Commission Reports</h3>
+        <Box display="flex">
+          <Box flexGrow={1}>
+            <Dropdownlist />
+          </Box>
+          <Box>
+
+          </Box>
+        </Box>
         <MaterialTable title=""
           columns={columns}
           data={data}
