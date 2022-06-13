@@ -65,6 +65,15 @@ export default function CalculateCommission(props) {
     <>
       <div  >
         <h4>Calculated Sales Commission </h4>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          color="primary"
+
+        >
+          Submit
+        </Button>
         <MaterialTable title=""
           columns={columns}
           data={data}
