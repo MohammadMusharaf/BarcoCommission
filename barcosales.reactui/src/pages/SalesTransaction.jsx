@@ -290,7 +290,7 @@ export default function Transaction() {
           </Grid>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <input type="file" color="primary" fullWidth onChange={importExcel} />
+              <input type="file" color="primary" title='Upload Sales Files' fullWidth onChange={importExcel} />
             </Grid>
             {/* <Grid item xs={12} sm={6}>
          
@@ -312,73 +312,80 @@ export default function Transaction() {
           </Grid>
 
         </form>
+        <Grid container spacing={2}>
+          <Grid item xs={12}  >
+            <MaterialTable
+              title="Customer Sales Details"
+
+              columns={colDefs}
+              data={data}
+              actions={[
+                // {
+                //   icon: () => <button >Export</button>,// you can pass icon too
+                //   tooltip: "Export to Excel",
+                //   onClick: () => downloadExcel(),
+                //   isFreeAction: true
+                // },
+                {
+                  icon: () => <PrintIcon />,// you can pass icon too
+                  tooltip: "Export to Pdf",
+                  onClick: () => downloadPdf(),
+                  isFreeAction: true
+                }
+              ]}
+
+              editable={{
+                onRowAdd: newData =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      setData([...data, newData]);
+
+                      resolve();
+                    }, 1000)
+                  }),
+                onRowUpdate: (newData, oldData) =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      const dataUpdate = [...data];
+                      const index = oldData.tableData.id;
+                      dataUpdate[index] = newData;
+                      setData([...dataUpdate]);
+
+                      resolve();
+                    }, 1000)
+                  }),
+                onRowDelete: oldData =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      const dataDelete = [...data];
+                      const index = oldData.tableData.id;
+                      dataDelete.splice(index, 1);
+                      setData([...dataDelete]);
+
+                      resolve()
+                    }, 1000)
+                  }),
+              }}
+              options={{
+                sorting: true, search: true,
+                searchFieldAlignment: "right", searchAutoFocus: true, searchFieldVariant: "standard",
+                filtering: true, paging: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100], pageSize: 5,
+                paginationType: "stepped", showFirstLastPageButtons: false, paginationPosition: "both", exportButton: true,
+                exportAllData: true, exportFileName: "TableData", addRowPosition: "first", actionsColumnIndex: -1, selection: true,
+                showSelectAllCheckbox: false,
+                rowStyle: (data, index) => index % 2 === 0 ? { background: "#f5f5f5" } : null,
+                headerStyle: { background: "#f44336", color: "#fff" }
+              }}
+
+            />
+          </Grid>
 
 
 
-        <MaterialTable
-          title="Customer Sales Details"
+        </Grid>
 
-          columns={colDefs}
-          data={data}
-          actions={[
-            // {
-            //   icon: () => <button >Export</button>,// you can pass icon too
-            //   tooltip: "Export to Excel",
-            //   onClick: () => downloadExcel(),
-            //   isFreeAction: true
-            // },
-            {
-              icon: () => <PrintIcon />,// you can pass icon too
-              tooltip: "Export to Pdf",
-              onClick: () => downloadPdf(),
-              isFreeAction: true
-            }
-          ]}
 
-          editable={{
-            onRowAdd: newData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  setData([...data, newData]);
 
-                  resolve();
-                }, 1000)
-              }),
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const dataUpdate = [...data];
-                  const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  setData([...dataUpdate]);
-
-                  resolve();
-                }, 1000)
-              }),
-            onRowDelete: oldData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  const dataDelete = [...data];
-                  const index = oldData.tableData.id;
-                  dataDelete.splice(index, 1);
-                  setData([...dataDelete]);
-
-                  resolve()
-                }, 1000)
-              }),
-          }}
-          options={{
-            sorting: true, search: true,
-            searchFieldAlignment: "right", searchAutoFocus: true, searchFieldVariant: "standard",
-            filtering: true, paging: true, pageSizeOptions: [2, 5, 10, 20, 25, 50, 100], pageSize: 5,
-            paginationType: "stepped", showFirstLastPageButtons: false, paginationPosition: "both", exportButton: true,
-            exportAllData: true, exportFileName: "TableData", addRowPosition: "first", actionsColumnIndex: -1, selection: true,
-            showSelectAllCheckbox: false,
-            rowStyle: (data, index) => index % 2 === 0 ? { background: "#f5f5f5" } : null,
-            headerStyle: { background: "#f44336", color: "#fff" }
-          }}
-
-        />
 
 
 

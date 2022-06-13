@@ -15,7 +15,7 @@ export default function PriorYearDropdownlist() {
     return (
         <Box sx={{ minWidth: 20 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Prior Year</InputLabel>
+                <InputLabel id="demo-simple-select-label">Select Prior Year</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
