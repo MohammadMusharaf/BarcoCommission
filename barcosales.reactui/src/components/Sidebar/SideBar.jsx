@@ -1,5 +1,13 @@
 import { NavLink } from "react-router-dom";
-import { FaBars, FaHome, FaLock, FaMoneyBill, FaUser, FaCalculator, FaFile } from "react-icons/fa";
+import {
+  FaBars,
+  FaHome,
+  FaLock,
+  FaMoneyBill,
+  FaUser,
+  FaCalculator,
+  FaFile,
+} from "react-icons/fa";
 import { MdMessage } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
@@ -144,7 +152,7 @@ const SideBar = ({ children }) => {
       <div className="main-container">
         <motion.div
           animate={{
-            width: isOpen ? "200px" : "45px",
+            width: isOpen ? "250px" : "45px",
 
             transition: {
               duration: 0.5,
