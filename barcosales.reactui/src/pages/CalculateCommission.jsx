@@ -52,7 +52,7 @@ export default function CalculateCommission(props) {
     { title: "Salesman Comm", field: "salesmanComm" },
   ];
 
-  const data = JSON.parse(localStorage.getItem("data1"));
+  const data = JSON.parse(localStorage.getItem("salesComissionData"));
   //const columns = JSON.parse(localStorage.getItem('columns1'))
 
   //console.log(data)
