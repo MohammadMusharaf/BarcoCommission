@@ -3,27 +3,18 @@ import MaterialTable, { Column } from "@material-table/core";
 import { Link } from "react-router-dom";
 
 import * as XLSX from 'xlsx'
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
+
 import Box from '@material-ui/core/Box';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+
 
 import PrintIcon from '@material-ui/icons/Print'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import { StyledEngineProvider } from '@mui/material/styles';
 
-import Dropdownlist from "./Dropdownlist";
+
+import FactoriesDropdownlist from "./FactoriesDropdownlist";
 
 
 
@@ -80,12 +71,6 @@ export default function Transaction() {
 
   ];
 
-  // const columns1 = [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  // ];
-
 
 
   const columns1 = [
@@ -98,15 +83,6 @@ export default function Transaction() {
   ];
 
 
-
-  //   Customer 
-  // Invoice No
-  // Sale Amount
-  // Gross Comm.Rate
-  // Gross Comm.
-  // Salesman. Comm
-  // localStorage.setItem('colum', JSON.stringify(colDefs));
-  // localStorage.setItem('data', JSON.stringify(data));
 
   localStorage.setItem('data', data1);
   localStorage.setItem('colDefs', columns1);
@@ -227,7 +203,7 @@ export default function Transaction() {
 
         <Box display="flex">
           <Box flexGrow={1}>
-            <Dropdownlist />
+            <FactoriesDropdownlist />
           </Box>
           <Box>
 
@@ -314,27 +290,7 @@ export default function Transaction() {
 
         />
 
-        {/* 
-        <MaterialTable title="Sales Details" data={data} columns={colDefs}
-          actions={[
-            {
-              icon: () => <button >Export</button>,// you can pass icon too
-              tooltip: "Export to Excel",
-              onClick: () => downloadExcel(),
-              isFreeAction: true
-            },
-            {
-              icon: () => <PrintIcon />,// you can pass icon too
-              tooltip: "Export to Pdf",
-              onClick: () => downloadPdf(),
-              isFreeAction: true
-            }
-          ]}
 
-        /> */}
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
-
-        </Typography>
 
         <Box display="flex">
           <Box flexGrow={1}>

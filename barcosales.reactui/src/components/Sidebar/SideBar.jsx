@@ -103,7 +103,7 @@ const routes = [
 ];
 
 const SideBar = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
   const inputAnimation = {
     hidden: {
@@ -114,7 +114,7 @@ const SideBar = ({ children }) => {
       },
     },
     show: {
-      width: "140px",
+      width: "150px",
       padding: "5px 15px",
       transition: {
         duration: 0.2,

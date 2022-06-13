@@ -18,16 +18,40 @@ import Avatar from '@material-ui/core/Avatar';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { StyledEngineProvider } from '@mui/material/styles';
 import GetAppIcon from '@material-ui/icons/GetApp';
-
-
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 import PrintIcon from '@material-ui/icons/Print'
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import Dropdownlist from "./Dropdownlist";
+import FactoriesDropdownlist from "./FactoriesDropdownlist";
+import SalesmanDropdownlist from "./SalesmanDropdownlist";
+import PriorYearDropdownlist from "./PriorYearDropdownlist";
+import SalesMonthsDropdownlist from "./SalesMonthsDropdownlist";
 
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 export default function Analytics(props) {
+  const classes = useStyles();
+
 
   // const [columns, setColDefs] = useState()
   // const [data, setData] = useState()
@@ -73,14 +97,69 @@ export default function Analytics(props) {
     <>
       <div  >
         <h3> Sales Commission Reports</h3>
-        <Box display="flex">
-          <Box flexGrow={1}>
-            <Dropdownlist />
-          </Box>
-          <Box>
 
-          </Box>
-        </Box>
+        <form className={classes.form}  >
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="custName"
+                name="custName"
+                variant="outlined"
+
+                fullWidth
+                id="custName"
+                label="Enter From Date"
+
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="custName"
+                name="custName"
+                variant="outlined"
+
+                fullWidth
+                id="custName"
+                label="Enter To Date"
+
+                autoFocus
+              />
+            </Grid>
+
+
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <PriorYearDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SalesMonthsDropdownlist />
+            </Grid>
+
+
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <SalesmanDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FactoriesDropdownlist />
+            </Grid>
+
+
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Search
+          </Button>
+        </form>
         <MaterialTable title=""
           columns={columns}
           data={data}

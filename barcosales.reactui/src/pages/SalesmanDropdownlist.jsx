@@ -5,27 +5,30 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function Dropdownlist() {
-    const [Factory, setFactory] = React.useState('');
+export default function SalesmanDropdownlist() {
+    const [salesman, setSalesman] = React.useState('');
 
     const handleChange = (event) => {
-        setFactory(event.target.value);
+        setSalesman(event.target.value);
     };
 
     return (
         <Box sx={{ minWidth: 20 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Factory</InputLabel>
+                <InputLabel id="demo-simple-select-label">Select Salesman</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={Factory}
-                    label="Factory"
+                    value={salesman}
+                    label="Select Salesman"
                     onChange={handleChange}
                 >
-                    <MenuItem value={1}>Alpha Fittings</MenuItem>
-                    <MenuItem value={2}>Kentak</MenuItem>
-                    <MenuItem value={3}>U S Hose</MenuItem>
+                    <MenuItem value={1}>Barrett B.</MenuItem>
+                    <MenuItem value={2}>Dan B.</MenuItem>
+                    <MenuItem value={3}>Tom B.</MenuItem>
+                    <MenuItem value={4}>Don R.</MenuItem>
+                    <MenuItem value={5}>Steve B.</MenuItem>
+
                 </Select>
             </FormControl>
         </Box>
