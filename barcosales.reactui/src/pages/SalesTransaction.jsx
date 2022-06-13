@@ -14,16 +14,39 @@ import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 
 
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
-
+import SalesmanDropdownlist from "./SalesmanDropdownlist";
+import PriorYearDropdownlist from "./PriorYearDropdownlist";
+import SalesMonthsDropdownlist from "./SalesMonthsDropdownlist";
 
 
 const EXTENSIONS = ['xlsx', 'xls', 'csv']
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 export default function Transaction() {
 
   // const Transaction = (props) =>
 
-
+  const classes = useStyles();
 
   const [colDefs, setColDefs] = useState([
     { title: "Sold-To Name", field: "Sold-To Name" },
@@ -201,7 +224,7 @@ export default function Transaction() {
       <div  >
 
 
-        <Box display="flex">
+        {/* <Box display="flex">
           <Box flexGrow={1}>
             <FactoriesDropdownlist />
           </Box>
@@ -221,9 +244,76 @@ export default function Transaction() {
               </Button>
             </Link>
           </Box>
-        </Box>
+        </Box> */}
+        <h3>Add / Upload Customer Sales </h3>
+        <form className={classes.form}  >
+          <Grid container spacing={2}>
 
-        <input type="file" onChange={importExcel} />
+            <Grid item xs={12} sm={12}>
+
+
+              <Link to="/transaction/addsales">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+
+                >
+                  Add New Sales
+                </Button>
+              </Link>
+            </Grid>
+
+
+          </Grid>
+
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <PriorYearDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SalesMonthsDropdownlist />
+            </Grid>
+
+
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <SalesmanDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <FactoriesDropdownlist />
+            </Grid>
+
+
+          </Grid>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <input type="file" color="primary" fullWidth onChange={importExcel} />
+            </Grid>
+            {/* <Grid item xs={12} sm={6}>
+         
+
+              <Link to="/transaction/addsales">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+
+                >
+                  Add New Sales
+                </Button>
+              </Link>
+            </Grid> */}
+
+
+          </Grid>
+
+        </form>
+
+
 
         <MaterialTable
           title="Customer Sales Details"
@@ -292,20 +382,24 @@ export default function Transaction() {
 
 
 
-        <Box display="flex">
-          <Box flexGrow={1}>
+        <form className={classes.form}  >
+          <Grid container spacing={1}>
 
-          </Box>
-          <Box>
-            {/* <Link to={{ pathname: '/route', state: { foo: 'bar'} }}>My route</Link> */}
-            <Link to="/transaction/calculate">
-              <Button variant="contained" color="primary" onClick={() => handleClick()}>
-                Calculate Sales Commission
-              </Button>
-            </Link>
+            <Grid item xs={12}  >
 
-          </Box>
-        </Box>
+
+              <Link to="/transaction/calculate">
+
+
+                <Button variant="contained" color="primary" fullWidth onClick={() => handleClick()}>
+                  Calculate Sales Commission
+                </Button>
+              </Link>
+            </Grid>
+
+
+          </Grid>
+        </form>
       </div>
 
     </>
