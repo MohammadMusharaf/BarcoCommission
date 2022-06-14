@@ -85,7 +85,7 @@ export default function Analytics(props) {
   // localStorage.setItem('data1', JSON.stringify(data1));
   // localStorage.setItem('columns1', JSON.stringify(columns1));
 
-  const data = JSON.parse(localStorage.getItem("data1"));
+  const data = JSON.parse(localStorage.getItem("salesComissionData"));
   //const columns = JSON.parse(localStorage.getItem('columns1'))
   const columns = [
     { title: "Customer", field: "customer" },

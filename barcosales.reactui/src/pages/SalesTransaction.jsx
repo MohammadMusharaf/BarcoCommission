@@ -261,9 +261,6 @@ export default function Transaction() {
     { title: "Salesman Comm", field: "salesmanComm" },
   ];
 
-  localStorage.setItem("data", data1);
-  localStorage.setItem("colDefs", columns1);
-
   const getExention = (file) => {
     const parts = file.name.split(".");
     const extension = parts[parts.length - 1];
@@ -338,9 +335,6 @@ export default function Transaction() {
       // console.log(setData)
       // localStorage.setItem('columns1', JSON.stringify(columns));
       // localStorage.setItem('data1', JSON.stringify(convertToJson(columns, cdata)));
-
-      localStorage.setItem("columns1", JSON.stringify(columns1));
-      localStorage.setItem("data1", JSON.stringify(data1));
     };
 
     if (file) {
@@ -355,11 +349,45 @@ export default function Transaction() {
     }
   };
 
+  const numberToCurrency = (num) => {
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+
+      // These options are needed to round to whole numbers if that's what you want.
+      //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+      //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+    });
+
+    return formatter.format(num);
+  };
+
   const handleClick = () => {
-    debugger;
-    console.log(data);
-    // transformer over data
-    //transformed data passed through local storage
+    const transformedArray = [];
+    data.forEach((d, i) => {
+      const invoiceNo = i; // Will come from API
+      const saleAmount = d["Sale Amount"];
+      const commRate = i % 2 ? 5 : 7; // Will come from API
+      const grossComm = (
+        (Number(saleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
+        100
+      ).toFixed(2);
+      const salesmanComm = grossComm / 2;
+      const obj = {
+        customer: d["Sold-To Name"],
+        invoiceNo,
+        saleAmount,
+        commRate: `${commRate}%`,
+        grossComm: numberToCurrency(grossComm),
+        salesmanComm: numberToCurrency(salesmanComm),
+      };
+      transformedArray.push(obj);
+    });
+
+    localStorage.setItem(
+      "salesComissionData",
+      JSON.stringify(transformedArray)
+    );
   };
 
   const tableIcons = {
