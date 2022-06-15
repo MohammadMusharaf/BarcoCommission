@@ -680,7 +680,7 @@ export default function Transaction() {
                 paginationPosition: "both",
                 exportButton: true,
                 exportAllData: true,
-                exportFileName: "TableData",
+                exportFileName: "SalesCommission",
                 addRowPosition: "first",
                 actionsColumnIndex: -1,
                 selection: true,
