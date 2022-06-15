@@ -150,6 +150,9 @@ export default function CalculateCommission(props) {
             headerStyle: { background: "#f44336", color: "#fff" },
           }}
         />
+        <Button type="submit" fullWidth variant="contained" color="primary">
+          Submit
+        </Button>
       </div>
     </>
   );
