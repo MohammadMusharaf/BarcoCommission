@@ -6,6 +6,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
+import { Link } from "react-router-dom";
+import FactoriesDropdownlist from "./FactoriesDropdownlist";
+import SalesmanDropdownlist from "./SalesmanDropdownlist";
+import PriorYearDropdownlist from "./PriorYearDropdownlist";
+import SalesMonthsDropdownlist from "./SalesMonthsDropdownlist";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -62,69 +68,186 @@ export default function AddSales() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
+
+  const columns = [
+    { title: "Customer", field: "customer" },
+    { title: "ShipToName", field: "shipToName" },
+    { title: "ShipToAddress", field: "shipToAddress" },
+    { title: "ShipToCity", field: "shipToCity" },
+    { title: "ShipToState", field: "shipToState" },
+    { title: "Factory", field: "factory" },
+    { title: "Check", field: "check" },
+    { title: "Month", field: "month" },
+    { title: "Salesman", field: "salesman" },
+    { title: "Invoice No", field: "invoiceNo" },
+    { title: "Sale Amount", field: "saleAmount" },
+    { title: "Gross CommRate", field: "commRate" },
+    { title: "Gross Comm", field: "grossComm" },
+    { title: "Salesman Comm", field: "salesmanComm" }
+  ];
   return (
-    <Container maxWidth="xs">
+    <Container >
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
           Add New Sales
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12} sm={3}>
+              <PriorYearDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <SalesMonthsDropdownlist />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
+              <SalesmanDropdownlist />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <FactoriesDropdownlist />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
               <TextField
-                autoComplete="fname"
-                name="firstName"
+                autoComplete="soldToName"
+                name="soldToName"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
-                label="First Name"
-                onChange={(e) => setFname(e.target.value)}
-                autoFocus
+                id="soldToName"
+                label="Sold-To Name"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="ShipToAddress"
+                name="ShipToAddress"
+                variant="outlined"
+                required
+                fullWidth
+                id="ShipToAddress"
+                label="Sold-To Address"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="lastName"
-                label="Last Name"
-                onChange={(e) => setLname(e.target.value)}
+                id="ShipToCity"
+                label="Sold-To City"
+              // onChange={(e) => setLname(e.target.value)}
               />
             </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="ShipToState"
+                name="ShipToState"
+                variant="outlined"
+                required
+                fullWidth
+                id="ShipToState"
+                label="Sold-To State"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="ShipToName "
+                name="ShipToName"
+                variant="outlined"
+                required
+                fullWidth
+                id="Ship-To Name"
+                label="Ship-To Name"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="ShipToAddress"
+                name="ShipToAddress"
+                variant="outlined"
+                required
+                fullWidth
+                id="ShipToAddress"
+                label="Ship-To Address"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="ShipToCity"
+                label="Ship-To City"
+              // onChange={(e) => setLname(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="ShipToState"
+                name="ShipToState"
+                variant="outlined"
+                required
+                fullWidth
+                id="ShipToState"
+                label="Ship-To State"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
+            {/* <Grid item xs={12} sm={3}>
+              <TextField
+                autoComplete="invoiceNo"
+                name="invoiceNo"
+                variant="outlined"
+                required
+                fullWidth
+                id="invoiceNo"
+                label="Invoice No"
+              onChange={(e) => setFname(e.target.value)}
+              autoFocus
+              />
+            </Grid> */}
+            <Grid item xs={12} sm={3}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="saleAmount"
+                label="Sale Amount"
+              // onChange={(e) => setLname(e.target.value)}
+              />
+            </Grid>
+
+
+
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <Link to="/transaction">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                  Add  Sales Commission
+                </Button>
+              </Link>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="avatar"
-                label="Avatar"
-                onChange={(e) => setAvatar(e.target.value)}
-              />
-            </Grid>
+
+
           </Grid>
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -132,7 +255,8 @@ export default function AddSales() {
             className={classes.submit}
           >
             Create
-          </Button>
+          </Button> */}
+
         </form>
       </div>
     </Container>
