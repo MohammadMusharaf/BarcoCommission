@@ -63,15 +63,14 @@ export default function Transaction() {
   const classes = useStyles();
 
   const [colDefs, setColDefs] = useState([
-    { title: "Sold-To Name", field: "Sold-To Name" },
-
-    { title: "Sold-To Address", field: "Sold-To Address" },
-    { title: "Sold-To State", field: "Sold-To State" },
-    { title: "Ship-To Name", field: "Ship-To Name" },
-    { title: "Ship-To Address", field: "Ship-To Address" },
-    { title: "Ship-To City", field: "Ship-To City" },
-    { title: "Ship-To State", field: "Ship-To State" },
-    { title: "Sale Amount", field: "Sale Amount" },
+    { title: "SoldToName", field: "Sold-To Name" },
+    { title: "SoldToAddress", field: "Sold-To Address" },
+    { title: "SoldToState", field: "Sold-To State" },
+    { title: "ShipToName", field: "Ship-To Name" },
+    { title: "ShipToAddress", field: "Ship-To Address" },
+    { title: "ShipToCity", field: "Ship-To City" },
+    { title: "ShipToState", field: "Ship-To State" },
+    { title: "SaleAmt", field: "Sale Amount" },
   ]);
   const [data, setData] = useState();
 
@@ -80,9 +79,16 @@ export default function Transaction() {
   //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
   // ];
 
+
+
   const data1 = [
     {
       customer: "AIR HYDRAULICS SYSTEMS",
+      //  shipToAddress: "4037 CLARKS RIVER RD", shipToCity: "KY", shipToState: "WALLACE ELECTRICAL SYSTEMS",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
       invoiceNo: "10001",
       saleAmount: "$145.00",
       commRate: "5",
@@ -91,14 +97,24 @@ export default function Transaction() {
     },
     {
       customer: "APPLIED IND",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
       invoiceNo: "10002",
       saleAmount: "$30.25",
       commRate: "5",
-      grossComm: "7.25",
-      salesmanComm: "3.63",
+      grossComm: "$7.25",
+      salesmanComm: "$3.63",
     },
     {
       customer: "CREST INDUSTRIES",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
       invoiceNo: "10003",
       saleAmount: "$689.80",
       commRate: "5",
@@ -107,7 +123,12 @@ export default function Transaction() {
     },
     {
       customer: "DAKOTA FLUID POWER",
-      invoiceNo: "10003",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10004",
       saleAmount: "$120.45",
       commRate: "5",
       grossComm: "$6.02",
@@ -115,7 +136,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC IA",
-      invoiceNo: "10004",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10005",
       saleAmount: "$2, 106.64",
       commRate: "2.5",
       grossComm: "$52.67",
@@ -123,7 +149,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC IL",
-      invoiceNo: "10005",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10006",
       saleAmount: "$642.33",
       commRate: "2.5",
       grossComm: "$51.60",
@@ -131,7 +162,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC KANSAS",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10007",
       saleAmount: "$2, 064.05",
       commRate: "2.5",
       grossComm: "$51.60",
@@ -139,7 +175,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC MO",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10008",
       saleAmount: "$5, 065.96",
       commRate: "2.5",
       grossComm: "$126.65",
@@ -147,7 +188,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC NE",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "10009",
       saleAmount: "1, 451.66",
       commRate: "2.5",
       grossComm: "$36.29",
@@ -155,7 +201,12 @@ export default function Transaction() {
     },
     {
       customer: "FASTENAL MISC SD",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100010",
       saleAmount: "$710.21",
       commRate: "2.5",
       grossComm: "$17.76",
@@ -163,7 +214,12 @@ export default function Transaction() {
     },
     {
       customer: "FRANK FLORI EQUIPMENT MARYLAND HGTS MO",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100011",
       saleAmount: "$260.70",
       commRate: "5",
       grossComm: "$13.04",
@@ -171,7 +227,12 @@ export default function Transaction() {
     },
     {
       customer: "HYSPECO INC",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100012",
       saleAmount: "$73.50",
       commRate: "5",
       grossComm: "$3.68",
@@ -179,7 +240,12 @@ export default function Transaction() {
     },
     {
       customer: "IBT MISC KS",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100013",
       saleAmount: "$627.98",
       commRate: "5",
       grossComm: "$31.40",
@@ -187,7 +253,12 @@ export default function Transaction() {
     },
     {
       customer: "JOHNSON AUTOMATION COMPONENTS",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100014",
       saleAmount: "$136.98",
       commRate: "5",
       grossComm: "$6.85",
@@ -195,7 +266,12 @@ export default function Transaction() {
     },
     {
       customer: "KAMAN INDUSTRIAL TECHNOLOGIES",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100015",
       saleAmount: "$118.78",
       commRate: "5",
       grossComm: "$5.94",
@@ -203,7 +279,12 @@ export default function Transaction() {
     },
     {
       customer: "LESSIN SUPPLY",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100016",
       saleAmount: "$60.90",
       commRate: "5",
       grossComm: "$3.05",
@@ -211,7 +292,12 @@ export default function Transaction() {
     },
     {
       customer: "Midland Metal KANSAS CITY MO",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100017",
       saleAmount: "$8, 901.29",
       commRate: "2.5",
       grossComm: "$222.53",
@@ -219,7 +305,12 @@ export default function Transaction() {
     },
     {
       customer: "PEERLESS SUPPLY INC",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100018",
       saleAmount: "$132.03",
       commRate: "5",
       grossComm: "$6.60",
@@ -227,7 +318,12 @@ export default function Transaction() {
     },
     {
       customer: "Quad Power Products LLC",
-      invoiceNo: "2001132",
+      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100019",
       saleAmount: "$186.65",
       commRate: "5",
       grossComm: "$9.33",
@@ -235,7 +331,12 @@ export default function Transaction() {
     },
     {
       customer: "Tompkins OLATHE",
-      invoiceNo: "2001132",
+      //   shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100020",
       saleAmount: "$308.80",
       commRate: "5",
       grossComm: "$15.44",
@@ -244,7 +345,12 @@ export default function Transaction() {
 
     {
       customer: "Total for Principal",
-      invoiceNo: " ",
+      //  shipToName: "shipToName1", shipToAddress: "shipToAddress1", shipToCity: "shipToCity1", shipToState: "shipToState1",
+      factory: "AF ALPHA FITTINGS",
+      check: "",
+      month: " February",
+      salesman: "Barrett B",
+      invoiceNo: "100021",
       saleAmount: "$23,773.46",
       commRate: " ",
       grossComm: "$665.14",
@@ -254,11 +360,19 @@ export default function Transaction() {
 
   const columns1 = [
     { title: "Customer", field: "customer" },
+    // { title: "ShipToName", field: "shipToName" },
+    // { title: "ShipToAddress", field: "shipToAddress" },
+    // { title: "ShipToCity", field: "shipToCity" },
+    // { title: "ShipToState", field: "shipToState" },
+    { title: "Factory", field: "factory" },
+    { title: "Check", field: "check" },
+    { title: "Month", field: "month" },
+    { title: "Salesman", field: "salesman" },
     { title: "Invoice No", field: "invoiceNo" },
     { title: "Sale Amount", field: "saleAmount" },
     { title: "Gross CommRate", field: "commRate" },
     { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" },
+    { title: "Salesman Comm", field: "salesmanComm" }
   ];
 
   const getExention = (file) => {
@@ -386,7 +500,7 @@ export default function Transaction() {
 
     localStorage.setItem(
       "salesComissionData",
-      JSON.stringify(transformedArray)
+      JSON.stringify(data1)
     );
   };
 
@@ -411,7 +525,7 @@ export default function Transaction() {
       <ArrowDownward {...props} ref={ref} />
     )),
     // ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    // ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
   return (
@@ -438,9 +552,9 @@ export default function Transaction() {
             </Link>
           </Box>
         </Box> */}
-        <h3>Add / Upload Customer Sales </h3>
+        {/* <h5>Add / Upload Customer Sales </h5> */}
         <form className={classes.form}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
               <Link to="/transaction/addsales">
                 <Button
@@ -449,13 +563,13 @@ export default function Transaction() {
                   variant="contained"
                   color="primary"
                 >
-                  Add New Sales
+                  Add New Sales Commission
                 </Button>
               </Link>
             </Grid>
           </Grid>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <PriorYearDropdownlist />
             </Grid>
@@ -463,7 +577,7 @@ export default function Transaction() {
               <SalesMonthsDropdownlist />
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <SalesmanDropdownlist />
             </Grid>
@@ -471,7 +585,7 @@ export default function Transaction() {
               <FactoriesDropdownlist />
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <input
                 type="file"
@@ -498,27 +612,27 @@ export default function Transaction() {
             </Grid> */}
           </Grid>
         </form>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <MaterialTable
               title="Customer Sales Details"
               columns={colDefs}
               data={data}
               icons={tableIcons}
-              actions={[
-                // {
-                //   icon: () => <button >Export</button>,// you can pass icon too
-                //   tooltip: "Export to Excel",
-                //   onClick: () => downloadExcel(),
-                //   isFreeAction: true
-                // },
-                {
-                  icon: () => <PrintIcon />, // you can pass icon too
-                  tooltip: "Export to Pdf",
-                  onClick: () => downloadPdf(),
-                  isFreeAction: true,
-                },
-              ]}
+              // actions={[
+              //   {
+              //     icon: () => <button >Export</button>,// you can pass icon too
+              //     tooltip: "Export to Excel",
+              //     onClick: () => downloadExcel(),
+              //     isFreeAction: true
+              //   },
+              //   {
+              //     icon: () => <PrintIcon />, // you can pass icon too
+              //     tooltip: "Export to Pdf",
+              //     onClick: () => downloadPdf(),
+              //     isFreeAction: true,
+              //   },
+              // ]}
               editable={{
                 onRowAdd: (newData) =>
                   new Promise((resolve, reject) => {
@@ -571,6 +685,9 @@ export default function Transaction() {
                 actionsColumnIndex: -1,
                 selection: true,
                 showSelectAllCheckbox: false,
+                showTextRowsSelected: false,
+                grouping: true,
+                columnsButton: true,
                 rowStyle: (data, index) =>
                   index % 2 === 0 ? { background: "#f5f5f5" } : null,
                 headerStyle: { background: "#f44336", color: "#fff" },

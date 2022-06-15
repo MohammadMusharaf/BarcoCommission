@@ -45,19 +45,27 @@ export default function CalculateCommission(props) {
 
   const columns = [
     { title: "Customer", field: "customer" },
-    // { title: "Invoice No", field: "invoiceNo" },
+    // { title: "ShipToName", field: "shipToName" },
+    // { title: "ShipToAddress", field: "shipToAddress" },
+    // { title: "ShipToCity", field: "shipToCity" },
+    // { title: "ShipToState", field: "shipToState" },
+    { title: "Factory", field: "factory" },
+    { title: "Check", field: "check" },
+    { title: "Month", field: "month" },
+    { title: "Salesman", field: "salesman" },
+    { title: "Invoice No", field: "invoiceNo" },
     { title: "Sale Amount", field: "saleAmount" },
     { title: "Gross CommRate", field: "commRate" },
     { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" },
+    { title: "Salesman Comm", field: "salesmanComm" }
   ];
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
   //const columns = JSON.parse(localStorage.getItem('columns1'))
 
-  //console.log(data)
+  console.log(data)
 
-  //console.log(columns)
+  console.log(columns)
 
   const downloadPdf = () => {
     const doc = new jsPDF();
@@ -106,14 +114,14 @@ export default function CalculateCommission(props) {
           columns={columns}
           data={data}
           icons={tableIcons}
-          actions={[
-            {
-              icon: () => <PrintIcon />, // you can pass icon too
-              tooltip: "Export to Pdf",
-              onClick: () => downloadPdf(),
-              isFreeAction: true,
-            },
-          ]}
+          // actions={[
+          //   {
+          //     icon: () => <PrintIcon />, // you can pass icon too
+          //     tooltip: "Export to Pdf",
+          //     onClick: () => downloadPdf(),
+          //     isFreeAction: true,
+          //   },
+          // ]}
           options={{
             sorting: true,
             search: true,
