@@ -73,35 +73,61 @@ export default function CommissonRules(props) {
 
   // const [columns, setColDefs] = useState()
   const [data, setData] = useState()
-
-  // const data1 = [
-  //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-  // ];
-
-  // const columns1 = [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  // ];
-
-  // localStorage.setItem('data1', JSON.stringify(data1));
-  // localStorage.setItem('columns1', JSON.stringify(columns1));
-
-  // const data = JSON.parse(localStorage.getItem("salesComissionData"));
-
-
   const columns = [
-    { title: "Rules Id", field: "CommRuleId" },
+    { title: "Rules Id", field: "commRuleId" },
     { title: "Fin Year", field: "finYear" },
     { title: "Factory Name", field: "factoryName" },
     { title: "Customer Name", field: "customerName" },
-
     { title: "Comm. Rate", field: "commRate" },
     { title: "IsActive", field: "IsActive" },
 
 
   ];
+
+  const [commRuleId, setCommRuleId] = useState('');
+  const [finYear, setFinYear] = useState('');
+  const [factoryName, setFactoryName] = useState('');
+  const [customerName, setCustomerName] = useState('');
+
+  const [commRate, setCommRate] = useState('');
+  const [IsActive, setIsActive] = useState('');
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    var data = {
+      'CommRuleId': commRuleId,
+      'FinYear': finYear,
+      'FactoryName': factoryName,
+      'CustomerName': customerName,
+      'CommRate': commRate,
+      'IsActive': IsActive
+    }
+
+    debugger;
+    console.log(data);
+
+    fetch('http://localhost:57636/api/Customer/AddCustomer',
+      // fetch('https://www.mecallapi.com/api/users/create', 
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/form-data',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          alert(result['message'])
+          if (result['status'] === 'ok') {
+            window.location.href = '/';
+          }
+        }
+      )
+  }
+
+
 
   const downloadPdf = () => {
     const doc = new jsPDF();
@@ -143,7 +169,7 @@ export default function CommissonRules(props) {
       <div>
         <h3>Create Commission Rules</h3>
 
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <PriorYearDropdownlist />

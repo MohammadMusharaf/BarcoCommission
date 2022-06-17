@@ -43,6 +43,8 @@ import "jspdf-autotable";
 
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import FactoryCategoryddl from "./FactoryCategoryddl";
+import Checkbox from '@mui/material/Checkbox';
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 const useStyles = makeStyles((theme) => ({
@@ -173,6 +175,15 @@ export default function Factories(props) {
                 id="commissionRate"
                 label="Commission Rate"
                 autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <label>IsActive</label>
+              <Checkbox
+
+                {...label}
+                defaultChecked
+                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
               />
             </Grid>
           </Grid>
