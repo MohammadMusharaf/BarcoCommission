@@ -45,6 +45,12 @@ import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import Customerddl from "./Customerddl";
 import FactoryCategoryddl from "./FactoryCategoryddl";
 
+//import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
 import Checkbox from '@mui/material/Checkbox';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -69,8 +75,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function CommissonRules(props) {
-  const classes = useStyles();
 
+  const [priorYear, setPriorYear] = React.useState('');
+
+  const handleChange = (event) => {
+    setPriorYear(event.target.value);
+    debugger;
+    console.log(priorYear);
+  };
+
+
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
+  const [selectedCustomerValue, setSelectedCustomerValue] = useState('');
+
+
+
+  const FactoryOnchange = ((value) => {
+    setSelectedFactoryValue(value)
+    debugger;
+    console.log(selectedFactoryValue);
+  })
+  const PriorYearOnchange = ((value) => {
+    setSelectedPriorYearValue(value)
+    debugger;
+    console.log(selectedPriorYearValue);
+  })
+  const CustomerOnchange = ((value) => {
+    setSelectedCustomerValue(value)
+    debugger;
+    console.log(selectedCustomerValue);
+  })
+   
+
+  const classes = useStyles();
   // const [columns, setColDefs] = useState()
   const [data, setData] = useState()
   const columns = [
@@ -80,15 +118,12 @@ export default function CommissonRules(props) {
     { title: "Customer Name", field: "customerName" },
     { title: "Comm. Rate", field: "commRate" },
     { title: "IsActive", field: "IsActive" },
-
-
   ];
 
   const [commRuleId, setCommRuleId] = useState('');
   const [finYear, setFinYear] = useState('');
   const [factoryName, setFactoryName] = useState('');
   const [customerName, setCustomerName] = useState('');
-
   const [commRate, setCommRate] = useState('');
   const [IsActive, setIsActive] = useState('');
 
@@ -164,21 +199,25 @@ export default function CommissonRules(props) {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
+ 
+<Grid item xs={12} sm={6}>
+  <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
+</Grid>
   return (
     <>
       <div>
         <h3>Create Commission Rules</h3>
-
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <PriorYearDropdownlist />
+            <PriorYearDropdownlist ddlOnchang={PriorYearOnchange}/>
+  
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Customerddl />
+              <Customerddl ddlOnchang={CustomerOnchange}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <FactoriesDropdownlist />
+            <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
 
 

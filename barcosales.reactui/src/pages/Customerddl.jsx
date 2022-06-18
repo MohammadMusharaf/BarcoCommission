@@ -5,11 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function Customerddl() {
+export default function Customerddl({ ddlOnchang }) {
     const [customer, setCustomer] = React.useState('');
 
     const handleChange = (event) => {
         setCustomer(event.target.value);
+        ddlOnchang (event.target.value);
     };
 
     return (

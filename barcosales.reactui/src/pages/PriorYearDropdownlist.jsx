@@ -5,11 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function PriorYearDropdownlist() {
+export default function PriorYearDropdownlist({ddlOnchang}) {
     const [priorYear, setPriorYear] = React.useState('');
 
     const handleChange = (event) => {
-        setPriorYear(event.target.value);
+        setPriorYear(event.target.value); 
+        ddlOnchang(event.target.value);
     };
 
     return (

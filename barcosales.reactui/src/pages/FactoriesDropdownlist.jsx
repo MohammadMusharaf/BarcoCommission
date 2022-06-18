@@ -1,17 +1,22 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function FactoriesDropdownlist() {
+export default function FactoriesDropdownlist({ ddlOnchang }) {
+
     const [Factory, setFactory] = React.useState('');
 
     const handleChange = (event) => {
         setFactory(event.target.value);
-    };
+        console.log(event.target.value);
+        ddlOnchang(event.target.value);
 
+    };
+    debugger;
+    console.log(Factory);
     return (
         <Box sx={{ minWidth: 20 }}>
             <FormControl fullWidth>

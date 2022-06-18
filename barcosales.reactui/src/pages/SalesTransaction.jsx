@@ -74,12 +74,37 @@ export default function Transaction() {
   ]);
   const [data, setData] = useState();
 
-  // const data1 = [
-  //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-  // ];
+  
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
 
 
+  const FactoryOnchange = ((value) => {
+    setSelectedFactoryValue(value)
+    debugger;
+    console.log(selectedFactoryValue);
+  })
+  const PriorYearOnchange = ((value) => {
+    setSelectedPriorYearValue(value)
+    debugger;
+    console.log(selectedPriorYearValue);
+  })
+  const SalesMonthsOnchange = ((value) => {
+    setSelectedSalesMonthsValue(value)
+    debugger;
+    console.log(selectedSalesMonthsValue);
+  })
+  const SalesmanOnchange = ((value) => {
+    setSelectedSalesmanValue(value)
+    debugger;
+    console.log(selectedSalesmanValue);
+  })
+
+
+
+ 
 
   const data1 = [
     {
@@ -531,28 +556,7 @@ export default function Transaction() {
   return (
     <>
       <div>
-        {/* <Box display="flex">
-          <Box flexGrow={1}>
-            <FactoriesDropdownlist />
-          </Box>
-          <Box>
-
-          </Box>
-        </Box>
-
-        <Box display="flex">
-          <Box flexGrow={1}>
-
-          </Box>
-          <Box>
-            <Link to="/transaction/addsales">
-              <Button variant="contained" color="primary">
-                Add New Sales
-              </Button>
-            </Link>
-          </Box>
-        </Box> */}
-        {/* <h5>Add / Upload Customer Sales </h5> */}
+    
         <form className={classes.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
@@ -571,18 +575,20 @@ export default function Transaction() {
 
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <PriorYearDropdownlist />
+              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange}/>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <SalesMonthsDropdownlist />
+              <SalesMonthsDropdownlist ddlOnchang={SalesMonthsOnchange}/>
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <SalesmanDropdownlist />
+              <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
+              
             </Grid>
+           
             <Grid item xs={12} sm={6}>
-              <FactoriesDropdownlist />
+              <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
@@ -595,21 +601,7 @@ export default function Transaction() {
                 onChange={importExcel}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-         
-
-              <Link to="/transaction/addsales">
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-
-                >
-                  Add New Sales
-                </Button>
-              </Link>
-            </Grid> */}
+          
           </Grid>
         </form>
         <Grid container spacing={1}>
@@ -619,20 +611,7 @@ export default function Transaction() {
               columns={colDefs}
               data={data}
               icons={tableIcons}
-              // actions={[
-              //   {
-              //     icon: () => <button >Export</button>,// you can pass icon too
-              //     tooltip: "Export to Excel",
-              //     onClick: () => downloadExcel(),
-              //     isFreeAction: true
-              //   },
-              //   {
-              //     icon: () => <PrintIcon />, // you can pass icon too
-              //     tooltip: "Export to Pdf",
-              //     onClick: () => downloadPdf(),
-              //     isFreeAction: true,
-              //   },
-              // ]}
+              
               editable={{
                 onRowAdd: (newData) =>
                   new Promise((resolve, reject) => {

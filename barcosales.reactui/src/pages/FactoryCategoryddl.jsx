@@ -5,11 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function FactoryCategoryddl() {
+export default function FactoryCategoryddl({ddlOnchang}) {
     const [factoryCategory, setFactoryCategory] = React.useState('');
 
     const handleChange = (event) => {
         setFactoryCategory(event.target.value);
+        ddlOnchang(event.target.value);
     };
 
     return (

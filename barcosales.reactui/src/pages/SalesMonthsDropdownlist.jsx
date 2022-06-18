@@ -5,11 +5,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SalesMonthsDropdownlist() {
+export default function SalesMonthsDropdownlist({ ddlOnchang }) {
     const [salesMonths, setSalesMonths] = React.useState('');
 
     const handleChange = (event) => {
         setSalesMonths(event.target.value);
+        ddlOnchang(event.target.value);
     };
 
     return (

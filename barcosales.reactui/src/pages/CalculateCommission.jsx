@@ -40,8 +40,10 @@ import "jspdf-autotable";
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 export default function CalculateCommission(props) {
-  // const [columns, setColDefs] = useState()
-  // const [data, setData] = useState()
+
+  
+
+
 
   const columns = [
     { title: "Customer", field: "customer" },
@@ -61,22 +63,8 @@ export default function CalculateCommission(props) {
   ];
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
-  //const columns = JSON.parse(localStorage.getItem('columns1'))
+  
 
-  console.log(data)
-
-  console.log(columns)
-
-  const downloadPdf = () => {
-    const doc = new jsPDF();
-    doc.text("Sales Commission Details", 20, 10);
-    doc.autoTable({
-      theme: "grid",
-      columns: columns.map((col) => ({ ...col, dataKey: col.field })),
-      body: data,
-    });
-    doc.save("SalesCommission.pdf");
-  };
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -114,14 +102,7 @@ export default function CalculateCommission(props) {
           columns={columns}
           data={data}
           icons={tableIcons}
-          // actions={[
-          //   {
-          //     icon: () => <PrintIcon />, // you can pass icon too
-          //     tooltip: "Export to Pdf",
-          //     onClick: () => downloadPdf(),
-          //     isFreeAction: true,
-          //   },
-          // ]}
+      
           options={{
             sorting: true,
             search: true,

@@ -68,33 +68,35 @@ const useStyles = makeStyles((theme) => ({
 export default function Analytics(props) {
   const classes = useStyles();
 
-  // const [columns, setColDefs] = useState()
-  // const [data, setData] = useState()
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
 
-  // const data1 = [
-  //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-  // ];
 
-  // const columns1 = [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  // ];
-
-  // localStorage.setItem('data1', JSON.stringify(data1));
-  // localStorage.setItem('columns1', JSON.stringify(columns1));
+  const FactoryOnchange = ((value) => {
+    setSelectedFactoryValue(value)
+    debugger;
+    console.log(selectedFactoryValue);
+  })
+  const PriorYearOnchange = ((value) => {
+    setSelectedPriorYearValue(value)
+    debugger;
+    console.log(selectedPriorYearValue);
+  })
+  const SalesMonthsOnchange = ((value) => {
+    setSelectedSalesMonthsValue(value)
+    debugger;
+    console.log(selectedSalesMonthsValue);
+  })
+  const SalesmanOnchange = ((value) => {
+    setSelectedSalesmanValue(value)
+    debugger;
+    console.log(selectedSalesmanValue);
+  })
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
-  //const columns = JSON.parse(localStorage.getItem('columns1'))
-  // const columns = [
-  //   { title: "Customer", field: "customer" },
-  //   { title: "Invoice No", field: "invoiceNo" },
-  //   { title: "Sale Amount", field: "saleAmount" },
-  //   { title: "Gross CommRate", field: "commRate" },
-  //   { title: "Gross Comm", field: "grossComm" },
-  //   { title: "Salesman Comm", field: "salesmanComm" },
-  // ];
+
 
   const columns = [
     { title: "Customer", field: "customer" },
@@ -113,16 +115,7 @@ export default function Analytics(props) {
     { title: "SalesmanComm", field: "salesmanComm" }
   ];
 
-  const downloadPdf = () => {
-    const doc = new jsPDF();
-    doc.text("Sales Commission Details", 20, 10);
-    doc.autoTable({
-      theme: "grid",
-      columns: columns.map((col) => ({ ...col, dataKey: col.field })),
-      body: data,
-    });
-    doc.save("SalesCommission.pdf");
-  };
+ 
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
