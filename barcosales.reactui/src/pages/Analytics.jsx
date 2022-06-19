@@ -68,35 +68,33 @@ const useStyles = makeStyles((theme) => ({
 export default function Analytics(props) {
   const classes = useStyles();
 
-  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
-  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
-  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
-  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
 
-
-  const FactoryOnchange = ((value) => {
-    setSelectedFactoryValue(value)
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
     debugger;
     console.log(selectedFactoryValue);
-  })
-  const PriorYearOnchange = ((value) => {
-    setSelectedPriorYearValue(value)
+  };
+  const PriorYearOnchange = (value) => {
+    setSelectedPriorYearValue(value);
     debugger;
     console.log(selectedPriorYearValue);
-  })
-  const SalesMonthsOnchange = ((value) => {
-    setSelectedSalesMonthsValue(value)
+  };
+  const SalesMonthsOnchange = (value) => {
+    setSelectedSalesMonthsValue(value);
     debugger;
     console.log(selectedSalesMonthsValue);
-  })
-  const SalesmanOnchange = ((value) => {
-    setSelectedSalesmanValue(value)
+  };
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
     debugger;
     console.log(selectedSalesmanValue);
-  })
+  };
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
-
 
   const columns = [
     { title: "Customer", field: "customer" },
@@ -112,22 +110,22 @@ export default function Analytics(props) {
     { title: "SalesAmt", field: "saleAmount" },
     { title: "GrossCommRate", field: "commRate" },
     { title: "GrossComm", field: "grossComm" },
-    { title: "SalesmanComm", field: "salesmanComm" }
+    { title: "SalesmanComm", field: "salesmanComm" },
   ];
-
- 
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
     Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
     Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    // DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    DetailPanel: forwardRef((props, ref) => (
+      <ChevronRight {...props} ref={ref} />
+    )),
     Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
     Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
     Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    // FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    // LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
     NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
     PreviousPage: forwardRef((props, ref) => (
       <ChevronLeft {...props} ref={ref} />
@@ -137,7 +135,9 @@ export default function Analytics(props) {
     SortArrow: forwardRef((props, ref) => (
       <ArrowDownward {...props} ref={ref} />
     )),
-    // ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ThirdStateCheck: forwardRef((props, ref) => (
+      <Remove {...props} ref={ref} />
+    )),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
