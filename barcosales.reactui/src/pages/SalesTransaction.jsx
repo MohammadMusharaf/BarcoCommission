@@ -57,13 +57,60 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
+
+const getDownloadContent = (columns, data) => {
+  const separator = ",,,,,,,,,,,,,,,,,,\n";
+
+  // creating table header
+  let headerContent = "";
+  const groupedCol = columns.find((col) => col?.tableData.groupOrder === 0);
+  if (groupedCol) headerContent = groupedCol.title + separator;
+  columns.forEach((col) => {
+    if (col?.tableData.groupOrder !== 0)
+      headerContent = headerContent + "," + col.title;
+  });
+
+  // creating table body
+  let bodyContent = "";
+  if (groupedCol) {
+    data.forEach((d) => {
+      bodyContent = bodyContent + d.value + separator + "\n";
+      d.data.forEach((dd) => {
+        columns.forEach((col) => {
+          if (col?.tableData.groupOrder !== 0)
+            bodyContent = bodyContent + "," + (dd[col.field] || "No Data");
+        });
+        bodyContent = bodyContent + "\n";
+      });
+    });
+  } else {
+    data.forEach((d) => {
+      columns.forEach((col) => {
+        bodyContent = bodyContent + "," + (d[col.field] || "No Data");
+      });
+      bodyContent = bodyContent + "\n";
+    });
+  }
+
+  // create actual content
+  const content = headerContent + "\n" + bodyContent;
+
+  return content;
+};
 export default function Transaction() {
   // const Transaction = (props) =>
 
   const classes = useStyles();
 
   const [colDefs, setColDefs] = useState([
-    { title: "SoldToName", field: "Sold-To Name" },
+    {
+      title: "SoldToName",
+      field: "Sold-To Name",
+      exportTransformer: (a, s, ...d) => {
+        console.log({ a, s, d });
+        debugger;
+      },
+    },
     { title: "SoldToAddress", field: "Sold-To Address" },
     { title: "SoldToState", field: "Sold-To State" },
     { title: "ShipToName", field: "Ship-To Name" },
@@ -74,37 +121,31 @@ export default function Transaction() {
   ]);
   const [data, setData] = useState();
 
-  
-  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
-  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
-  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
-  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
 
-
-  const FactoryOnchange = ((value) => {
-    setSelectedFactoryValue(value)
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
     debugger;
     console.log(selectedFactoryValue);
-  })
-  const PriorYearOnchange = ((value) => {
-    setSelectedPriorYearValue(value)
+  };
+  const PriorYearOnchange = (value) => {
+    setSelectedPriorYearValue(value);
     debugger;
     console.log(selectedPriorYearValue);
-  })
-  const SalesMonthsOnchange = ((value) => {
-    setSelectedSalesMonthsValue(value)
+  };
+  const SalesMonthsOnchange = (value) => {
+    setSelectedSalesMonthsValue(value);
     debugger;
     console.log(selectedSalesMonthsValue);
-  })
-  const SalesmanOnchange = ((value) => {
-    setSelectedSalesmanValue(value)
+  };
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
     debugger;
     console.log(selectedSalesmanValue);
-  })
-
-
-
- 
+  };
 
   const data1 = [
     {
@@ -397,7 +438,7 @@ export default function Transaction() {
     { title: "Sale Amount", field: "saleAmount" },
     { title: "Gross CommRate", field: "commRate" },
     { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" }
+    { title: "Salesman Comm", field: "salesmanComm" },
   ];
 
   const getExention = (file) => {
@@ -523,10 +564,7 @@ export default function Transaction() {
       transformedArray.push(obj);
     });
 
-    localStorage.setItem(
-      "salesComissionData",
-      JSON.stringify(data1)
-    );
+    localStorage.setItem("salesComissionData", JSON.stringify(data1));
   };
 
   const tableIcons = {
@@ -556,7 +594,6 @@ export default function Transaction() {
   return (
     <>
       <div>
-    
         <form className={classes.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
@@ -575,18 +612,17 @@ export default function Transaction() {
 
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange}/>
+              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <SalesMonthsDropdownlist ddlOnchang={SalesMonthsOnchange}/>
+              <SalesMonthsDropdownlist ddlOnchang={SalesMonthsOnchange} />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
-              
             </Grid>
-           
+
             <Grid item xs={12} sm={6}>
               <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
@@ -601,7 +637,6 @@ export default function Transaction() {
                 onChange={importExcel}
               />
             </Grid>
-          
           </Grid>
         </form>
         <Grid container spacing={1}>
@@ -611,7 +646,6 @@ export default function Transaction() {
               columns={colDefs}
               data={data}
               icons={tableIcons}
-              
               editable={{
                 onRowAdd: (newData) =>
                   new Promise((resolve, reject) => {
@@ -658,6 +692,37 @@ export default function Transaction() {
                 showFirstLastPageButtons: false,
                 paginationPosition: "both",
                 exportButton: true,
+                exportCsv: (columns, data) => {
+                  debugger;
+                  const content = getDownloadContent(columns, data);
+
+                  // download code
+                  const a = document.createElement("a");
+                  a.href = URL.createObjectURL(
+                    new Blob([content], { type: "text/csv" })
+                  );
+                  a.setAttribute("download", "Sales Transaction");
+                  document.body.appendChild(a);
+                  a.click();
+                  document.body.removeChild(a);
+                },
+                exportPdf: (columns, data) => {
+                  debugger;
+                  const content = getDownloadContent(columns, data);
+
+                  const doc = new jsPDF();
+
+                  doc.text(content, 10, 10);
+                  doc.autoTable({
+                    theme: "grid",
+                    columns: colDefs.map((col) => ({
+                      ...col,
+                      dataKey: col.field,
+                    })),
+                    body: data,
+                  });
+                  doc.save("Sales Transaction.pdf");
+                },
                 exportAllData: true,
                 exportFileName: "SalesCommission",
                 addRowPosition: "first",
