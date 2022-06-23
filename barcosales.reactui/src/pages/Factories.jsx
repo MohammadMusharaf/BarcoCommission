@@ -1,4 +1,7 @@
-import React, { useState, Component, useEffect, forwardRef } from "react";
+import React, { useState, Component, useEffect, forwardRef,useRef  } from "react";
+
+import Checkbox from '@mui/material/Checkbox';
+
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -43,8 +46,8 @@ import "jspdf-autotable";
 
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import FactoryCategoryddl from "./FactoryCategoryddl";
-import Checkbox from '@mui/material/Checkbox';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+ 
+ 
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +90,56 @@ export default function Factories(props) {
   // localStorage.setItem('columns1', JSON.stringify(columns1));
 
   // const data = JSON.parse(localStorage.getItem("salesComissionData"));
+  const [selectedFactCategoryValue, setSelectedFactCategoryValue] = useState('');
+  const [factoryName, setFactoryName] = useState('');
+  const [princcode, setPrinccode] = useState('');
+  const [commissionRate, setCommissionRate] = useState('');
+  
 
+  const FactoryCategoryOnchange = ((value) => {
+    setSelectedFactCategoryValue(value)
+    debugger;
+    console.log(selectedFactCategoryValue);
+  })
+
+  const [checked, setChecked] = useState(false);
+  const checkChanged = (state) => {
+    setChecked(!checked);
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+     
+    var data = {
+      'Factoryname': factoryName, 
+      'Princcode': princcode, 
+      'CommissionRate': commissionRate,
+      'FactoryCategory': selectedFactCategoryValue, 
+      'IsActive': checked
+      
+    }
+
+    debugger;
+    console.log(data);
+    
+    // fetch('http://localhost:57636/api/Customer/AddCustomer',
+    // {
+    //   method: 'POST',
+    //   headers: {
+    //     Accept: 'application/form-data',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // })
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       alert(result['message'])
+    //       if (result['status'] === 'ok') {
+    //         window.location.href = '/';
+    //       }
+    //     }
+    //   )
+  }
 
   const columns = [
     { title: "Factory Id", field: "factoryId" },
@@ -139,10 +191,11 @@ export default function Factories(props) {
       <div>
         <h3> Add Factory</h3>
 
-        <form className={classes.form}>
+        <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <FactoryCategoryddl />
+              <FactoryCategoryddl ddlOnchang={FactoryCategoryOnchange} />
+              {/* <FactoriesDropdownlist ddlOnchang={FactoryOnchange} /> */}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -152,6 +205,7 @@ export default function Factories(props) {
                 fullWidth
                 id="factoryName"
                 label="Factory Name"
+                onChange={(e) => setFactoryName(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -163,6 +217,7 @@ export default function Factories(props) {
                 fullWidth
                 id="princcode"
                 label="Princ Code"
+                onChange={(e) => setPrinccode(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -174,17 +229,14 @@ export default function Factories(props) {
                 fullWidth
                 id="commissionRate"
                 label="Commission Rate"
+                onChange={(e) => setCommissionRate(e.target.value)}
                 autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <label>IsActive</label>
-              <Checkbox
-
-                {...label}
-                defaultChecked
-                sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-              />
+            <label>IsActive</label>
+            <Checkbox    checked={checked} onChange={checkChanged} color='primary' size='medium' />
+          {/* <input type="checkbox" ref={checkboxRef} /> IsActive */}
             </Grid>
           </Grid>
 
