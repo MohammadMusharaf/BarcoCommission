@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,8 @@ namespace BarcoSales.DAO
 {
     public class CustomerDAO : ICustomerRepository
     {
-        BarcoSalesCommissionContext dbContext;
-        public CustomerDAO(BarcoSalesCommissionContext _db)
+        barcosalescommissionContext dbContext;
+        public CustomerDAO(barcosalescommissionContext _db)
         {
 
             dbContext = _db;

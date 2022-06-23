@@ -1,50 +1,51 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+ 
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BarcoSales.EFModel;
 
 namespace BarcoSales.DAO
 {
  public   class CommissionRulesDAO: ICommissionRules
     {
 
-        BarcoSalesCommissionContext dbContext;
-        public CommissionRulesDAO(BarcoSalesCommissionContext _db)
+        barcosalescommissionContext dbContext;
+        public CommissionRulesDAO(barcosalescommissionContext _db)
         {
             dbContext = _db;
         }
-        public IEnumerable<CommissionRules> IGetCommissionRules()
+        public IEnumerable<Commissionrules> IGetCommissionRules()
         {
-            var custlist = dbContext.CommissionRules.ToList();
+            var custlist = dbContext.Commissionrules.ToList();
             return custlist;
         }
-        public CommissionRules IAddCommissionRules(CommissionRules commissionRules)
+        public Commissionrules IAddCommissionRules(Commissionrules commissionRules)
         {
             if (commissionRules != null)
             {
-                dbContext.CommissionRules.Add(commissionRules);
+                dbContext.Commissionrules.Add(commissionRules);
                 dbContext.SaveChanges();
                 return commissionRules;
             }
             return null;
         }
-        public CommissionRules IGetCommissionRulesById(int id)
+        public Commissionrules IGetCommissionRulesById(int id)
         {
-            var commissionRules = dbContext.CommissionRules.FirstOrDefault(x => x.CommissionRulesId == id);
+            var commissionRules = dbContext.Commissionrules.FirstOrDefault(x => x.CommissionRulesId == id);
             return commissionRules;
         }
-        public CommissionRules IUpdateCommissionRules(CommissionRules commissionRules)
+        public Commissionrules IUpdateCommissionRules(Commissionrules commissionRules)
         {
             dbContext.Entry(commissionRules).State = EntityState.Modified;
             dbContext.SaveChanges();
             return commissionRules;
         }
-        public CommissionRules IDeleteCommissionRules(int id)
+        public Commissionrules IDeleteCommissionRules(int id)
         {
-            var commissionRules = dbContext.CommissionRules.FirstOrDefault(x => x.CustId == id);
+            var commissionRules = dbContext.Commissionrules.FirstOrDefault(x => x.CustId == id);
             dbContext.Entry(commissionRules).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return commissionRules;

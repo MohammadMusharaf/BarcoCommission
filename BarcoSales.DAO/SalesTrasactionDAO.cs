@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,43 +10,43 @@ namespace BarcoSales.DAO
 {
   public  class SalesTrasactionDAO: ISalesTrasaction
     {
-        BarcoSalesCommissionContext dbContext;
-        public SalesTrasactionDAO(BarcoSalesCommissionContext _db)
+        barcosalescommissionContext dbContext;
+        public SalesTrasactionDAO(barcosalescommissionContext _db)
         {
 
             dbContext = _db;
         }
-        public IEnumerable<SalesTrasaction> IGetSalesTrasaction()
+        public IEnumerable<Salestrasaction> IGetSalesTrasaction()
         {
-            var salesTrasactions = dbContext.SalesTrasaction.ToList();
+            var salesTrasactions = dbContext.Salestrasaction.ToList();
             return salesTrasactions;
 
 
         }
-        public SalesTrasaction IAddSalesTrasaction(SalesTrasaction salesTrasaction)
+        public Salestrasaction IAddSalesTrasaction(Salestrasaction salesTrasaction)
         {
             if (salesTrasaction != null)
             {
-                dbContext.SalesTrasaction.Add(salesTrasaction);
+                dbContext.Salestrasaction.Add(salesTrasaction);
                 dbContext.SaveChanges();
                 return salesTrasaction;
             }
             return null;
         }
-        public SalesTrasaction IGetSalesTrasactionById(int id)
+        public Salestrasaction IGetSalesTrasactionById(int id)
         {
-            var salesTrasaction = dbContext.SalesTrasaction.FirstOrDefault(x => x.TrasactionId == id);
+            var salesTrasaction = dbContext.Salestrasaction.FirstOrDefault(x => x.TrasactionId == id);
             return salesTrasaction;
         }
-        public SalesTrasaction IUpdateSalesTrasaction(SalesTrasaction salesTrasaction)
+        public Salestrasaction IUpdateSalesTrasaction(Salestrasaction salesTrasaction)
         {
             dbContext.Entry(salesTrasaction).State = EntityState.Modified;
             dbContext.SaveChanges();
             return salesTrasaction;
         }
-        public SalesTrasaction IDeleteSalesTrasaction(int id)
+        public Salestrasaction IDeleteSalesTrasaction(int id)
         {
-            var salesTrasaction = dbContext.SalesTrasaction.FirstOrDefault(x => x.TrasactionId == id);
+            var salesTrasaction = dbContext.Salestrasaction.FirstOrDefault(x => x.TrasactionId == id);
             dbContext.Entry(salesTrasaction).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return salesTrasaction;

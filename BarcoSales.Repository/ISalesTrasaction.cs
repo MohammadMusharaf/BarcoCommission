@@ -1,4 +1,4 @@
-﻿using BarcoSales.Model;
+﻿using BarcoSales.EFModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +8,11 @@ namespace BarcoSales.Repository
    public interface ISalesTrasaction
     {
 
-        IEnumerable<SalesTrasaction> IGetSalesTrasaction();
-        SalesTrasaction IGetSalesTrasactionById(int id);
-        SalesTrasaction IAddSalesTrasaction(SalesTrasaction salesTrasaction);
-        SalesTrasaction IUpdateSalesTrasaction(SalesTrasaction salesTrasaction);
-        SalesTrasaction IDeleteSalesTrasaction(int id);
+        IEnumerable<Salestrasaction> IGetSalesTrasaction();
+        Salestrasaction IGetSalesTrasactionById(int id);
+        Salestrasaction IAddSalesTrasaction(Salestrasaction salesTrasaction);
+        Salestrasaction IUpdateSalesTrasaction(Salestrasaction salesTrasaction);
+        Salestrasaction IDeleteSalesTrasaction(int id);
 
     }
 }

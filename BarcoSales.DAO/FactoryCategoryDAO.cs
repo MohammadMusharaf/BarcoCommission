@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,42 +11,42 @@ namespace BarcoSales.DAO
 {
    public class FactoryCategoryDAO: IFactoryCategory
     {
-        BarcoSalesCommissionContext dbContext;
-        public FactoryCategoryDAO(BarcoSalesCommissionContext _db)
+        barcosalescommissionContext dbContext;
+        public FactoryCategoryDAO(barcosalescommissionContext _db)
         {
 
             dbContext = _db;
         }
-        public IEnumerable<FactoryCategory> IGetFactoryCategory()
+        public IEnumerable<Factorycategory> IGetFactoryCategory()
         {
-            var custlist = dbContext.FactoryCategory.ToList();
+            var custlist = dbContext.Factorycategory.ToList();
             return custlist;
 
         }
-        public FactoryCategory IAddFactoryCategory(FactoryCategory factoryCategory)
+        public Factorycategory IAddFactoryCategory(Factorycategory factoryCategory)
         {
             if (factoryCategory != null)
             {
-                dbContext.FactoryCategory.Add(factoryCategory);
+                dbContext.Factorycategory.Add(factoryCategory);
                 dbContext.SaveChanges();
                 return factoryCategory;
             }
             return null;
         }
-        public FactoryCategory IGetFactoryCategoryById(int id)
+        public Factorycategory IGetFactoryCategoryById(int id)
         {
-            var factoryCategory = dbContext.FactoryCategory.FirstOrDefault(x => x.FactoryCategoryId == id);
+            var factoryCategory = dbContext.Factorycategory.FirstOrDefault(x => x.FactoryCategoryId == id);
             return factoryCategory;
         }
-        public FactoryCategory IUpdateFactoryCategory(FactoryCategory factoryCategory)
+        public Factorycategory IUpdateFactoryCategory(Factorycategory factoryCategory)
         {
             dbContext.Entry(factoryCategory).State = EntityState.Modified;
             dbContext.SaveChanges();
             return factoryCategory;
         }
-        public FactoryCategory IDeleteFactoryCategory(int id)
+        public Factorycategory IDeleteFactoryCategory(int id)
         {
-            var factoryCategory = dbContext.FactoryCategory.FirstOrDefault(x => x.FactoryCategoryId == id);
+            var factoryCategory = dbContext.Factorycategory.FirstOrDefault(x => x.FactoryCategoryId == id);
             dbContext.Entry(factoryCategory).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return factoryCategory;

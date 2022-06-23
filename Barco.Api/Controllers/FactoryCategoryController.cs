@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,35 +21,35 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/FactoryCategory/GetFactoryCategory")]
-        public IEnumerable<FactoryCategory> GetFactoryCategory()
+        public IEnumerable<Factorycategory> GetFactoryCategory()
         {
             return factoryCategoryService.IGetFactoryCategory();
         }
         [HttpPost]
         [Route("[action]")]
         [Route("api/FactoryCategory/AddFactoryCategory")]
-        public FactoryCategory AddFactoryCategory(FactoryCategory factoryCategory)
+        public Factorycategory AddFactoryCategory(Factorycategory factoryCategory)
         {
             return factoryCategoryService.IAddFactoryCategory(factoryCategory);
         }
         [HttpPut]
         [Route("[action]")]
         [Route("api/FactoryCategory/EditFactoryCategory")]
-        public FactoryCategory EditFactoryCategory(FactoryCategory factoryCategory)
+        public Factorycategory EditFactoryCategory(Factorycategory factoryCategory)
         {
             return factoryCategoryService.IUpdateFactoryCategory(factoryCategory);
         }
         [HttpDelete]
         [Route("[action]")]
         [Route("api/FactoryCategory/DeleteFactoryCategory")]
-        public FactoryCategory DeleteFactoryCategory(int id)
+        public Factorycategory DeleteFactoryCategory(int id)
         {
             return factoryCategoryService.IDeleteFactoryCategory(id);
         }
         [HttpGet]
         [Route("[action]")]
         [Route("api/FactoryCategory/GetFactoryCategoryId")]
-        public FactoryCategory GetFactoryCategoryId(int id)
+        public Factorycategory GetFactoryCategoryId(int id)
         {
             return factoryCategoryService.IGetFactoryCategoryById(id);
         }

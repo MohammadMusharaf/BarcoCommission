@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,35 +22,35 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/SalesPerson/GetSalesPerson")]
-        public IEnumerable<SalesPerson> GetSalesPerson()
+        public IEnumerable<Salesperson> GetSalesPerson()
         {
             return salesPersonService.IGetSalesPerson();
         }
         [HttpPost]
         [Route("[action]")]
         [Route("api/SalesPerson/AddSalesPerson")]
-        public SalesPerson AddSalesPerson(SalesPerson salesPerson)
+        public Salesperson AddSalesPerson(Salesperson salesPerson)
         {
             return salesPersonService.IAddSalesPerson(salesPerson);
         }
         [HttpPut]
         [Route("[action]")]
         [Route("api/SalesPerson/EditSalesPerson")]
-        public SalesPerson EditSalesPerson(SalesPerson salesPerson)
+        public Salesperson EditSalesPerson(Salesperson salesPerson)
         {
             return salesPersonService.IUpdateSalesPerson(salesPerson);
         }
         [HttpDelete]
         [Route("[action]")]
         [Route("api/SalesPerson/DeleteSalesPerson")]
-        public SalesPerson DeleteSalesPerson(int id)
+        public Salesperson DeleteSalesPerson(int id)
         {
             return salesPersonService.IDeleteSalesPerson(id);
         }
         [HttpGet]
         [Route("[action]")]
         [Route("api/SalesPerson/GetSalesPersonId")]
-        public SalesPerson GetSalesPersonId(int id)
+        public Salesperson GetSalesPersonId(int id)
         {
             return salesPersonService.IDeleteSalesPerson(id);
         }

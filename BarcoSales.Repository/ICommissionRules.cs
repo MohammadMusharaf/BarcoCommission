@@ -1,4 +1,5 @@
-﻿using BarcoSales.Model;
+﻿using BarcoSales.EFModel;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +9,11 @@ namespace BarcoSales.Repository
   public  interface ICommissionRules
     {
 
-        IEnumerable<CommissionRules> IGetCommissionRules();
-        CommissionRules IGetCommissionRulesById(int id);
-        CommissionRules IAddCommissionRules(CommissionRules commissionRules);
-        CommissionRules IUpdateCommissionRules(CommissionRules commissionRules);
-        CommissionRules IDeleteCommissionRules(int id);
+        IEnumerable<Commissionrules> IGetCommissionRules();
+        Commissionrules IGetCommissionRulesById(int id);
+        Commissionrules IAddCommissionRules(Commissionrules commissionRules);
+        Commissionrules IUpdateCommissionRules(Commissionrules commissionRules);
+        Commissionrules IDeleteCommissionRules(int id);
 
     }
 }

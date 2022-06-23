@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BarcoSales.Model\BarcoSales.Model.csproj" />
+    <ProjectReference Include="..\BarcoSales.EFModel\BarcoSales.EFModel.csproj" />
   </ItemGroup>
 
 </Project>

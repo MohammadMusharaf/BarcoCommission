@@ -1,6 +1,6 @@
 using BarcoSales.Repository;
 
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -48,8 +48,8 @@ namespace Barco.Api
             services.AddControllers();
             services.AddHttpClient();
             services.AddSwaggerGen();
-            services.AddDbContext<BarcoSalesCommissionContext>(options =>
-            options.UseSqlServer(Configuration["DbConnection"]));
+            services.AddDbContext<barcosalescommissionContext>(options =>
+            options.UseMySql(Configuration["DbConnection"]));
 
             services.AddTransient<ICustomerRepository, CustomerDAO>();
         }

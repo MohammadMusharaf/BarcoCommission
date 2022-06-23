@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using BarcoSales.Repository;
 
 using Npgsql;
@@ -14,42 +14,42 @@ namespace BarcoSales.DAO
     public class SalesPersonDAO : ISalesPersonRepository
     {
 
-        BarcoSalesCommissionContext dbContext;
-        public SalesPersonDAO(BarcoSalesCommissionContext _db)
+        barcosalescommissionContext dbContext;
+        public SalesPersonDAO(barcosalescommissionContext _db)
         {
             dbContext = _db;
         }
-        public IEnumerable<SalesPerson> IGetSalesPerson()
+        public IEnumerable<Salesperson> IGetSalesPerson()
         {
-            var salesPersons = dbContext.SalesPerson.ToList();
+            var salesPersons = dbContext.Salesperson.ToList();
             return salesPersons;
 
         }
-        public SalesPerson IAddSalesPerson(SalesPerson salesPerson)
+        public Salesperson IAddSalesPerson(Salesperson salesPerson)
         {
             if (salesPerson != null)
             {
-                dbContext.SalesPerson.Add(salesPerson);
+                dbContext.Salesperson.Add(salesPerson);
                 dbContext.SaveChanges();
                 return salesPerson;
             }
             return null;
         }
-        public SalesPerson IGetSalesPersonById(int id)
+        public Salesperson IGetSalesPersonById(int id)
         {
-            var salesPerson = dbContext.SalesPerson.FirstOrDefault(x => x.SalesId == id);
+            var salesPerson = dbContext.Salesperson.FirstOrDefault(x => x.SalesId == id);
             return salesPerson;
         }
 
-        public SalesPerson IUpdateSalesPerson(SalesPerson salesPerson)
+        public Salesperson IUpdateSalesPerson(Salesperson salesPerson)
         {
             dbContext.Entry(salesPerson).State = EntityState.Modified;
             dbContext.SaveChanges();
             return salesPerson;
         }
-        public SalesPerson IDeleteSalesPerson(int id)
+        public Salesperson IDeleteSalesPerson(int id)
         {
-            var salesPerson = dbContext.SalesPerson.FirstOrDefault(x => x.SalesId == id);
+            var salesPerson = dbContext.Salesperson.FirstOrDefault(x => x.SalesId == id);
             dbContext.Entry(salesPerson).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return salesPerson;

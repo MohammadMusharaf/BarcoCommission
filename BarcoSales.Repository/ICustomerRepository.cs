@@ -1,4 +1,4 @@
-﻿using BarcoSales.Model;
+﻿using BarcoSales.EFModel;
 using System;
 using System.Collections.Generic;
 using System.Text;

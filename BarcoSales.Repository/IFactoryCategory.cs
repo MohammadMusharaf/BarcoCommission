@@ -1,4 +1,4 @@
-﻿using BarcoSales.Model;
+﻿using BarcoSales.EFModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +8,11 @@ namespace BarcoSales.Repository
    public interface IFactoryCategory
     {
 
-        IEnumerable<FactoryCategory> IGetFactoryCategory();
-        FactoryCategory IGetFactoryCategoryById(int id);
-        FactoryCategory IAddFactoryCategory(FactoryCategory factoryCategory);
-        FactoryCategory IUpdateFactoryCategory(FactoryCategory factoryCategory);
-        FactoryCategory IDeleteFactoryCategory(int id);
+        IEnumerable<Factorycategory> IGetFactoryCategory();
+        Factorycategory IGetFactoryCategoryById(int id);
+        Factorycategory IAddFactoryCategory(Factorycategory factoryCategory);
+        Factorycategory IUpdateFactoryCategory(Factorycategory factoryCategory);
+        Factorycategory IDeleteFactoryCategory(int id);
 
     }
 }

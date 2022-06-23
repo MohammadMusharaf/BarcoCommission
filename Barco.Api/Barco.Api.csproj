@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BarcoSales.DAO\BarcoSales.DAO.csproj" />
-    <ProjectReference Include="..\BarcoSales.Model\BarcoSales.Model.csproj" />
+    <ProjectReference Include="..\BarcoSales.EFModel\BarcoSales.EFModel.csproj" />
     <ProjectReference Include="..\BarcoSales.Repository\BarcoSales.Repository.csproj" />
   </ItemGroup>
 

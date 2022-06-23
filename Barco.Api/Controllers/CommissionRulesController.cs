@@ -1,4 +1,4 @@
-﻿using BarcoSales.Model;
+﻿using BarcoSales.EFModel;
 using BarcoSales.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +24,7 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/CommissionRules/GetCommissionRules")]
-        public IEnumerable<CommissionRules> GetCommissionRules()
+        public IEnumerable<Commissionrules> GetCommissionRules()
         {
 
             return commissionRulesService.IGetCommissionRules();
@@ -32,28 +32,28 @@ namespace Barco.Api.Controllers
         [HttpPost]
         [Route("[action]")]
         [Route("api/CommissionRules/AddCommissionRules")]
-        public CommissionRules  AddCommissionRules(CommissionRules commissionRules)
+        public Commissionrules  AddCommissionRules(Commissionrules commissionRules)
         {
             return commissionRulesService.IAddCommissionRules(commissionRules);
         }
         [HttpPut]
         [Route("[action]")]
         [Route("api/CommissionRules/EditCommissionRules")]
-        public CommissionRules EditCustomer(CommissionRules commissionRules)
+        public Commissionrules EditCustomer(Commissionrules commissionRules)
         {
             return commissionRulesService.IUpdateCommissionRules(commissionRules);
         }
         [HttpDelete]
         [Route("[action]")]
         [Route("api/CommissionRules/DeleteCommissionRules")]
-        public CommissionRules DeleteCommissionRules(int id)
+        public Commissionrules DeleteCommissionRules(int id)
         {
             return commissionRulesService.IDeleteCommissionRules(id);
         }
         [HttpGet]
         [Route("[action]")]
         [Route("api/CommissionRules/GetCommissionRulesId")]
-        public CommissionRules GetCommissionRulesId(int id)
+        public Commissionrules GetCommissionRulesId(int id)
         {
             return commissionRulesService.IGetCommissionRulesById(id);
         }

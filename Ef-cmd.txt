@@ -1,0 +1,23 @@
+ https://stackoverflow.com/questions/49508003/ef-core-mysql-database-first
+
+Then run this command, reference
+
+dotnet ef dbcontext scaffold "Server=localhost;Database=ef;User=root;Password=123456;TreatTinyAsBoolean=true;" "Pomelo.EntityFrameworkCore.MySql"
+For scaffolding in a different path, you can use --output-dir
+
+dotnet ef dbcontext scaffold server=localhost;port=3306;database=palle2patnam;uid=root;password=password" "Pomelo.EntityFrameworkCore.MySql" --output-dir Models
+For forcing to get new fields from database u can add --force
+
+dotnet ef dbcontext scaffold "server=localhost;port=3306;database=palle2patnam;uid=root;password=password" "Pomelo.EntityFrameworkCore.MySql" --output-dir Models --force
+Share
+Improve this answer
+
+dotnet ef dbcontext scaffold server=localhost;port=3306;database=barcosalescommission;uid=root;password=root" "Pomelo.EntityFrameworkCore.MySql" --output-dir Models
+dotnet ef dbcontext scaffold "server=localhost;port=3306;database=barcosalescommission;uid=root;password=root" "Pomelo.EntityFrameworkCore.MySql" --output-dir Models --force
+
+
+PM> cd C:\Users\MohammadMusharaf\source\repos\BarcoCommission\BarcoSales.EFModel
+PM> dotnet ef dbcontext scaffold "server=localhost;port=3306;database=barcosalescommission;uid=root;password=root" "Pomelo.EntityFrameworkCore.MySql"
+Build started...
+Build succeeded.
+

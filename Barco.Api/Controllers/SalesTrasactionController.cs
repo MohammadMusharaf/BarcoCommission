@@ -1,5 +1,5 @@
 ﻿using BarcoSales.Repository;
-using BarcoSales.Model;
+using BarcoSales.EFModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,14 +23,14 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/Trasaction/GetTrasaction")]
-        public IEnumerable<SalesTrasaction> GetTrasaction()
+        public IEnumerable<Salestrasaction> GetTrasaction()
         {
             return salesTrasactionService.IGetSalesTrasaction();
         }
         [HttpPost]
         [Route("[action]")]
         [Route("api/Trasaction/AddTrasaction")]
-        public SalesTrasaction AddTrasaction(SalesTrasaction salesTrasaction)
+        public Salestrasaction AddTrasaction(Salestrasaction salesTrasaction)
         {
 
             return salesTrasactionService.IAddSalesTrasaction(salesTrasaction);
@@ -39,14 +39,14 @@ namespace Barco.Api.Controllers
         [HttpPut]
         [Route("[action]")]
         [Route("api/Trasaction/EditTrasaction")]
-        public SalesTrasaction EditTrasaction(SalesTrasaction salesTrasaction)
+        public Salestrasaction EditTrasaction(Salestrasaction salesTrasaction)
         {
             return salesTrasactionService.IUpdateSalesTrasaction(salesTrasaction);
         }
         [HttpDelete]
         [Route("[action]")]
         [Route("api/Trasaction/DeleteTrasaction")]
-        public SalesTrasaction DeleteTrasaction(int id)
+        public Salestrasaction DeleteTrasaction(int id)
         {
             return salesTrasactionService.IDeleteSalesTrasaction(id);
         }
