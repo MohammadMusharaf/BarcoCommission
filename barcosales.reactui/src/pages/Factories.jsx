@@ -121,16 +121,11 @@ export default function Factories(props) {
     }
     rows.push(factories);
     
-   // setData([...data, rows]);
-  // setArray((array) => [...array, newValue]);
-  // setData((data) => [...data, rows]);
+
   if(data)
   {
     debugger
-    // const oldrows = [];
-    // oldrows=data;
-    // oldrows.push(factories);
-    // setData(oldrows);
+  
     setData(data.concat(rows))
   }
   else{
@@ -256,7 +251,7 @@ export default function Factories(props) {
             <Grid item xs={12} sm={6}>
             <label>IsActive</label>
             <Checkbox    checked={checked} onChange={checkChanged} color='primary' size='medium' />
-          {/* <input type="checkbox" ref={checkboxRef} /> IsActive */}
+          
             </Grid>
           </Grid>
 

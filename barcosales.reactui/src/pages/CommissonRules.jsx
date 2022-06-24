@@ -107,6 +107,10 @@ export default function CommissonRules(props) {
     console.log(selectedCustomerValue);
   })
    
+  const [checked, setChecked] = useState(false);
+  const checkChanged = (state) => {
+    setChecked(!checked);
+  };
 
   const classes = useStyles();
   // const [columns, setColDefs] = useState()
@@ -117,49 +121,63 @@ export default function CommissonRules(props) {
     { title: "Factory Name", field: "factoryName" },
     { title: "Customer Name", field: "customerName" },
     { title: "Comm. Rate", field: "commRate" },
-    { title: "IsActive", field: "IsActive" },
+    { title: "IsActive", field: "isActive" },
   ];
 
   const [commRuleId, setCommRuleId] = useState('');
   const [finYear, setFinYear] = useState('');
   const [factoryName, setFactoryName] = useState('');
   const [customerName, setCustomerName] = useState('');
-  const [commRate, setCommRate] = useState('');
-  const [IsActive, setIsActive] = useState('');
+  const [commissionRate, setCommissionRate] = useState('');
+  const [isActive, setIsActive] = useState('');
+
 
   const handleSubmit = event => {
     event.preventDefault();
-    var data = {
-      'CommRuleId': commRuleId,
-      'FinYear': finYear,
-      'FactoryName': factoryName,
-      'CustomerName': customerName,
-      'CommRate': commRate,
-      'IsActive': IsActive
+    const rows = [];
+    var CommRule = {
+      'commRuleId': 1,
+      'finYear': selectedPriorYearValue,
+      'factoryName': selectedCustomerValue,
+      'customerName': selectedCustomerValue,
+      'commRate': commissionRate,
+      'isActive': checked
     }
+    rows.push(CommRule);
 
     debugger;
-    console.log(data);
+    if(data)
+    {
+      debugger
+    
+      setData(data.concat(rows))
+    }
+    else{
+      setData(rows);
+    }
+  
+      debugger;
+      console.log(data);
 
-    fetch('http://localhost:57636/api/Customer/AddCustomer',
-      // fetch('https://www.mecallapi.com/api/users/create', 
-      {
-        method: 'POST',
-        headers: {
-          Accept: 'application/form-data',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          alert(result['message'])
-          if (result['status'] === 'ok') {
-            window.location.href = '/';
-          }
-        }
-      )
+    // fetch('http://localhost:57636/api/Customer/AddCustomer',
+    //  
+    //   {
+    //     method: 'POST',
+    //     headers: {
+    //       Accept: 'application/form-data',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(data),
+    //   })
+    //   .then(res => res.json())
+    //   .then(
+    //     (result) => {
+    //       alert(result['message'])
+    //       if (result['status'] === 'ok') {
+    //         window.location.href = '/';
+    //       }
+    //     }
+    //   )
   }
 
 
@@ -229,17 +247,21 @@ export default function CommissonRules(props) {
                 fullWidth
                 id="commissionRate"
                 label="Commission Rate"
+                onChange={(e) => setCommissionRate(e.target.value)}
                 autoFocus
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <label>IsActive</label>
-              <Checkbox
+              {/* <Checkbox
 
                 {...label}
                 defaultChecked
                 sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
-              />
+              /> */}
+               
+            <Checkbox   {...label}  checked={checked} onChange={checkChanged} color='primary' size='medium' />
+          
             </Grid>
           </Grid>
 
