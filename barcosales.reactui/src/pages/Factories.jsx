@@ -74,6 +74,7 @@ export default function Factories(props) {
 
   // const [columns, setColDefs] = useState()
   const [data, setData] = useState()
+  // const [factories, setFactories] = useState()
 
   // const data1 = [
   //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
@@ -108,15 +109,33 @@ export default function Factories(props) {
   };
   const handleSubmit = event => {
     event.preventDefault();
-     
-    var data = {
-      'Factoryname': factoryName, 
-      'Princcode': princcode, 
-      'CommissionRate': commissionRate,
-      'FactoryCategory': selectedFactCategoryValue, 
-      'IsActive': checked
+    const rows = [];
+    var factories = { 
+      'factoryId': 1, 
+      'factoryName': factoryName, 
+      'princcode': princcode, 
+      'commRate': commissionRate,
+      'factoryCategory': selectedFactCategoryValue, 
+      'isActive': checked
       
     }
+    rows.push(factories);
+    
+   // setData([...data, rows]);
+  // setArray((array) => [...array, newValue]);
+  // setData((data) => [...data, rows]);
+  if(data)
+  {
+    debugger
+    // const oldrows = [];
+    // oldrows=data;
+    // oldrows.push(factories);
+    // setData(oldrows);
+    setData(data.concat(rows))
+  }
+  else{
+    setData(rows);
+  }
 
     debugger;
     console.log(data);
@@ -147,6 +166,7 @@ export default function Factories(props) {
     { title: "Factory Name", field: "factoryName" },
     { title: "Princ Code", field: "princcode" },
     { title: "Comm. Rate", field: "commRate" },
+    { title: "IsActive", field: "isActive" },
 
 
   ];
@@ -250,7 +270,7 @@ export default function Factories(props) {
             color="primary"
             className={classes.submit}
           >
-            Search
+            Submit
           </Button>
         </form>
         <MaterialTable
