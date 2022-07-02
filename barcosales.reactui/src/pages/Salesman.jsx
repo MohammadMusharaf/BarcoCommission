@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from "react";
+ 
 import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Avatar from '@material-ui/core/Avatar';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+import React, { useState, Component, useEffect, forwardRef,useRef  } from "react";
+import Checkbox from '@mui/material/Checkbox';
+import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
+import * as XLSX from "xlsx";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import AddBox from "@material-ui/icons/AddBox";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import Check from "@material-ui/icons/Check";
+import ChevronLeft from "@material-ui/icons/ChevronLeft";
+import ChevronRight from "@material-ui/icons/ChevronRight";
+import Clear from "@material-ui/icons/Clear";
+import DeleteOutline from "@material-ui/icons/DeleteOutline";
+import Edit from "@material-ui/icons/Edit";
+import FilterList from "@material-ui/icons/FilterList";
+import SaveAlt from "@material-ui/icons/SaveAlt";
+import Search from "@material-ui/icons/Search";
+import ViewColumn from "@material-ui/icons/ViewColumn";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
+import FactoryCategoryddl from "./FactoryCategoryddl";
 
+ 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,6 +48,28 @@ const useStyles = makeStyles((theme) => ({
 export default function Salesman() {
   const classes = useStyles();
 
+  const columns = [
+    { title: "SalesmanId", field: "salesmanId" },
+    { title: "SalesmanCode", field: "salesmanCode" },
+    { title: "SalesmanName", field: "salesmanName" },
+    { title: "Designation", field: "designation" },
+    { title: "EmailId", field: "emailId" },
+    { title: "JoiningDate", field: "joiningDate" },
+    { title: "Address", field: "address" },
+    { title: "City", field: "city" },
+    { title: "State", field: "state" },
+    { title: "Zip", field: "zip" },
+    { title: "Mobile", field: "mobile" },
+    { title: "PrincCode", field: "princCode" },
+    { title: "IsActive", field: "isActive" },
+  ];
+   
+  const [data, setData] = useState()
+ const [salesman, setSalesman] = useState();
+ 
+ 
+ 
+ 
   const [users, setUsers] = useState([]);
   useEffect(() => {
     UsersGet()
@@ -50,11 +83,11 @@ export default function Salesman() {
           setUsers(result)
         }
       )
-  }
+  };
 
   const UpdateUser = id => {
     window.location = '/update/' + id
-  }
+  };
 
   const UserDelete = id => {
     var data = {
@@ -77,64 +110,94 @@ export default function Salesman() {
           }
         }
       )
-  }
+  };
+  const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    // DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    // FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    // LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => (
+      <ChevronLeft {...props} ref={ref} />
+    )),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => (
+      <ArrowDownward {...props} ref={ref} />
+    )),
+    // ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  };
 
   return (
-    <div className={classes.root}>
-      <Container className={classes.container} maxWidth="lg">
-        <Paper className={classes.paper}>
-          <Box display="flex">
-            <Box flexGrow={1}>
-              <Typography component="h2" variant="h6" color="primary" gutterBottom>
-                Salesman
-              </Typography>
-            </Box>
-            <Box>
-              <Link to="/create">
-                <Button variant="contained" color="primary">
-                  CREATE
+  
+ 
+    <>
+      <div>
+        <h3> Add Salesman</h3>
+
+        <form className={classes.form}  >
+        <Grid container spacing={1}>
+            <Grid item xs={12} sm={12}>
+              <Link to="/salesman/add">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                >
+                  Add New Salesman
                 </Button>
               </Link>
-            </Box>
-          </Box>
-          <TableContainer component={Paper}>
-            <Table className={classes.table} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="right">ID</TableCell>
-                  <TableCell align="center">Avatar</TableCell>
-                  <TableCell align="left">First</TableCell>
-                  <TableCell align="left">Last</TableCell>
-                  <TableCell align="left">Username</TableCell>
-                  <TableCell align="center">Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.ID}>
-                    <TableCell align="right">{user.id}</TableCell>
-                    <TableCell align="center">
-                      <Box display="flex" justifyContent="center">
-                        <Avatar src={user.avatar} />
-                      </Box>
-                    </TableCell>
-                    <TableCell align="left">{user.fname}</TableCell>
-                    <TableCell align="left">{user.lname}</TableCell>
-                    <TableCell align="left">{user.username}</TableCell>
-                    <TableCell align="center">
-                      <ButtonGroup color="primary" aria-label="outlined primary button group">
-                        <Button onClick={() => UpdateUser(user.id)}>Edit</Button>
-                        <Button onClick={() => UserDelete(user.id)}>Del</Button>
-                      </ButtonGroup>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Paper>
-      </Container>
-    </div>
+            </Grid>
+          </Grid>
+       
+        </form>
+        <MaterialTable
+          title=""
+          columns={columns}
+          data={data}
+          icons={tableIcons}
 
+          options={{
+            sorting: true,
+            search: true,
+            searchFieldAlignment: "right",
+            searchAutoFocus: true,
+            searchFieldVariant: "standard",
+            filtering: true,
+            paging: true,
+            pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
+            pageSize: 5,
+            paginationType: "stepped",
+            showFirstLastPageButtons: false,
+            paginationPosition: "both",
+            exportButton: true,
+            exportAllData: true,
+            exportFileName: "SalesCommission",
+            addRowPosition: "first",
+            actionsColumnIndex: -1,
+            selection: true,
+            showSelectAllCheckbox: false,
+            showTextRowsSelected: false,
+            selectionProps: (rowData) => ({
+              disabled: rowData.age == null,
+              // color:"primary"
+            }),
+            grouping: true,
+            columnsButton: true,
+            rowStyle: (data, index) =>
+              index % 2 === 0 ? { background: "#f5f5f5" } : null,
+            headerStyle: { background: "#f44336", color: "#fff" },
+          }}
+        />
+      </div>
+    </>
   );
 }
