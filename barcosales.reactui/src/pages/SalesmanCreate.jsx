@@ -4,6 +4,7 @@ import React, { useState,  useEffect, forwardRef,useRef  } from "react";
 import Checkbox from '@mui/material/Checkbox';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import { Link } from "react-router-dom";
  
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -172,7 +173,28 @@ else{
         {/* <h3> Add Salesman</h3> */}
 
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
+          <Grid item xs={12} sm={12}> 
+          {/* <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Create
+          </Button> */}
+             <Link to="/salesman">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                  Create Salesman
+                </Button>
+              </Link>
+          </Grid>
           <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="salesmanName"
@@ -285,27 +307,16 @@ else{
               />
             </Grid>
         
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="princCode"
-                name="princCode"
-                variant="outlined"
-                fullWidth
-                id="princCode"
-                label="Princ Code"
-                onChange={(e) => setPrincCode(e.target.value)}
-                autoFocus
-              />
-            </Grid>
+           
             <Grid item xs={12} sm={6}>
             <label>IsActive</label>
             <Checkbox    checked={checked} onChange={checkChanged} color='primary' size='medium' />
           
             </Grid>
-          </Grid>
+          
 
 
-          <Grid item xs={12} sm={12}>
+          {/* <Grid item xs={12} sm={12}>
 
           <Button
             type="Create"
@@ -316,6 +327,28 @@ else{
           >
             Submit
           </Button>
+          </Grid> */}
+              <Grid item xs={12} sm={12}> 
+          {/* <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Create
+          </Button> */}
+             <Link to="/salesman">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                  Create Salesman
+                </Button>
+              </Link>
+          </Grid>
           </Grid>
         </form>
          

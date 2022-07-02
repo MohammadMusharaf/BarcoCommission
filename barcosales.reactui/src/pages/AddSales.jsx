@@ -79,35 +79,63 @@ export default function AddSales() {
     { title: "Check", field: "check" },
     { title: "Month", field: "month" },
     { title: "Salesman", field: "salesman" },
-    { title: "Invoice No", field: "invoiceNo" },
-    { title: "Sale Amount", field: "saleAmount" },
-    { title: "Gross CommRate", field: "commRate" },
-    { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" }
+    { title: "InvoiceNo", field: "invoiceNo" },
+    { title: "SaleAmount", field: "saleAmount" },
+    { title: "GrossCommRate", field: "commRate" },
+    { title: "GrossComm", field: "grossComm" },
+    { title: "SalesmanComm", field: "salesmanComm" },
+    { title: "CreationDate", field: "creationDate" }
   ];
   return (
     <Container >
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+        {/* <Typography component="h1" variant="h5">
           Add New Sales
-        </Typography>
+        </Typography> */}
         <form className={classes.form} onSubmit={handleSubmit}>
+          
           <Grid container spacing={1}>
-            <Grid item xs={12} sm={3}>
+          <Grid item xs={12}>
+              <Link to="/transaction">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                   Add New Sales
+                </Button>
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={4}>
               <PriorYearDropdownlist />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <SalesMonthsDropdownlist />
             </Grid>
+            
+            <Grid item xs={12} sm={4}>
+              <TextField
+                autoComplete="creationDate"
+                name="creationDate"
+                variant="outlined"
+                required
+                fullWidth
+                id="creationDate"
+                label="Creation Date"
+              // onChange={(e) => setFname(e.target.value)}
+              // autoFocus
+              />
+            </Grid>
 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <SalesmanDropdownlist />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <FactoriesDropdownlist />
             </Grid>
 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="soldToName"
                 name="soldToName"
@@ -120,7 +148,7 @@ export default function AddSales() {
               // autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="ShipToAddress"
                 name="ShipToAddress"
@@ -134,7 +162,7 @@ export default function AddSales() {
               />
             </Grid>
 
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
@@ -144,7 +172,7 @@ export default function AddSales() {
               // onChange={(e) => setLname(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="ShipToState"
                 name="ShipToState"
@@ -157,7 +185,7 @@ export default function AddSales() {
               // autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="ShipToName "
                 name="ShipToName"
@@ -170,7 +198,7 @@ export default function AddSales() {
               // autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="ShipToAddress"
                 name="ShipToAddress"
@@ -183,7 +211,7 @@ export default function AddSales() {
               // autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
@@ -193,7 +221,7 @@ export default function AddSales() {
               // onChange={(e) => setLname(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 autoComplete="ShipToState"
                 name="ShipToState"
@@ -219,7 +247,7 @@ export default function AddSales() {
               autoFocus
               />
             </Grid> */}
-            <Grid item xs={12} sm={3}>
+            <Grid item xs={12} sm={4}>
               <TextField
                 variant="outlined"
                 required
@@ -240,7 +268,7 @@ export default function AddSales() {
                   fullWidth
                 // onClick={() => handleClick()}
                 >
-                  Add  Sales Commission
+                   Add New Sales
                 </Button>
               </Link>
             </Grid>

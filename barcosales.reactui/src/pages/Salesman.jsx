@@ -140,7 +140,7 @@ export default function Salesman() {
  
     <>
       <div>
-        <h3> Add Salesman</h3>
+        {/* <h3> Add Salesman</h3> */}
 
         <form className={classes.form}  >
         <Grid container spacing={1}>
