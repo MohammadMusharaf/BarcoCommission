@@ -6,6 +6,9 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Checkbox from '@mui/material/Checkbox';
+import FactoriesDropdownlist from "./FactoriesDropdownlist";
+import SalesmanDropdownlist from "./SalesmanDropdownlist";
+import { Link } from "react-router-dom";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
@@ -57,8 +60,20 @@ export default function CustomerCreate() {
  const [princCode, setPrincCode] = useState(); 
  const [createdDate, setCreatedDate] = useState();
  const [isActive, setIsActive] = useState();
-  
 
+ const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
+ const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
+ const FactoryOnchange = ((value) => {
+  setSelectedFactoryValue(value)
+  debugger;
+  console.log(selectedFactoryValue);
+})
+
+const SalesmanOnchange = ((value) => {
+  setSelectedSalesmanValue(value)
+  debugger;
+  console.log(selectedSalesmanValue);
+})
 
 
   const handleSubmit = event => {
@@ -79,9 +94,9 @@ export default function CustomerCreate() {
       'emailId': emailId, 
       'mobile': mobile,
       'territory': territory, 
-      'salesId': salesId, 
+      'salesId': selectedSalesmanValue, 
 
-      'princCode': princCode, 
+      'princCode': selectedFactoryValue, 
       'createdDate': createdDate,
       'isActive': checked
       
@@ -115,16 +130,16 @@ export default function CustomerCreate() {
 
  
   return (
-    <Container maxWidth="">
-      <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
+    <Container >
+      <div >
+        {/* <Typography component="h1" variant="h5">
           Create Customer
-        </Typography>
+        </Typography> */}
       
         <form className={classes.form} onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
           <Grid item xs={12} sm={12}> 
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -132,7 +147,17 @@ export default function CustomerCreate() {
             className={classes.submit}
           >
             Create
-          </Button>
+          </Button> */}
+           <Link to="/customers">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                  Create Customer
+                </Button>
+              </Link>
           </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -144,6 +169,19 @@ export default function CustomerCreate() {
                 id="custId"
                 label="Cust ID"
                 onChange={(e) => setCustId(e.target.value)}
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="createdDate"
+                name="createdDate"
+                variant="outlined"
+                required
+                fullWidth
+                id="createdDate"
+                label="creation Date"
+                onChange={(e) => setCreatedDate(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -274,7 +312,7 @@ export default function CustomerCreate() {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="salesId"
                 name="salesId"
@@ -285,9 +323,13 @@ export default function CustomerCreate() {
                 onChange={(e) => setSalesId(e.target.value)}
                 autoFocus
               />
+            </Grid> */}
+            <Grid item xs={12} sm={6}>
+              
+              <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
             </Grid>
         
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="princCode"
                 name="princCode"
@@ -298,6 +340,9 @@ export default function CustomerCreate() {
                 onChange={(e) => setPrincCode(e.target.value)}
                 autoFocus
               />
+            </Grid> */}
+            <Grid item xs={12} sm={6}>
+            <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
             <label>IsActive</label>
@@ -306,7 +351,7 @@ export default function CustomerCreate() {
             </Grid>
         
             <Grid item xs={12} sm={12}> 
-          <Button
+          {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -314,7 +359,17 @@ export default function CustomerCreate() {
             className={classes.submit}
           >
             Create
-          </Button>
+          </Button> */}
+             <Link to="/customers">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                // onClick={() => handleClick()}
+                >
+                  Create Customer
+                </Button>
+              </Link>
           </Grid>
           </Grid>
         </form>

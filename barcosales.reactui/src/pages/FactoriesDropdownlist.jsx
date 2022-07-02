@@ -20,12 +20,12 @@ export default function FactoriesDropdownlist({ ddlOnchang }) {
     return (
         <Box sx={{ minWidth: 20 }}>
             <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Select Factory</InputLabel>
+                <InputLabel id="demo-simple-select-label">Select Factory / Princ Code</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={Factory}
-                    label="Select Factory"
+                    label="Select Factory / Princ Code"
                     onChange={handleChange}
                 >
                     <MenuItem value={1}>Alpha Fittings</MenuItem>

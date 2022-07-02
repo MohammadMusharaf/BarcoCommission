@@ -145,7 +145,7 @@ export default function Customers() {
  
     <>
       <div>
-        <h3> Add Customer</h3>
+        {/* <h3> Add Customer</h3> */}
 
         <form className={classes.form}  >
         <Grid container spacing={1}>
