@@ -1,23 +1,11 @@
 import React, { useState, Component, useEffect, forwardRef } from "react";
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
-import * as XLSX from "xlsx";
+ 
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+ 
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Avatar from "@material-ui/core/Avatar";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { StyledEngineProvider } from "@mui/material/styles";
-import GetAppIcon from "@material-ui/icons/GetApp";
+ 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
@@ -30,31 +18,23 @@ import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
 import FilterList from "@material-ui/icons/FilterList";
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import Remove from "@material-ui/icons/Remove";
+ 
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
-import PrintIcon from "@material-ui/icons/Print";
+ 
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import Customerddl from "./Customerddl";
-import FactoryCategoryddl from "./FactoryCategoryddl";
-
-//import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+ 
+ 
 
 import Checkbox from '@mui/material/Checkbox';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-const EXTENSIONS = ["xlsx", "xls", "csv"];
+ 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),

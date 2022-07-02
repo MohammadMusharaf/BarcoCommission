@@ -63,7 +63,7 @@ export default function SalesmanCreate() {
  const [zip, setZip] = useState();
  const [mobile, setMobile] = useState();
  const [princCode, setPrincCode] = useState();
- const [IsActive, setIsActive] = useState();
+ //const [isActive, setIsActive] = useState();
  
  
  const handleSubmit = event => {
@@ -85,6 +85,7 @@ export default function SalesmanCreate() {
     'isActive': checked
     
   }
+  debugger;
   console.log(salesmaninfo);
   rows.push(salesmaninfo);
   
@@ -292,7 +293,7 @@ else{
                 fullWidth
                 id="princCode"
                 label="Princ Code"
-                onChange={(e) => setZip(e.target.value)}
+                onChange={(e) => setPrincCode(e.target.value)}
                 autoFocus
               />
             </Grid>
@@ -304,10 +305,10 @@ else{
           </Grid>
 
 
-
+          <Grid item xs={12} sm={12}>
 
           <Button
-            type="submit"
+            type="Create"
             fullWidth
             variant="contained"
             color="primary"
@@ -315,6 +316,7 @@ else{
           >
             Submit
           </Button>
+          </Grid>
         </form>
          
       </div>
