@@ -93,9 +93,9 @@ export default function CalculateCommission(props) {
   return (
     <>
       <div>
-        <h4>Calculated Sales Commission </h4>
+        {/* <h4>Calculated Sales Commission </h4> */}
         <Button type="submit" fullWidth variant="contained" color="primary">
-          Submit
+        Save Calculated Sales Commission 
         </Button>
         <MaterialTable
           title=""
@@ -132,7 +132,7 @@ export default function CalculateCommission(props) {
           }}
         />
         <Button type="submit" fullWidth variant="contained" color="primary">
-          Submit
+        Save Calculated Sales Commission 
         </Button>
       </div>
     </>
