@@ -1,30 +1,32 @@
 import React, { useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import Checkbox from '@mui/material/Checkbox';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Checkbox from "@mui/material/Checkbox";
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
 import SalesmanDropdownlist from "./SalesmanDropdownlist";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Link } from "react-router-dom";
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -34,112 +36,108 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomerCreate() {
   const classes = useStyles();
-  const [data, setData] = useState()
+  const [data, setData] = useState();
   const [checked, setChecked] = useState(false);
   const checkChanged = (state) => {
     setChecked(!checked);
   };
- 
+  const [value, setValue] = useState("");
+  const [customerId, setCustomerId] = useState();
+  const [custId, setCustId] = useState();
+  const [customer, setCustomer] = useState();
+  const [branch, setBranch] = useState();
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [zip, setZip] = useState();
 
- const [customerId, setCustomerId] = useState();
- const [custId, setCustId] = useState();
- const [customer, setCustomer] = useState();
- const [branch, setBranch] = useState();
- const [address, setAddress] = useState();
- const [city, setCity] = useState();
- const [state, setState] = useState();
- const [zip, setZip] = useState(); 
+  const [contact, setContact] = useState();
+  const [phone, setPhone] = useState();
+  const [fax, setFax] = useState();
+  const [emailId, setEmailId] = useState();
+  const [mobile, setMobile] = useState();
+  const [territory, setTerritory] = useState();
+  const [salesId, setSalesId] = useState();
+  const [princCode, setPrincCode] = useState();
+  const [createdDate, setCreatedDate] = useState();
+  const [isActive, setIsActive] = useState();
 
- const [contact, setContact] = useState(); 
- const [phone, setPhone] = useState();
- const [fax, setFax] = useState(); 
- const [emailId, setEmailId] = useState();
- const [mobile, setMobile] = useState();
- const [territory, setTerritory] = useState();
- const [salesId, setSalesId] = useState();
- const [princCode, setPrincCode] = useState(); 
- const [createdDate, setCreatedDate] = useState();
- const [isActive, setIsActive] = useState();
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
+    debugger;
+    console.log(selectedFactoryValue);
+  };
 
- const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
- const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
- const FactoryOnchange = ((value) => {
-  setSelectedFactoryValue(value)
-  debugger;
-  console.log(selectedFactoryValue);
-})
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
+    debugger;
+    console.log(selectedSalesmanValue);
+  };
 
-const SalesmanOnchange = ((value) => {
-  setSelectedSalesmanValue(value)
-  debugger;
-  console.log(selectedSalesmanValue);
-})
-
-
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    
-    var CustInfo = { 
-      'custId': custId, 
-      'customer': customer, 
-      'branch': branch,
-      'address': address, 
-      'city': city, 
-      'state': state, 
-      'zip': zip,
 
-      'contact': contact, 
-      'phone': phone, 
-      'fax': fax,
-      'emailId': emailId, 
-      'mobile': mobile,
-      'territory': territory, 
-      'salesId': selectedSalesmanValue, 
+    var CustInfo = {
+      custId: custId,
+      customer: customer,
+      branch: branch,
+      address: address,
+      city: city,
+      state: state,
+      zip: zip,
 
-      'princCode': selectedFactoryValue, 
-      'createdDate': createdDate,
-      'isActive': checked
-      
-    }
+      contact: contact,
+      phone: phone,
+      fax: fax,
+      emailId: emailId,
+      mobile: mobile,
+      territory: territory,
+      salesId: selectedSalesmanValue,
+
+      princCode: selectedFactoryValue,
+      createdDate: createdDate,
+      isActive: checked,
+    };
     debugger;
     console.log(CustInfo);
 
     debugger;
     console.log(data);
-    
-    fetch('http://localhost:57636/api/Customer/AddCustomer',
-   // fetch('https://www.mecallapi.com/api/users/create', 
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          alert(result['message'])
-          if (result['status'] === 'ok') {
-            window.location.href = '/';
-          }
-        }
-      )
-  }
 
- 
+    fetch(
+      "http://localhost:57636/api/Customer/AddCustomer",
+      // fetch('https://www.mecallapi.com/api/users/create',
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/form-data",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          window.location.href = "/";
+        }
+      });
+  };
+
   return (
-    <Container >
-      <div >
+    <Container>
+      <div>
         {/* <Typography component="h1" variant="h5">
           Create Customer
         </Typography> */}
-      
+
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={1}>
-          <Grid item xs={12} sm={12}> 
-          {/* <Button
+            <Grid item xs={12} sm={12}>
+              {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -148,17 +146,17 @@ const SalesmanOnchange = ((value) => {
           >
             Create
           </Button> */}
-           <Link to="/customers">
+              <Link to="/customers">
                 <Button
                   variant="contained"
                   color="primary"
                   fullWidth
-                // onClick={() => handleClick()}
+                  // onClick={() => handleClick()}
                 >
                   Create Customer
                 </Button>
               </Link>
-          </Grid>
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="custId"
@@ -172,18 +170,20 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="createdDate"
-                name="createdDate"
-                variant="outlined"
-                required
-                fullWidth
-                id="createdDate"
-                label="creation Date"
-                onChange={(e) => setCreatedDate(e.target.value)}
-                autoFocus
-              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Creation Date"
+                  value={value}
+                  onChange={(newValue) => {
+                    setValue(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField variant="outlined" fullWidth {...params} />
+                  )}
+                />
+              </LocalizationProvider>
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -208,8 +208,7 @@ const SalesmanOnchange = ((value) => {
                 onChange={(e) => setBranch(e.target.value)}
               />
             </Grid>
-       
-           
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="address"
@@ -234,7 +233,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-       
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="zip"
@@ -247,7 +246,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-        
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="contact"
@@ -260,7 +259,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-        
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="phone"
@@ -273,7 +272,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-        
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fax"
@@ -286,7 +285,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-        
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="emailId"
@@ -299,7 +298,7 @@ const SalesmanOnchange = ((value) => {
                 autoFocus
               />
             </Grid>
-        
+
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="territory"
@@ -325,10 +324,9 @@ const SalesmanOnchange = ((value) => {
               />
             </Grid> */}
             <Grid item xs={12} sm={6}>
-              
               <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
             </Grid>
-        
+
             {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="princCode"
@@ -342,16 +340,20 @@ const SalesmanOnchange = ((value) => {
               />
             </Grid> */}
             <Grid item xs={12} sm={6}>
-            <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
+              <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <label>IsActive</label>
-            <Checkbox    checked={checked} onChange={checkChanged} color='primary' size='medium' />
-          
+              <label>IsActive</label>
+              <Checkbox
+                checked={checked}
+                onChange={checkChanged}
+                color="primary"
+                size="medium"
+              />
             </Grid>
-        
-            <Grid item xs={12} sm={12}> 
-          {/* <Button
+
+            <Grid item xs={12} sm={12}>
+              {/* <Button
             type="submit"
             fullWidth
             variant="contained"
@@ -360,17 +362,17 @@ const SalesmanOnchange = ((value) => {
           >
             Create
           </Button> */}
-             <Link to="/customers">
+              <Link to="/customers">
                 <Button
                   variant="contained"
                   color="primary"
                   fullWidth
-                // onClick={() => handleClick()}
+                  // onClick={() => handleClick()}
                 >
                   Create Customer
                 </Button>
               </Link>
-          </Grid>
+            </Grid>
           </Grid>
         </form>
       </div>
