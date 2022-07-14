@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomerCreate() {
   const classes = useStyles();
   const [data, setData] = useState();
+
   const [checked, setChecked] = useState(false);
   const checkChanged = (state) => {
     setChecked(!checked);
@@ -45,6 +46,8 @@ export default function CustomerCreate() {
   const [customerId, setCustomerId] = useState();
   const [custId, setCustId] = useState();
   const [customer, setCustomer] = useState();
+  const [custAliasName, setCustAliasName] = useState();
+
   const [branch, setBranch] = useState();
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
@@ -53,7 +56,7 @@ export default function CustomerCreate() {
 
   const [contact, setContact] = useState();
   const [phone, setPhone] = useState();
-  const [fax, setFax] = useState();
+  // const [fax, setFax] = useState();
   const [emailId, setEmailId] = useState();
   const [mobile, setMobile] = useState();
   const [territory, setTerritory] = useState();
@@ -76,48 +79,42 @@ export default function CustomerCreate() {
     console.log(selectedSalesmanValue);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    var CustInfo = {
-      custId: custId,
-      customer: customer,
-      branch: branch,
-      address: address,
-      city: city,
-      state: state,
-      zip: zip,
-
-      contact: contact,
-      phone: phone,
-      fax: fax,
-      emailId: emailId,
-      mobile: mobile,
-      territory: territory,
-      salesId: selectedSalesmanValue,
-
-      princCode: selectedFactoryValue,
-      createdDate: createdDate,
-      isActive: checked,
+  const handleClick = () => {
+    var custInfo = {
+      CustId: 0,
+      CustomerCode: custId,
+      CustomerName: customer,
+      CustAliasName: custAliasName,
+      Branch: branch,
+      Address: address,
+      City: city,
+      State: state,
+      Zip: zip,
+      Contact: contact,
+      Phone: phone,
+      // Fax: fax,
+      EmailId: emailId,
+      Mobile: mobile,
+      Territory: territory,
+      SalesmanId: selectedSalesmanValue,
+      PrincCode: selectedFactoryValue,
+      CreatedDate: createdDate,
+      IsActive: checked,
     };
     debugger;
-    console.log(CustInfo);
+    console.log(custInfo);
 
     debugger;
-    console.log(data);
+    console.log(custInfo);
 
-    fetch(
-      "http://localhost:57636/api/Customer/AddCustomer",
-      // fetch('https://www.mecallapi.com/api/users/create',
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/form-data",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
+    fetch("http://localhost:57636/api/Customer/AddCustomer", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(custInfo),
+    })
       .then((res) => res.json())
       .then((result) => {
         alert(result["message"]);
@@ -130,28 +127,15 @@ export default function CustomerCreate() {
   return (
     <Container>
       <div>
-        {/* <Typography component="h1" variant="h5">
-          Create Customer
-        </Typography> */}
-
-        <form className={classes.form} onSubmit={handleSubmit}>
+        <form className={classes.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
-              {/* <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Create
-          </Button> */}
-              <Link to="/customers">
+              <Link to="/Customers">
                 <Button
                   variant="contained"
                   color="primary"
                   fullWidth
-                  // onClick={() => handleClick()}
+                  onClick={() => handleClick()}
                 >
                   Create Customer
                 </Button>
@@ -200,8 +184,19 @@ export default function CustomerCreate() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                autoComplete="custAliasName"
+                name="custAliasName"
                 variant="outlined"
-                required
+                fullWidth
+                id="custAliasName"
+                label="Customer Alias Name"
+                onChange={(e) => setCustAliasName(e.target.value)}
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
                 fullWidth
                 id="branch"
                 label="Branch Name"
@@ -233,7 +228,18 @@ export default function CustomerCreate() {
                 autoFocus
               />
             </Grid>
-
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="state"
+                name="state"
+                variant="outlined"
+                fullWidth
+                id="state"
+                label="state"
+                onChange={(e) => setState(e.target.value)}
+                autoFocus
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="zip"
@@ -272,7 +278,7 @@ export default function CustomerCreate() {
                 autoFocus
               />
             </Grid>
-
+            {/* 
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="fax"
@@ -284,7 +290,7 @@ export default function CustomerCreate() {
                 onChange={(e) => setFax(e.target.value)}
                 autoFocus
               />
-            </Grid>
+            </Grid> */}
 
             <Grid item xs={12} sm={6}>
               <TextField
@@ -293,7 +299,7 @@ export default function CustomerCreate() {
                 variant="outlined"
                 fullWidth
                 id="emailId"
-                label="EmailId"
+                label="Email"
                 onChange={(e) => setEmailId(e.target.value)}
                 autoFocus
               />
@@ -311,34 +317,11 @@ export default function CustomerCreate() {
                 autoFocus
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="salesId"
-                name="salesId"
-                variant="outlined"
-                fullWidth
-                id="salesId"
-                label="SalesId"
-                onChange={(e) => setSalesId(e.target.value)}
-                autoFocus
-              />
-            </Grid> */}
+
             <Grid item xs={12} sm={6}>
               <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
             </Grid>
 
-            {/* <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="princCode"
-                name="princCode"
-                variant="outlined"
-                fullWidth
-                id="princCode"
-                label="Princ Code"
-                onChange={(e) => setPrincCode(e.target.value)}
-                autoFocus
-              />
-            </Grid> */}
             <Grid item xs={12} sm={6}>
               <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
@@ -353,21 +336,12 @@ export default function CustomerCreate() {
             </Grid>
 
             <Grid item xs={12} sm={12}>
-              {/* <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Create
-          </Button> */}
-              <Link to="/customers">
+              <Link to="/Customers">
                 <Button
                   variant="contained"
                   color="primary"
                   fullWidth
-                  // onClick={() => handleClick()}
+                  onClick={() => handleClick()}
                 >
                   Create Customer
                 </Button>

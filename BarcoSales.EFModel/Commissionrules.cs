@@ -7,6 +7,7 @@ namespace BarcoSales.EFModel
     {
         public long CommissionRulesId { get; set; }
         public long CustId { get; set; }
+        public long SalesId { get; set; }
         public long FactoryId { get; set; }
         public decimal CommisionRate { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -14,8 +15,6 @@ namespace BarcoSales.EFModel
         public DateTime UpdatedDate { get; set; }
         public long UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-
-        public virtual Customer Cust { get; set; }
-        public virtual Factory Factory { get; set; }
+        public int FinYear { get; set; }
     }
 }

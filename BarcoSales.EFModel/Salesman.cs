@@ -3,20 +3,14 @@ using System.Collections.Generic;
 
 namespace BarcoSales.EFModel
 {
-    public partial class Salesperson
+    public partial class Salesman
     {
-        public Salesperson()
-        {
-            Customersalesperson = new HashSet<Customersalesperson>();
-            Salestrasaction = new HashSet<Salestrasaction>();
-        }
-
         public long SalesmanId { get; set; }
-        public string Salesmancode { get; set; }
-        public string Salesmanname { get; set; }
+        public string SalesmanCode { get; set; }
+        public string SalesmanName { get; set; }
         public string Designation { get; set; }
-        public string Emailid { get; set; }
-        public DateTime? Joiningdate { get; set; }
+        public string EmailId { get; set; }
+        public DateTime? JoiningDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
@@ -27,8 +21,5 @@ namespace BarcoSales.EFModel
         public DateTime UpdatedDate { get; set; }
         public long UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-
-        public virtual ICollection<Customersalesperson> Customersalesperson { get; set; }
-        public virtual ICollection<Salestrasaction> Salestrasaction { get; set; }
     }
 }

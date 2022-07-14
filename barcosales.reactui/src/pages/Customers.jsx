@@ -1,9 +1,14 @@
- 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import React, { useState, Component, useEffect, forwardRef,useRef  } from "react";
-import Checkbox from '@mui/material/Checkbox';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import React, {
+  useState,
+  Component,
+  useEffect,
+  forwardRef,
+  useRef,
+} from "react";
+import Checkbox from "@mui/material/Checkbox";
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -25,7 +30,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoryCategoryddl from "./FactoryCategoryddl";
 
- 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -49,72 +53,98 @@ export default function Customers() {
   const classes = useStyles();
 
   const columns = [
-    { title: "SNo", field: "customerId" },
-    { title: "CustId", field: "custId" },
-    { title: "Customer", field: "customer" },
+    { title: "SN#", field: "CustId" },
+    { title: "CustId", field: "CustomerCode" },
+    { title: "CustomerName", field: "CustomerName" },
+    { title: "CustAliasName", field: "CustAliasName" },
     { title: "Branch", field: "branch" },
-    { title: "Address", field: "address" },
-    { title: "City", field: "city" },
-    { title: "State", field: "state" },
-    { title: "Zip", field: "zip" },
-    { title: "Contact", field: "contact" },
-    { title: "Phone", field: "phone" },
-    { title: "FAX", field: "fax" },
-    { title: "EmailId", field: "emailId" },
-    { title: "Mobile", field: "mobile" },
-    { title: "Territory", field: "territory" },
-    { title: "SalesId", field: "salesId" },
-    { title: "PrincCode", field: "princCode" }, 
-    { title: "CreationDate", field: "creationDate" },
-    { title: "IsActive", field: "isActive" },
+    { title: "Address", field: "Address" },
+    { title: "City", field: "City" },
+    { title: "State", field: "State" },
+    { title: "Zip", field: "Zip" },
+    { title: "Contact", field: "Contact" },
+    { title: "Phone", field: "Phone" },
+    // { title: "FAX", field: "FAX" },
+    { title: "EmailId", field: "EmailId" },
+    { title: "Mobile", field: "Mobile" },
+    { title: "Territory", field: "Territory" },
+    { title: "SalesmanId", field: "SalesmanId" },
+    { title: "PrincCode", field: "PrincCode" },
+    { title: "CreationDate", field: "CreatedDate" },
+    { title: "IsActive", field: "IsActive" },
   ];
-   
-  const [data, setData] = useState()
- const [salesman, setSalesman] = useState();
- 
- 
- 
- 
+  //   Address: "LF flan"
+  // City: "CD"
+  // Contact: null
+  // CreatedBy: 101
+  // CreatedDate: "2022-05-11T20:05:12"
+  // CustAliasName: null
+  // CustId: 1
+  // CustomerCode: "ADsys"
+  // CustomerName: "Musharaf"
+  // EmailId: "adsys@gail.com"
+  // IsActive: true
+  // Mobile: null
+  // Phone: null
+  // PrincCode: null
+  // SalesmanId: null
+  // State: "LF"
+  // Territory: null
+  // UpdatedBy: 101
+  // UpdatedDate: "2022-05-11T20:05:12"
+  // Zip: "25533"
+
+  const [data, setData] = useState();
+  const [salesman, setSalesman] = useState();
+  const [customers, setCustomers] = useState([]);
+
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    UsersGet()
-  }, [])
+    //UsersGet()
+    GetCustomers();
+  }, []);
 
   const UsersGet = () => {
     fetch("https://www.mecallapi.com/api/users")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setUsers(result)
-        }
-      )
+      .then((res) => res.json())
+      .then((result) => {
+        setUsers(result);
+      });
   };
 
-  const UpdateUser = id => {
-    window.location = '/update/' + id
+  const GetCustomers = () => {
+    fetch("http://localhost:57636/api/Customer/GetCustomer")
+      .then((res) => res.json())
+      .then((result) => {
+        debugger;
+        setCustomers(result);
+        setData(result);
+      });
   };
 
-  const UserDelete = id => {
+  const UpdateUser = (id) => {
+    window.location = "/update/" + id;
+  };
+
+  const UserDelete = (id) => {
     var data = {
-      'id': id
-    }
-    fetch('https://www.mecallapi.com/api/users/delete', {
-      method: 'DELETE',
+      id: id,
+    };
+    fetch("https://www.mecallapi.com/api/users/delete", {
+      method: "DELETE",
       headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json',
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          alert(result['message'])
-          if (result['status'] === 'ok') {
-            UsersGet();
-          }
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          UsersGet();
         }
-      )
+      });
   };
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -141,14 +171,12 @@ export default function Customers() {
   };
 
   return (
-  
- 
     <>
       <div>
         {/* <h3> Add Customer</h3> */}
 
-        <form className={classes.form}  >
-        <Grid container spacing={1}>
+        <form className={classes.form}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
               <Link to="/customer/create">
                 <Button
@@ -162,14 +190,12 @@ export default function Customers() {
               </Link>
             </Grid>
           </Grid>
-       
         </form>
         <MaterialTable
           title=""
           columns={columns}
           data={data}
           icons={tableIcons}
-
           options={{
             sorting: true,
             search: true,

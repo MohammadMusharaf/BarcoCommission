@@ -15,12 +15,13 @@ namespace BarcoSales.EFModel
         {
         }
 
+        public virtual DbSet<Barcosaleshistory> Barcosaleshistory { get; set; }
         public virtual DbSet<Commissionrules> Commissionrules { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Customersalesperson> Customersalesperson { get; set; }
         public virtual DbSet<Factory> Factory { get; set; }
         public virtual DbSet<Factorycategory> Factorycategory { get; set; }
-        public virtual DbSet<Salesperson> Salesperson { get; set; }
+        public virtual DbSet<Salesman> Salesman { get; set; }
         public virtual DbSet<Salestrasaction> Salestrasaction { get; set; }
         public virtual DbSet<Sysdiagrams> Sysdiagrams { get; set; }
 
@@ -28,13 +29,73 @@ namespace BarcoSales.EFModel
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql("server=localhost;port=3306;database=barcosalescommission;uid=root;password=root", x => x.ServerVersion("8.0.29-mysql"));
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Barcosaleshistory>(entity =>
+            {
+                entity.HasKey(e => e.BarcoSalesId)
+                    .HasName("PRIMARY");
+
+                entity.ToTable("barcosaleshistory");
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("timestamp")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.ExtPrice).HasColumnType("decimal(10,0)");
+
+                entity.Property(e => e.FinYear).HasDefaultValueSql("'22'");
+
+                entity.Property(e => e.ShipToAddress)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToCity)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToName)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToState)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToAddress)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToCity)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToName)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToState)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnType("timestamp")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+            });
+
             modelBuilder.Entity<Commissionrules>(entity =>
             {
                 entity.ToTable("commissionrules");
@@ -51,21 +112,11 @@ namespace BarcoSales.EFModel
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                entity.Property(e => e.FinYear).HasDefaultValueSql("'22'");
+
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.Cust)
-                    .WithMany(p => p.Commissionrules)
-                    .HasForeignKey(d => d.CustId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CommissionRules_Customer");
-
-                entity.HasOne(d => d.Factory)
-                    .WithMany(p => p.Commissionrules)
-                    .HasForeignKey(d => d.FactoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CommissionRules_Factory");
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -75,77 +126,72 @@ namespace BarcoSales.EFModel
 
                 entity.ToTable("customer");
 
+                entity.Property(e => e.Address)
+                    .HasColumnType("varchar(256)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.City)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Contact)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.CustAddress)
-                    .HasColumnType("varchar(256)")
+                entity.Property(e => e.CustAliasName)
+                    .HasColumnType("varchar(450)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustCity)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustCompanyCode)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustCompanyName)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustContactPerson)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustEmailId)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustFaxNo)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustMobileNo)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.CustName)
+                entity.Property(e => e.CustomerCode)
                     .IsRequired()
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.CustomerName)
                     .HasColumnType("varchar(256)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustPhoneNo)
+                entity.Property(e => e.EmailId)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustPrincCode)
+                entity.Property(e => e.Mobile)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustState)
+                entity.Property(e => e.Phone)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustTerritory)
+                entity.Property(e => e.PrincCode)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustZip)
+                entity.Property(e => e.SalesmanId)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.State)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.Territory)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
@@ -153,6 +199,11 @@ namespace BarcoSales.EFModel
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.Zip)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
             });
 
             modelBuilder.Entity<Customersalesperson>(entity =>
@@ -171,21 +222,41 @@ namespace BarcoSales.EFModel
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                entity.Property(e => e.ExtPrice).HasColumnType("decimal(10,0)");
+
+                entity.Property(e => e.ShipToAddress)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToCity)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToName)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.ShipToState)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToAddress)
+                    .HasColumnType("varchar(450)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToState)
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.Cust)
-                    .WithMany(p => p.Customersalesperson)
-                    .HasForeignKey(d => d.CustId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CustomerSalesPerson_Customer");
-
-                entity.HasOne(d => d.Sales)
-                    .WithMany(p => p.Customersalesperson)
-                    .HasForeignKey(d => d.SalesId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_CustomerSalesPerson_SalesPerson");
             });
 
             modelBuilder.Entity<Factory>(entity =>
@@ -216,12 +287,6 @@ namespace BarcoSales.EFModel
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.FactoryCategory)
-                    .WithMany(p => p.Factory)
-                    .HasForeignKey(d => d.FactoryCategoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Factory_FactoryCategory");
             });
 
             modelBuilder.Entity<Factorycategory>(entity =>
@@ -243,12 +308,16 @@ namespace BarcoSales.EFModel
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
             });
 
-            modelBuilder.Entity<Salesperson>(entity =>
+            modelBuilder.Entity<Salesman>(entity =>
             {
-                entity.HasKey(e => e.SalesId)
-                    .HasName("PRIMARY");
+                entity.ToTable("salesman");
 
-                entity.ToTable("salesperson");
+                entity.Property(e => e.SalesmanId).HasDefaultValueSql("'1'");
+
+                entity.Property(e => e.Address)
+                    .HasColumnType("varchar(256)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.City)
                     .HasColumnType("varchar(50)")
@@ -259,53 +328,34 @@ namespace BarcoSales.EFModel
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.FaxNo)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.MobileNo)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.PhoneNo)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.PrincCode)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.SalesPersonAddress)
+                entity.Property(e => e.Designation)
                     .HasColumnType("varchar(256)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.SalesPersonDesignation)
-                    .HasColumnType("varchar(256)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.SalesPersonEmailId)
+                entity.Property(e => e.EmailId)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.SalesPersonName)
+                entity.Property(e => e.Mobile)
+                    .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SalesmanCode)
+                    .IsRequired()
+                    .HasColumnType("varchar(45)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SalesmanName)
                     .IsRequired()
                     .HasColumnType("varchar(256)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.State)
-                    .HasColumnType("varchar(50)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.Territory)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
@@ -344,6 +394,8 @@ namespace BarcoSales.EFModel
 
                 entity.Property(e => e.ExtPrice).HasColumnType("decimal(19,4)");
 
+                entity.Property(e => e.FinYear).HasDefaultValueSql("'22'");
+
                 entity.Property(e => e.GrossCommAmt).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.GrossCommRate).HasColumnType("decimal(19,4)");
@@ -371,24 +423,6 @@ namespace BarcoSales.EFModel
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                entity.HasOne(d => d.Cust)
-                    .WithMany(p => p.Salestrasaction)
-                    .HasForeignKey(d => d.CustId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SalesTrasaction_Customer");
-
-                entity.HasOne(d => d.Factory)
-                    .WithMany(p => p.Salestrasaction)
-                    .HasForeignKey(d => d.FactoryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SalesTrasaction_Factory");
-
-                entity.HasOne(d => d.Sales)
-                    .WithMany(p => p.Salestrasaction)
-                    .HasForeignKey(d => d.SalesId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SalesTrasaction_SalesPerson");
             });
 
             modelBuilder.Entity<Sysdiagrams>(entity =>

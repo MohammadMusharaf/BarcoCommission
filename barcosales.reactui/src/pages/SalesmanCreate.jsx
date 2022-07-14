@@ -73,18 +73,18 @@ export default function SalesmanCreate() {
     debugger;
     const rows = [];
     var salesmaninfo = {
-      salesmanCode: salesmanCode,
-      salesmanName: salesmanName,
-      designation: designation,
-      emailId: emailId,
-      joiningDate: value,
-      address: address,
-      city: city,
-      state: state,
-      zip: zip,
-      mobile: mobile,
-      princCode: princCode,
-      isActive: checked,
+      SalesmanId: 0,
+      SalesmanCode: salesmanCode,
+      SalesmanName: salesmanName,
+      Designation: designation,
+      Emailid: emailId,
+      JoiningDate: value,
+      Address: address,
+      City: city,
+      State: state,
+      Zip: zip,
+      Mobile: mobile,
+      IsActive: checked,
     };
     debugger;
     console.log(salesmaninfo);
@@ -110,18 +110,18 @@ export default function SalesmanCreate() {
     const rows = [];
     var salesmaninfo = {
       SalesId: 1,
-      salesmanCode: salesmanCode,
-      salesmanName: salesmanName,
-      designation: designation,
-      emailId: emailId,
-      joiningDate: value,
-      address: address,
-      city: city,
-      state: state,
+      SalesmanCode: salesmanCode,
+      SalesmanName: salesmanName,
+      Designation: designation,
+      EmailId: emailId,
+      JoiningDate: value,
+      Address: address,
+      City: city,
+      State: state,
       zip: zip,
-      mobile: mobile,
-      princCode: princCode,
-      isActive: checked,
+      Mobile: mobile,
+      PrincCode: princCode,
+      IsActive: checked,
     };
     debugger;
     console.log(salesmaninfo);

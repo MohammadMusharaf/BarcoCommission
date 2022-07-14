@@ -14,8 +14,13 @@ namespace BarcoSales.EFModel
         public DateTime UpdatedDate { get; set; }
         public long UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-
-        public virtual Customer Cust { get; set; }
-        public virtual Salesperson Sales { get; set; }
+        public string SoldToAddress { get; set; }
+        public string SoldToState { get; set; }
+        public string ShipToName { get; set; }
+        public string ShipToAddress { get; set; }
+        public string ShipToCity { get; set; }
+        public string ShipToState { get; set; }
+        public decimal? ExtPrice { get; set; }
+        public long? FactoryId { get; set; }
     }
 }

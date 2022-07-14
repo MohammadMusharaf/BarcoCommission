@@ -22,35 +22,35 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/SalesPerson/GetSalesPerson")]
-        public IEnumerable<Salesperson> GetSalesPerson()
+        public IEnumerable<Salesman> GetSalesPerson()
         {
             return salesPersonService.IGetSalesPerson();
         }
         [HttpPost]
         [Route("[action]")]
         [Route("api/SalesPerson/AddSalesPerson")]
-        public Salesperson AddSalesPerson(Salesperson salesPerson)
+        public Salesman AddSalesPerson(Salesman salesPerson)
         {
             return salesPersonService.IAddSalesPerson(salesPerson);
         }
         [HttpPut]
         [Route("[action]")]
         [Route("api/SalesPerson/EditSalesPerson")]
-        public Salesperson EditSalesPerson(Salesperson salesPerson)
+        public Salesman EditSalesPerson(Salesman salesPerson)
         {
             return salesPersonService.IUpdateSalesPerson(salesPerson);
         }
         [HttpDelete]
         [Route("[action]")]
         [Route("api/SalesPerson/DeleteSalesPerson")]
-        public Salesperson DeleteSalesPerson(int id)
+        public Salesman DeleteSalesPerson(int id)
         {
             return salesPersonService.IDeleteSalesPerson(id);
         }
         [HttpGet]
         [Route("[action]")]
         [Route("api/SalesPerson/GetSalesPersonId")]
-        public Salesperson GetSalesPersonId(int id)
+        public Salesman GetSalesPersonId(int id)
         {
             return salesPersonService.IDeleteSalesPerson(id);
         }

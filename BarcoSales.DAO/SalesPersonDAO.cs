@@ -19,40 +19,40 @@ namespace BarcoSales.DAO
         {
             dbContext = _db;
         }
-        public IEnumerable<Salesperson> IGetSalesPerson()
+        public IEnumerable<Salesman> IGetSalesPerson()
         {
-            var salesPersons = dbContext.Salesperson.ToList();
-            return salesPersons;
+            var salesmans = dbContext.Salesman.ToList();
+            return salesmans;
 
         }
-        public Salesperson IAddSalesPerson(Salesperson salesPerson)
+        public Salesman IAddSalesPerson(Salesman salesman)
         {
-            if (salesPerson != null)
+            if (salesman != null)
             {
-                dbContext.Salesperson.Add(salesPerson);
+                dbContext.Salesman.Add(salesman);
                 dbContext.SaveChanges();
-                return salesPerson;
+                return salesman;
             }
             return null;
         }
-        public Salesperson IGetSalesPersonById(int id)
+        public Salesman IGetSalesPersonById(int id)
         {
-            var salesPerson = dbContext.Salesperson.FirstOrDefault(x => x.SalesId == id);
-            return salesPerson;
+            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmanId == id);
+            return salesman;
         }
 
-        public Salesperson IUpdateSalesPerson(Salesperson salesPerson)
+        public Salesman IUpdateSalesPerson(Salesman salesman)
         {
-            dbContext.Entry(salesPerson).State = EntityState.Modified;
+            dbContext.Entry(salesman).State = EntityState.Modified;
             dbContext.SaveChanges();
-            return salesPerson;
+            return salesman;
         }
-        public Salesperson IDeleteSalesPerson(int id)
+        public Salesman IDeleteSalesPerson(int id)
         {
-            var salesPerson = dbContext.Salesperson.FirstOrDefault(x => x.SalesId == id);
-            dbContext.Entry(salesPerson).State = EntityState.Deleted;
+            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmanId == id);
+            dbContext.Entry(salesman).State = EntityState.Deleted;
             dbContext.SaveChanges();
-            return salesPerson;
+            return salesman;
         }
     }
 }

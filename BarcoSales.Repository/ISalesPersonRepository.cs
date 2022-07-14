@@ -10,10 +10,10 @@ namespace BarcoSales.Repository
     public interface ISalesPersonRepository
     {
 
-        IEnumerable<Salesperson> IGetSalesPerson();
-        Salesperson IGetSalesPersonById(int id);
-        Salesperson IAddSalesPerson(Salesperson salesPerson);
-        Salesperson IUpdateSalesPerson(Salesperson salesPerson);
-        Salesperson IDeleteSalesPerson(int id);
+        IEnumerable<Salesman> IGetSalesPerson();
+        Salesman IGetSalesPersonById(int id);
+        Salesman IAddSalesPerson(Salesman salesman);
+        Salesman IUpdateSalesPerson(Salesman salesman);
+        Salesman IDeleteSalesPerson(int id);
     }
 }
