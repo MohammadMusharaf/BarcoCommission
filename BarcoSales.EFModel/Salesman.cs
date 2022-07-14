@@ -5,7 +5,7 @@ namespace BarcoSales.EFModel
 {
     public partial class Salesman
     {
-        public long SalesmanId { get; set; }
+        public int SalesmId { get; set; }
         public string SalesmanCode { get; set; }
         public string SalesmanName { get; set; }
         public string Designation { get; set; }

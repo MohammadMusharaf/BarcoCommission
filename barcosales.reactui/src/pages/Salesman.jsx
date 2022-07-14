@@ -1,9 +1,14 @@
- 
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-import React, { useState, Component, useEffect, forwardRef,useRef  } from "react";
-import Checkbox from '@mui/material/Checkbox';
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import React, {
+  useState,
+  Component,
+  useEffect,
+  forwardRef,
+  useRef,
+} from "react";
+import Checkbox from "@mui/material/Checkbox";
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -25,7 +30,6 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoryCategoryddl from "./FactoryCategoryddl";
 
- 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -49,67 +53,69 @@ export default function Salesman() {
   const classes = useStyles();
 
   const columns = [
-    { title: "SalesmanId", field: "salesmanId" },
-    { title: "SalesmanCode", field: "salesmanCode" },
-    { title: "SalesmanName", field: "salesmanName" },
-    { title: "Designation", field: "designation" },
-    { title: "EmailId", field: "emailId" },
-    { title: "JoiningDate", field: "joiningDate" },
-    { title: "Address", field: "address" },
-    { title: "City", field: "city" },
-    { title: "State", field: "state" },
-    { title: "Zip", field: "zip" },
-    { title: "Mobile", field: "mobile" },
-    { title: "PrincCode", field: "princCode" },
-    { title: "IsActive", field: "isActive" },
+    { title: "SalesmId", field: "SalesmId" },
+    { title: "SalesmanCode", field: "SalesmanCode" },
+    { title: "SalesmanName", field: "SalesmanName" },
+    { title: "Designation", field: "Designation" },
+    { title: "EmailId", field: "EmailId" },
+    { title: "JoiningDate", field: "JoiningDate" },
+    { title: "Address", field: "Address" },
+    { title: "City", field: "City" },
+    { title: "State", field: "State" },
+    { title: "Zip", field: "Zip" },
+    { title: "Mobile", field: "Mobile" },
+    // { title: "PrincCode", field: "PrincCode" },
+    { title: "IsActive", field: "IsActive" },
   ];
-   
-  const [data, setData] = useState()
- const [salesman, setSalesman] = useState();
- 
- 
- 
- 
+
+  const [salesman, setSalesman] = useState();
+  const [data, setData] = useState([]);
+
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    UsersGet()
-  }, [])
+    //UsersGet();
+    GetSalesman();
+  }, []);
+
+  const GetSalesman = () => {
+    fetch("http://localhost:57636/api/SalesPerson/GetSalesPerson")
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result);
+      });
+  };
 
   const UsersGet = () => {
     fetch("https://www.mecallapi.com/api/users")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          setUsers(result)
-        }
-      )
+      .then((res) => res.json())
+      .then((result) => {
+        setUsers(result);
+      });
   };
 
-  const UpdateUser = id => {
-    window.location = '/update/' + id
+  const UpdateUser = (id) => {
+    window.location = "/update/" + id;
   };
 
-  const UserDelete = id => {
+  const UserDelete = (id) => {
     var data = {
-      'id': id
-    }
-    fetch('https://www.mecallapi.com/api/users/delete', {
-      method: 'DELETE',
+      id: id,
+    };
+    fetch("https://www.mecallapi.com/api/users/delete", {
+      method: "DELETE",
       headers: {
-        Accept: 'application/form-data',
-        'Content-Type': 'application/json',
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then(
-        (result) => {
-          alert(result['message'])
-          if (result['status'] === 'ok') {
-            UsersGet();
-          }
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          UsersGet();
         }
-      )
+      });
   };
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -136,14 +142,12 @@ export default function Salesman() {
   };
 
   return (
-  
- 
     <>
       <div>
         {/* <h3> Add Salesman</h3> */}
 
-        <form className={classes.form}  >
-        <Grid container spacing={1}>
+        <form className={classes.form}>
+          <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
               <Link to="/salesman/add">
                 <Button
@@ -157,14 +161,12 @@ export default function Salesman() {
               </Link>
             </Grid>
           </Grid>
-       
         </form>
         <MaterialTable
           title=""
           columns={columns}
           data={data}
           icons={tableIcons}
-
           options={{
             sorting: true,
             search: true,

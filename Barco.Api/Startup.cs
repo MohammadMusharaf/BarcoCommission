@@ -52,6 +52,12 @@ namespace Barco.Api
             options.UseMySql(Configuration["DbConnection"]));
 
             services.AddTransient<ICustomerRepository, CustomerDAO>();
+            services.AddTransient<ISalesPersonRepository, SalesPersonDAO>(); 
+            services.AddTransient<ICommissionRules, CommissionRulesDAO>();
+            services.AddTransient<IFactoryCategory, FactoryCategoryDAO>();  
+           // services.AddTransient<IFactory, FactoryDAO>();
+           services.AddTransient<ISalesTrasaction, SalesTrasactionDAO>();
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

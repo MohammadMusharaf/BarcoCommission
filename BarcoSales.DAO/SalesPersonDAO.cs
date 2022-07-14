@@ -37,7 +37,7 @@ namespace BarcoSales.DAO
         }
         public Salesman IGetSalesPersonById(int id)
         {
-            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmanId == id);
+            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmId == id);
             return salesman;
         }
 
@@ -49,7 +49,7 @@ namespace BarcoSales.DAO
         }
         public Salesman IDeleteSalesPerson(int id)
         {
-            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmanId == id);
+            var salesman = dbContext.Salesman.FirstOrDefault(x => x.SalesmId == id);
             dbContext.Entry(salesman).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return salesman;

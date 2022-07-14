@@ -23,7 +23,6 @@ namespace BarcoSales.EFModel
         public virtual DbSet<Factorycategory> Factorycategory { get; set; }
         public virtual DbSet<Salesman> Salesman { get; set; }
         public virtual DbSet<Salestrasaction> Salestrasaction { get; set; }
-        public virtual DbSet<Sysdiagrams> Sysdiagrams { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -100,12 +99,6 @@ namespace BarcoSales.EFModel
             {
                 entity.ToTable("commissionrules");
 
-                entity.HasIndex(e => e.CustId)
-                    .HasName("FK_CommissionRules_Customer");
-
-                entity.HasIndex(e => e.FactoryId)
-                    .HasName("FK_CommissionRules_Factory");
-
                 entity.Property(e => e.CommisionRate).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.CreatedDate)
@@ -121,10 +114,12 @@ namespace BarcoSales.EFModel
 
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(e => e.CustId)
+                entity.HasKey(e => e.Cid)
                     .HasName("PRIMARY");
 
                 entity.ToTable("customer");
+
+                entity.Property(e => e.Cid).HasColumnName("CId");
 
                 entity.Property(e => e.Address)
                     .HasColumnType("varchar(256)")
@@ -150,9 +145,8 @@ namespace BarcoSales.EFModel
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.CustomerCode)
-                    .IsRequired()
-                    .HasColumnType("varchar(50)")
+                entity.Property(e => e.CustId)
+                    .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
@@ -210,12 +204,6 @@ namespace BarcoSales.EFModel
             {
                 entity.ToTable("customersalesperson");
 
-                entity.HasIndex(e => e.CustId)
-                    .HasName("FK_CustomerSalesPerson_Customer");
-
-                entity.HasIndex(e => e.SalesId)
-                    .HasName("FK_CustomerSalesPerson_SalesPerson");
-
                 entity.Property(e => e.Commision).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.CreatedDate)
@@ -263,9 +251,6 @@ namespace BarcoSales.EFModel
             {
                 entity.ToTable("factory");
 
-                entity.HasIndex(e => e.FactoryCategoryId)
-                    .HasName("FK_Factory_FactoryCategory");
-
                 entity.Property(e => e.CommissionRate).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.CreatedDate)
@@ -310,9 +295,10 @@ namespace BarcoSales.EFModel
 
             modelBuilder.Entity<Salesman>(entity =>
             {
-                entity.ToTable("salesman");
+                entity.HasKey(e => e.SalesmId)
+                    .HasName("PRIMARY");
 
-                entity.Property(e => e.SalesmanId).HasDefaultValueSql("'1'");
+                entity.ToTable("salesman");
 
                 entity.Property(e => e.Address)
                     .HasColumnType("varchar(256)")
@@ -344,13 +330,11 @@ namespace BarcoSales.EFModel
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.SalesmanCode)
-                    .IsRequired()
                     .HasColumnType("varchar(45)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.SalesmanName)
-                    .IsRequired()
                     .HasColumnType("varchar(256)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
@@ -376,15 +360,6 @@ namespace BarcoSales.EFModel
                     .HasName("PRIMARY");
 
                 entity.ToTable("salestrasaction");
-
-                entity.HasIndex(e => e.CustId)
-                    .HasName("FK_SalesTrasaction_Customer");
-
-                entity.HasIndex(e => e.FactoryId)
-                    .HasName("FK_SalesTrasaction_Factory");
-
-                entity.HasIndex(e => e.SalesId)
-                    .HasName("FK_SalesTrasaction_SalesPerson");
 
                 entity.Property(e => e.ActualCommAmt).HasColumnType("decimal(19,4)");
 
@@ -423,33 +398,6 @@ namespace BarcoSales.EFModel
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
-            });
-
-            modelBuilder.Entity<Sysdiagrams>(entity =>
-            {
-                entity.HasKey(e => e.DiagramId)
-                    .HasName("PRIMARY");
-
-                entity.ToTable("sysdiagrams");
-
-                entity.HasIndex(e => new { e.PrincipalId, e.Name })
-                    .HasName("UK_principal_name")
-                    .IsUnique();
-
-                entity.Property(e => e.DiagramId).HasColumnName("diagram_id");
-
-                entity.Property(e => e.Definition).HasColumnName("definition");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasColumnType("varchar(160)")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_0900_ai_ci");
-
-                entity.Property(e => e.PrincipalId).HasColumnName("principal_id");
-
-                entity.Property(e => e.Version).HasColumnName("version");
             });
 
             OnModelCreatingPartial(modelBuilder);

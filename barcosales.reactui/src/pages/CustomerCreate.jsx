@@ -81,8 +81,8 @@ export default function CustomerCreate() {
 
   const handleClick = () => {
     var custInfo = {
-      CustId: 0,
-      CustomerCode: custId,
+      CId: 0,
+      CustId: custId,
       CustomerName: customer,
       CustAliasName: custAliasName,
       Branch: branch,

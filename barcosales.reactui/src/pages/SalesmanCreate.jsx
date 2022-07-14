@@ -40,9 +40,9 @@ export default function SalesmanCreate() {
   };
 
   const columns = [
-    { title: "Salesman Id", field: "salesmanId" },
-    { title: "Salesman Code", field: "salesmanCode" },
-    { title: "Salesman Name", field: "salesmanName" },
+    { title: "SalesmanId", field: "SalesmId" },
+    { title: "SalesmanCode", field: "salesmanCode" },
+    { title: "Salesman", field: "salesmanName" },
     { title: "Designation", field: "designation" },
     { title: "EmailId", field: "emailId" },
     { title: "JoiningDate", field: "joiningDate" },
@@ -73,11 +73,11 @@ export default function SalesmanCreate() {
     debugger;
     const rows = [];
     var salesmaninfo = {
-      SalesmanId: 0,
+      SalesmId: 0,
       SalesmanCode: salesmanCode,
       SalesmanName: salesmanName,
       Designation: designation,
-      Emailid: emailId,
+      EmailId: emailId,
       JoiningDate: value,
       Address: address,
       City: city,
@@ -86,10 +86,11 @@ export default function SalesmanCreate() {
       Mobile: mobile,
       IsActive: checked,
     };
+
     debugger;
     console.log(salesmaninfo);
-    rows.push(salesmaninfo);
-    fetch("http://localhost:57636/api/Customer/AddCustomer", {
+    // rows.push(salesmaninfo);
+    fetch("http://localhost:57636/api/SalesPerson/AddSalesPerson", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -314,7 +315,18 @@ export default function SalesmanCreate() {
                 autoFocus
               />
             </Grid>
-
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="state"
+                name="state"
+                variant="outlined"
+                fullWidth
+                id="state"
+                label="State"
+                onChange={(e) => setState(e.target.value)}
+                autoFocus
+              />
+            </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="zip"

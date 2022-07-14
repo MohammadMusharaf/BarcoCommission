@@ -7,8 +7,7 @@ namespace BarcoSales.EFModel
     {
         public Salesperson()
         {
-            Customersalesperson = new HashSet<Customersalesperson>();
-            Salestrasaction = new HashSet<Salestrasaction>();
+           
         }
 
         public long SalesmanId { get; set; }
@@ -28,7 +27,6 @@ namespace BarcoSales.EFModel
         public long UpdatedBy { get; set; }
         public bool IsActive { get; set; }
 
-        public virtual ICollection<Customersalesperson> Customersalesperson { get; set; }
-        public virtual ICollection<Salestrasaction> Salestrasaction { get; set; }
+      
     }
 }

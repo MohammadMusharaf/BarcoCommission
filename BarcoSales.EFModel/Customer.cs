@@ -5,8 +5,8 @@ namespace BarcoSales.EFModel
 {
     public partial class Customer
     {
-        public long CustId { get; set; }
-        public string CustomerCode { get; set; }
+        public long Cid { get; set; }
+        public string CustId { get; set; }
         public string CustomerName { get; set; }
         public string CustAliasName { get; set; }
         public string EmailId { get; set; }

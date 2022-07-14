@@ -33,7 +33,7 @@ namespace BarcoSales.DAO
         }
         public Customer IGetCustomerById(int id)
         {
-            var customerInfo = dbContext.Customer.FirstOrDefault(x => x.CustId == id);
+            var customerInfo = dbContext.Customer.FirstOrDefault(x => x.Cid == id);
             return customerInfo;
         }
         public Customer IUpdateCustomer(Customer customerInfo)
@@ -44,7 +44,7 @@ namespace BarcoSales.DAO
         }
         public Customer IDeleteCustomer(int id)
         {
-            var customer = dbContext.Customer.FirstOrDefault(x => x.CustId == id);
+            var customer = dbContext.Customer.FirstOrDefault(x => x.Cid == id);
             dbContext.Entry(customer).State = EntityState.Deleted;
             dbContext.SaveChanges();
             return customer;
