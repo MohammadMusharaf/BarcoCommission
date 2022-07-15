@@ -251,21 +251,17 @@ namespace BarcoSales.EFModel
             {
                 entity.ToTable("factory");
 
-                entity.Property(e => e.CommissionRate).HasColumnType("decimal(19,4)");
-
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.Property(e => e.FactoryName)
-                    .IsRequired()
                     .HasColumnType("varchar(256)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
-                entity.Property(e => e.Princcode)
-                    .HasColumnName("princcode")
-                    .HasColumnType("varchar(256)")
+                entity.Property(e => e.PrincCode)
+                    .HasColumnType("varchar(56)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 

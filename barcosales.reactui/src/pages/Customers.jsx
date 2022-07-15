@@ -53,7 +53,7 @@ export default function Customers() {
   const classes = useStyles();
 
   const columns = [
-    { title: "SN#", field: "CId" },
+    { title: "SN#", field: "Cid" },
     { title: "CustId", field: "CustId" },
     { title: "CustomerName", field: "CustomerName" },
     { title: "CustAliasName", field: "CustAliasName" },

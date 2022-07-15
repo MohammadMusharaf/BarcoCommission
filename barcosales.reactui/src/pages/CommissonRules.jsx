@@ -1,11 +1,11 @@
 import React, { useState, Component, useEffect, forwardRef } from "react";
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
- 
+
 import { makeStyles } from "@material-ui/core/styles";
- 
+
 import Button from "@material-ui/core/Button";
- 
+
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 
@@ -18,23 +18,20 @@ import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
 import FilterList from "@material-ui/icons/FilterList";
- 
+
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
- 
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import Customerddl from "./Customerddl";
- 
- 
 
-import Checkbox from '@mui/material/Checkbox';
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
- 
+import Checkbox from "@mui/material/Checkbox";
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -55,8 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function CommissonRules(props) {
-
-  const [priorYear, setPriorYear] = React.useState('');
+  const [priorYear, setPriorYear] = React.useState("");
 
   const handleChange = (event) => {
     setPriorYear(event.target.value);
@@ -64,37 +60,34 @@ export default function CommissonRules(props) {
     console.log(priorYear);
   };
 
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  const [selectedCustomerValue, setSelectedCustomerValue] = useState("");
 
-  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
-  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
-  const [selectedCustomerValue, setSelectedCustomerValue] = useState('');
-
-
-
-  const FactoryOnchange = ((value) => {
-    setSelectedFactoryValue(value)
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
     debugger;
     console.log(selectedFactoryValue);
-  })
-  const PriorYearOnchange = ((value) => {
-    setSelectedPriorYearValue(value)
+  };
+  const PriorYearOnchange = (value) => {
+    setSelectedPriorYearValue(value);
     debugger;
     console.log(selectedPriorYearValue);
-  })
-  const CustomerOnchange = ((value) => {
-    setSelectedCustomerValue(value)
+  };
+  const CustomerOnchange = (value) => {
+    setSelectedCustomerValue(value);
     debugger;
     console.log(selectedCustomerValue);
-  })
-   
+  };
+
   const [checked, setChecked] = useState(false);
   const checkChanged = (state) => {
     setChecked(!checked);
   };
 
   const classes = useStyles();
-  // const [columns, setColDefs] = useState()
-  const [data, setData] = useState()
+
+  const [data, setData] = useState([]);
   const columns = [
     { title: "Rules Id", field: "commRuleId" },
     { title: "Fin Year", field: "finYear" },
@@ -104,63 +97,69 @@ export default function CommissonRules(props) {
     { title: "IsActive", field: "isActive" },
   ];
 
-  const [commRuleId, setCommRuleId] = useState('');
-  const [finYear, setFinYear] = useState('');
-  const [factoryName, setFactoryName] = useState('');
-  const [customerName, setCustomerName] = useState('');
-  const [commissionRate, setCommissionRate] = useState('');
-  const [isActive, setIsActive] = useState('');
+  const [finYear, setFinYear] = useState("");
+  const [factoryName, setFactoryName] = useState("");
+  const [customerName, setCustomerName] = useState("");
+  const [commissionRate, setCommissionRate] = useState("");
+  const [isActive, setIsActive] = useState("");
 
-
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const rows = [];
     var CommRule = {
-      'commRuleId': 1,
-      'finYear': selectedPriorYearValue,
-      'factoryName': selectedCustomerValue,
-      'customerName': selectedCustomerValue,
-      'commRate': commissionRate,
-      'isActive': checked
-    }
+      commRuleId: 1,
+      finYear: selectedPriorYearValue,
+      factoryName: selectedCustomerValue,
+      customerName: selectedCustomerValue,
+      commRate: commissionRate,
+      isActive: checked,
+    };
     rows.push(CommRule);
 
+    // debugger;
+    // if (data) {
+    //   debugger;
+
+    //   setData(data.concat(rows));
+    // } else {
+    //   setData(rows);
+    // }
+
     debugger;
-    if(data)
-    {
-      debugger
-    
-      setData(data.concat(rows))
-    }
-    else{
-      setData(rows);
-    }
-  
-      debugger;
-      console.log(data);
+    console.log(CommRule);
 
-    // fetch('http://localhost:57636/api/Customer/AddCustomer',
-    //  
-    //   {
-    //     method: 'POST',
-    //     headers: {
-    //       Accept: 'application/form-data',
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   })
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       alert(result['message'])
-    //       if (result['status'] === 'ok') {
-    //         window.location.href = '/';
-    //       }
-    //     }
-    //   )
-  }
+    fetch(
+      "http://localhost:57636/api/CommissionRules/AddCommissionRules",
 
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/form-data",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(CommRule),
+      }
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          window.location.href = "/";
+        }
+      });
+  };
 
+  useEffect(() => {
+    GetCummRules();
+  }, []);
+
+  const GetCummRules = () => {
+    fetch("http://localhost:57636/api/CommissionRules/GetCommissionRules")
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result);
+      });
+  };
 
   const downloadPdf = () => {
     const doc = new jsPDF();
@@ -197,10 +196,9 @@ export default function CommissonRules(props) {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
- 
-<Grid item xs={12} sm={6}>
-  <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
-</Grid>
+  <Grid item xs={12} sm={6}>
+    <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
+  </Grid>;
   return (
     <>
       <div>
@@ -208,16 +206,14 @@ export default function CommissonRules(props) {
         <form className={classes.form} onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-            <PriorYearDropdownlist ddlOnchang={PriorYearOnchange}/>
-  
+              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <Customerddl ddlOnchang={CustomerOnchange}/>
+              <Customerddl ddlOnchang={CustomerOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
+              <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
-
 
             <Grid item xs={12} sm={6}>
               <TextField
@@ -239,14 +235,16 @@ export default function CommissonRules(props) {
                 defaultChecked
                 sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
               /> */}
-               
-            <Checkbox   {...label}  checked={checked} onChange={checkChanged} color='primary' size='medium' />
-          
+
+              <Checkbox
+                {...label}
+                checked={checked}
+                onChange={checkChanged}
+                color="primary"
+                size="medium"
+              />
             </Grid>
           </Grid>
-
-
-
 
           <Button
             type="submit"
@@ -263,7 +261,6 @@ export default function CommissonRules(props) {
           columns={columns}
           data={data}
           icons={tableIcons}
-
           options={{
             sorting: true,
             search: true,

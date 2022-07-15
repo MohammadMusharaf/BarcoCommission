@@ -1,5 +1,11 @@
-import React, { useState, Component, useEffect, forwardRef,useRef  } from "react";
-import Checkbox from '@mui/material/Checkbox';
+import React, {
+  useState,
+  Component,
+  useEffect,
+  forwardRef,
+  useRef,
+} from "react";
+import Checkbox from "@mui/material/Checkbox";
 import MaterialTable, { Column } from "material-table";
 import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
@@ -22,8 +28,6 @@ import ViewColumn from "@material-ui/icons/ViewColumn";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoryCategoryddl from "./FactoryCategoryddl";
- 
- 
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 const useStyles = makeStyles((theme) => ({
@@ -49,94 +53,84 @@ export default function Factories(props) {
   const classes = useStyles();
 
   // const [columns, setColDefs] = useState()
-  const [data, setData] = useState()
-  // const [factories, setFactories] = useState()
 
-  // const data1 = [
-  //   { name: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  //   { name: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-  // ];
+  const [selectedFactCategoryValue, setSelectedFactCategoryValue] =
+    useState("");
+  const [factoryName, setFactoryName] = useState("");
+  const [princcode, setPrinccode] = useState("");
+  const [commissionRate, setCommissionRate] = useState("");
 
-  // const columns1 = [
-  //   { title: "Name", field: "name" },
-  //   { title: "Surname", field: "surname" },
-  //   { title: "Birth Year", field: "birthYear", type: "numeric" },
-  // ];
-
-  // localStorage.setItem('data1', JSON.stringify(data1));
-  // localStorage.setItem('columns1', JSON.stringify(columns1));
-
-  // const data = JSON.parse(localStorage.getItem("salesComissionData"));
-  const [selectedFactCategoryValue, setSelectedFactCategoryValue] = useState('');
-  const [factoryName, setFactoryName] = useState('');
-  const [princcode, setPrinccode] = useState('');
-  const [commissionRate, setCommissionRate] = useState('');
-  
-
-  const FactoryCategoryOnchange = ((value) => {
-    setSelectedFactCategoryValue(value)
+  const FactoryCategoryOnchange = (value) => {
+    setSelectedFactCategoryValue(value);
     debugger;
     console.log(selectedFactCategoryValue);
-  })
+  };
 
   const [checked, setChecked] = useState(false);
   const checkChanged = (state) => {
     setChecked(!checked);
   };
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const rows = [];
-    var factories = { 
-      'factoryId': 1, 
-      'factoryName': factoryName, 
-      'princcode': princcode, 
-      'commRate': commissionRate,
-      'factoryCategory': selectedFactCategoryValue, 
-      'isActive': checked
-      
-    }
+    var factories = {
+      factoryId: 1,
+      factoryName: factoryName,
+      princcode: princcode,
+      // commRate: commissionRate,
+      factoryCategory: selectedFactCategoryValue,
+      isActive: checked,
+    };
     rows.push(factories);
-    
 
-  if(data)
-  {
-    debugger
-  
-    setData(data.concat(rows))
-  }
-  else{
-    setData(rows);
-  }
+    // if (data) {
+    //   debugger;
+
+    //   setData(data.concat(rows));
+    // } else {
+    //   setData(rows);
+    // }
 
     debugger;
-    console.log(data);
-    
-    // fetch('http://localhost:57636/api/Customer/AddCustomer',
-    // {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/form-data',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then(res => res.json())
-    //   .then(
-    //     (result) => {
-    //       alert(result['message'])
-    //       if (result['status'] === 'ok') {
-    //         window.location.href = '/';
-    //       }
-    //     }
-    //   )
-  }
+    console.log(factories);
+
+    fetch("http://localhost:57636/api/Customer/AddCustomer", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(factories),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          window.location.href = "/";
+        }
+      });
+  };
+  const [data, setData] = useState([]);
+
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    GetFactory();
+  }, []);
+
+  const GetFactory = () => {
+    fetch("http://localhost:57636/api/Factory/GetFactory")
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result);
+      });
+  };
 
   const columns = [
     { title: "Factory Id", field: "factoryId" },
     { title: "Factory Category", field: "factoryCategory" },
     { title: "Factory Name", field: "factoryName" },
     { title: "Princ Code", field: "princcode" },
-    { title: "Comm. Rate", field: "commRate" },
+    // { title: "Comm. Rate", field: "commRate" },
     { title: "IsActive", field: "isActive" },
   ];
 
@@ -210,7 +204,7 @@ export default function Factories(props) {
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={6}>
               <TextField
                 autoComplete="commissionRate"
                 name="commissionRate"
@@ -221,16 +215,17 @@ export default function Factories(props) {
                 onChange={(e) => setCommissionRate(e.target.value)}
                 autoFocus
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
-            <label>IsActive</label>
-            <Checkbox    checked={checked} onChange={checkChanged} color='primary' size='medium' />
-          
+              <label>IsActive</label>
+              <Checkbox
+                checked={checked}
+                onChange={checkChanged}
+                color="primary"
+                size="medium"
+              />
             </Grid>
           </Grid>
-
-
-
 
           <Button
             type="submit"
@@ -247,7 +242,6 @@ export default function Factories(props) {
           columns={columns}
           data={data}
           icons={tableIcons}
-
           options={{
             sorting: true,
             search: true,
