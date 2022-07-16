@@ -8,7 +8,7 @@ using System.Text;
 
 namespace BarcoSales.DAO
 {
-    class FactoryDAO: IFactory
+ public   class FactoryDAO: IFactory
     {
         barcosalescommissionContext dbContext;
         public FactoryDAO(barcosalescommissionContext _db)

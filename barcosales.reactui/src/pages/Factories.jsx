@@ -94,7 +94,7 @@ export default function Factories(props) {
     debugger;
     console.log(factories);
 
-    fetch("http://localhost:57636/api/Customer/AddCustomer", {
+    fetch("http://localhost:57636/api/Factory/AddFactory", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -126,12 +126,11 @@ export default function Factories(props) {
   };
 
   const columns = [
-    { title: "Factory Id", field: "factoryId" },
-    { title: "Factory Category", field: "factoryCategory" },
-    { title: "Factory Name", field: "factoryName" },
-    { title: "Princ Code", field: "princcode" },
-    // { title: "Comm. Rate", field: "commRate" },
-    { title: "IsActive", field: "isActive" },
+    { title: "FactoryId", field: "FactoryId" },
+    { title: "FactoryCategoryId", field: "FactoryCategoryId" },
+    { title: "FactoryName", field: "FactoryName" },
+    { title: "PrincCode", field: "PrincCode" },
+    { title: "IsActive", field: "IsActive" },
   ];
 
   const downloadPdf = () => {

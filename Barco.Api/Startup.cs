@@ -55,7 +55,7 @@ namespace Barco.Api
             services.AddTransient<ISalesPersonRepository, SalesPersonDAO>(); 
             services.AddTransient<ICommissionRules, CommissionRulesDAO>();
             services.AddTransient<IFactoryCategory, FactoryCategoryDAO>();  
-           // services.AddTransient<IFactory, FactoryDAO>();
+            services.AddTransient<IFactory, FactoryDAO>();
            services.AddTransient<ISalesTrasaction, SalesTrasactionDAO>();
         
         }
