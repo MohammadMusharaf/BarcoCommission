@@ -68,35 +68,33 @@ const useStyles = makeStyles((theme) => ({
 export default function Analytics(props) {
   const classes = useStyles();
 
-  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
-  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
-  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
-  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
 
-
-  const FactoryOnchange = ((value) => {
-    setSelectedFactoryValue(value)
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
     debugger;
     console.log(selectedFactoryValue);
-  })
-  const PriorYearOnchange = ((value) => {
-    setSelectedPriorYearValue(value)
+  };
+  const PriorYearOnchange = (value) => {
+    setSelectedPriorYearValue(value);
     debugger;
     console.log(selectedPriorYearValue);
-  })
-  const SalesMonthsOnchange = ((value) => {
-    setSelectedSalesMonthsValue(value)
+  };
+  const SalesMonthsOnchange = (value) => {
+    setSelectedSalesMonthsValue(value);
     debugger;
     console.log(selectedSalesMonthsValue);
-  })
-  const SalesmanOnchange = ((value) => {
-    setSelectedSalesmanValue(value)
+  };
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
     debugger;
     console.log(selectedSalesmanValue);
-  })
+  };
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
-
 
   const columns = [
     { title: "Customer", field: "customer" },
@@ -112,10 +110,8 @@ export default function Analytics(props) {
     { title: "SalesAmt", field: "saleAmount" },
     { title: "GrossCommRate", field: "commRate" },
     { title: "GrossComm", field: "grossComm" },
-    { title: "SalesmanComm", field: "salesmanComm" }
+    { title: "SalesmanComm", field: "salesmanComm" },
   ];
-
- 
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -219,7 +215,7 @@ export default function Analytics(props) {
             filtering: true,
             paging: true,
             pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
-            pageSize: 5,
+            pageSize: 10,
             paginationType: "stepped",
             showFirstLastPageButtons: false,
             paginationPosition: "both",

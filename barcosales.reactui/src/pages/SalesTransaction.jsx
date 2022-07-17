@@ -74,37 +74,31 @@ export default function Transaction() {
   ]);
   const [data, setData] = useState();
 
-  
-  const [selectedFactoryValue, setSelectedFactoryValue] = useState('');
-  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState('');
-  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState('');
-  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState('');
+  const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
 
-
-  const FactoryOnchange = ((value) => {
-    setSelectedFactoryValue(value)
+  const FactoryOnchange = (value) => {
+    setSelectedFactoryValue(value);
     debugger;
     console.log(selectedFactoryValue);
-  })
-  const PriorYearOnchange = ((value) => {
-    setSelectedPriorYearValue(value)
+  };
+  const PriorYearOnchange = (value) => {
+    setSelectedPriorYearValue(value);
     debugger;
     console.log(selectedPriorYearValue);
-  })
-  const SalesMonthsOnchange = ((value) => {
-    setSelectedSalesMonthsValue(value)
+  };
+  const SalesMonthsOnchange = (value) => {
+    setSelectedSalesMonthsValue(value);
     debugger;
     console.log(selectedSalesMonthsValue);
-  })
-  const SalesmanOnchange = ((value) => {
-    setSelectedSalesmanValue(value)
+  };
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
     debugger;
     console.log(selectedSalesmanValue);
-  })
-
-
-
- 
+  };
 
   const data1 = [
     {
@@ -397,7 +391,7 @@ export default function Transaction() {
     { title: "Sale Amount", field: "saleAmount" },
     { title: "Gross CommRate", field: "commRate" },
     { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" }
+    { title: "Salesman Comm", field: "salesmanComm" },
   ];
 
   const getExention = (file) => {
@@ -523,10 +517,7 @@ export default function Transaction() {
       transformedArray.push(obj);
     });
 
-    localStorage.setItem(
-      "salesComissionData",
-      JSON.stringify(data1)
-    );
+    localStorage.setItem("salesComissionData", JSON.stringify(data1));
   };
 
   const tableIcons = {
@@ -556,7 +547,6 @@ export default function Transaction() {
   return (
     <>
       <div>
-    
         <form className={classes.form}>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={12}>
@@ -575,18 +565,17 @@ export default function Transaction() {
 
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
-              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange}/>
+              <PriorYearDropdownlist ddlOnchang={PriorYearOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <SalesMonthsDropdownlist ddlOnchang={SalesMonthsOnchange}/>
+              <SalesMonthsDropdownlist ddlOnchang={SalesMonthsOnchange} />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item xs={12} sm={6}>
               <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
-              
             </Grid>
-           
+
             <Grid item xs={12} sm={6}>
               <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />
             </Grid>
@@ -601,7 +590,6 @@ export default function Transaction() {
                 onChange={importExcel}
               />
             </Grid>
-          
           </Grid>
         </form>
         <Grid container spacing={1}>
@@ -611,7 +599,6 @@ export default function Transaction() {
               columns={colDefs}
               data={data}
               icons={tableIcons}
-              
               editable={{
                 onRowAdd: (newData) =>
                   new Promise((resolve, reject) => {
@@ -653,7 +640,7 @@ export default function Transaction() {
                 filtering: true,
                 paging: true,
                 pageSizeOptions: [2, 5, 10, 20, 25, 50, 100],
-                pageSize: 5,
+                pageSize: 10,
                 paginationType: "stepped",
                 showFirstLastPageButtons: false,
                 paginationPosition: "both",
