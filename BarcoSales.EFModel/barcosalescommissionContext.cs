@@ -105,8 +105,6 @@ namespace BarcoSales.EFModel
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.FinYear).HasDefaultValueSql("'22'");
-
                 entity.Property(e => e.UpdatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");

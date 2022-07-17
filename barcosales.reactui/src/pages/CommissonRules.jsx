@@ -28,6 +28,7 @@ import "jspdf-autotable";
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import Customerddl from "./Customerddl";
+import SalesmanDropdownlist from "./SalesmanDropdownlist";
 
 import Checkbox from "@mui/material/Checkbox";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -63,6 +64,13 @@ export default function CommissonRules(props) {
   const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
   const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
   const [selectedCustomerValue, setSelectedCustomerValue] = useState("");
+  const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
+
+  const SalesmanOnchange = (value) => {
+    setSelectedSalesmanValue(value);
+    debugger;
+    console.log(selectedSalesmanValue);
+  };
 
   const FactoryOnchange = (value) => {
     setSelectedFactoryValue(value);
@@ -90,13 +98,12 @@ export default function CommissonRules(props) {
   const [data, setData] = useState([]);
   const columns = [
     { title: "CommissionRulesId", field: "CommissionRulesId" },
-    { title: "CustomerName", field: "CustomerName" },
-    { title: "SalesmanName", field: "SalesmanName" },
-    { title: "FactoryName", field: "FactoryName" },
-
+    { title: "CustId", field: "CustId" },
+    { title: "SalesmanId", field: "SalesmanId" },
+    { title: "FactoryId", field: "FactoryId" },
     { title: "CommisionRate", field: "CommisionRate" },
-    { title: "Fin Year", field: "finYear" },
-    { title: "IsActive", field: "isActive" },
+    { title: "FinYearId", field: "FinYearId" },
+    { title: "IsActive", field: "IsActive" },
   ];
 
   const [finYear, setFinYear] = useState("");
@@ -109,12 +116,13 @@ export default function CommissonRules(props) {
     event.preventDefault();
     const rows = [];
     var CommRule = {
-      commRuleId: 1,
-      finYear: selectedPriorYearValue,
-      factoryName: selectedCustomerValue,
-      customerName: selectedCustomerValue,
-      commRate: commissionRate,
-      isActive: checked,
+      CommissionRulesId: 0,
+      FinYearId: selectedPriorYearValue,
+      FactoryId: selectedCustomerValue,
+      CustId: selectedCustomerValue,
+      SalesmanId: selectedSalesmanValue,
+      CommisionRate: commissionRate,
+      IsActive: checked,
     };
     rows.push(CommRule);
 
@@ -144,6 +152,7 @@ export default function CommissonRules(props) {
     )
       .then((res) => res.json())
       .then((result) => {
+        GetCummRules();
         alert(result["message"]);
         if (result["status"] === "ok") {
           window.location.href = "/";
@@ -212,6 +221,9 @@ export default function CommissonRules(props) {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Customerddl ddlOnchang={CustomerOnchange} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SalesmanDropdownlist ddlOnchang={SalesmanOnchange} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <FactoriesDropdownlist ddlOnchang={FactoryOnchange} />

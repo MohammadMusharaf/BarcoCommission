@@ -74,12 +74,12 @@ export default function Factories(props) {
     event.preventDefault();
     const rows = [];
     var factories = {
-      factoryId: 1,
-      factoryName: factoryName,
-      princcode: princcode,
+      FactoryId: 0,
+      FactoryName: factoryName,
+      PrincCode: princcode,
       // commRate: commissionRate,
-      factoryCategory: selectedFactCategoryValue,
-      isActive: checked,
+      FactoryCategoryId: selectedFactCategoryValue,
+      IsActive: checked,
     };
     rows.push(factories);
 
@@ -104,6 +104,7 @@ export default function Factories(props) {
     })
       .then((res) => res.json())
       .then((result) => {
+        GetFactory();
         alert(result["message"]);
         if (result["status"] === "ok") {
           window.location.href = "/";
