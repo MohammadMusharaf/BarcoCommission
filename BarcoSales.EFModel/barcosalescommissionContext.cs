@@ -124,6 +124,11 @@ namespace BarcoSales.EFModel
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 
+                entity.Property(e => e.BranchName)
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
                 entity.Property(e => e.City)
                     .HasColumnType("varchar(50)")
                     .HasCharSet("utf8mb4")

@@ -10,6 +10,7 @@ namespace BarcoSales.EFModel
         public string CustomerName { get; set; }
         public string CustAliasName { get; set; }
         public string EmailId { get; set; }
+        public string BranchName { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }

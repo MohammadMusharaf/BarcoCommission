@@ -413,6 +413,7 @@ export default function Transaction() {
     });
     return rows;
   };
+
   const downloadExcel = () => {
     const newData = data.map((row) => {
       delete row.tableData;
@@ -486,21 +487,106 @@ export default function Transaction() {
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-
-      // These options are needed to round to whole numbers if that's what you want.
-      //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-      //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
 
     return formatter.format(num);
   };
 
+  const [getCommRules, setGetCommRules] = useState([]);
+  const [getCustomers, setGetCustomers] = useState([]);
+  const [getCommrulesId, setGetCommrulesId] = useState();
+
+  useEffect(() => {
+    getCommissionRules();
+    getAllCustomers();
+  }, []);
+
+  const getAllCustomers = () => {
+    fetch("http://localhost:57636/api/Customer/GetCustomer")
+      .then((res) => res.json())
+      .then((result) => {
+        debugger;
+        setGetCustomers(result);
+      });
+  };
+  const getCommissionRules = () => {
+    fetch("http://localhost:57636/api/CommissionRules/GetCommissionRules")
+      .then((res) => res.json())
+      .then((result) => {
+        debugger;
+        setGetCommRules(result);
+      });
+  };
+
+  const getcommRate = (row) => {
+    debugger;
+
+    let rowData = {};
+    if (row) {
+      // myObj = myArrayOfObjects.find(obj => obj.prop === 'something');
+      var custInfo = getCustomers.find(
+        (item) => item.CustomerName === row["Sold-To Name"]
+      );
+      var commRate = getCommRules.find(
+        (item) =>
+          item.CustId === custInfo.Cid &&
+          item.SalesmanId === selectedSalesmanValue &&
+          item.FactoryId === selectedFactoryValue
+      );
+      debugger;
+      if (commRate) {
+        rowData = commRate;
+        debugger;
+      } else {
+        var commRate1 = getCommRules.find(
+          (Ruleid) =>
+            Ruleid.SalesmanId === selectedSalesmanValue &&
+            Ruleid.FactoryId === selectedFactoryValue
+        );
+        debugger;
+        commRate = commRate1;
+      }
+    }
+    return rowData.CommisionRate;
+  };
+
+  // customer: "Quad Power Products LLC",
+  //     // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
+  //     factory: "AF ALPHA FITTINGS",
+  //     check: "",
+  //     month: "February",
+  //     salesman: "Barrett B",
+  //     invoiceNo: "100019",
+  //     saleAmount: "$186.65",
+  //     commRate: "5",
+  //     grossComm: "$9.33",
+  //     salesmanComm: "$4.67",
+
+  // { title: "Customer", field: "customer" },
+
+  // { title: "Factory", field: "factory" },
+  // { title: "Check", field: "check" },
+  // { title: "Month", field: "month" },
+  // { title: "Salesman", field: "salesman" },
+  // { title: "Invoice No", field: "invoiceNo" },
+  // { title: "Sale Amount", field: "saleAmount" },
+  // { title: "Gross CommRate", field: "commRate" },
+  // { title: "Gross Comm", field: "grossComm" },
+  // { title: "Salesman Comm", field: "salesmanComm" }
+
+  // const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
+  // const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
+  // const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
+  // const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
+
   const handleClick = () => {
     const transformedArray = [];
     data.forEach((d, i) => {
+      let comRate = getcommRate(d);
+      debugger;
       const invoiceNo = i; // Will come from API
       const saleAmount = d["Sale Amount"];
-      const commRate = i % 2 ? 5 : 7; // Will come from API
+      const commRate = comRate; //i % 2 ? 5 : 7; // Will come from API
       const grossComm = (
         (Number(saleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
         100
@@ -508,6 +594,10 @@ export default function Transaction() {
       const salesmanComm = grossComm / 2;
       const obj = {
         customer: d["Sold-To Name"],
+        Factory: selectedFactoryValue,
+        Check: "",
+        Month: "",
+        salesman: selectedSalesmanValue,
         invoiceNo,
         saleAmount,
         commRate: `${commRate}%`,
@@ -516,8 +606,11 @@ export default function Transaction() {
       };
       transformedArray.push(obj);
     });
-
-    localStorage.setItem("salesComissionData", JSON.stringify(data1));
+    debugger;
+    localStorage.setItem(
+      "salesComissionData",
+      JSON.stringify(transformedArray)
+    );
   };
 
   const tableIcons = {
