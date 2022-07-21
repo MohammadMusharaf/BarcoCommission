@@ -62,7 +62,30 @@ export default function CalculateCommission(props) {
   // GrossCommRate: `${commRate}%`,
   // GrossCommAmt: numberToCurrency(grossComm),
   // SalesmanCommAmt: numberToCurrency(salesmanComm),
+  const handleClick = () => {
+    salesComissiongridData.forEach((salesRecord, i) => {
+      debugger;
+      fetch(
+        "http://localhost:57636/api/SalesTrasaction/AddTrasaction",
 
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/form-data",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(salesRecord),
+        }
+      )
+        .then((res) => res.json())
+        .then((result) => {
+          //  alert(result["message"]);
+          if (result["status"] === "ok") {
+            window.location.href = "/";
+          }
+        });
+    });
+  };
   const columns = [
     { title: "Customer", field: "SoldToName" },
     { title: "Factory", field: "Factory" },
@@ -76,6 +99,7 @@ export default function CalculateCommission(props) {
     { title: "Salesman Comm", field: "SalesmanCommAmt" },
   ];
   const [data, setData] = useState();
+  const [salesComissiongridData, setSalesComissiongridData] = useState();
   useEffect(() => {
     GetSalesTransaction();
   }, []);
@@ -85,6 +109,9 @@ export default function CalculateCommission(props) {
       .then((res) => res.json())
       .then((result) => {
         setData(JSON.parse(localStorage.getItem("salesComissionData")));
+        setSalesComissiongridData(
+          JSON.parse(localStorage.getItem("salesComissiongridData"))
+        );
       });
   };
 
@@ -154,9 +181,25 @@ export default function CalculateCommission(props) {
             headerStyle: { background: "#f44336", color: "#fff" },
           }}
         />
-        <Button type="submit" fullWidth variant="contained" color="primary">
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          onClick={() => handleClick()}
+          color="primary"
+        >
           Save Calculated Sales Commission
         </Button>
+        {/* <Link to="/transaction/calculate">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={() => handleClick()}
+                >
+                  Calculate Sales Commission
+                </Button>
+              </Link> */}
       </div>
     </>
   );

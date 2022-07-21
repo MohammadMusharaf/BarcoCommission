@@ -312,10 +312,10 @@ export default function Transaction() {
         const salesmanComm = grossComm / 2;
         const obj = {
           TrasactionId: 0,
-          SalesmId: d["Sold-To Name"],
+          SalesmId: 1,
           SalesmanName: d["Sold-To Name"],
-          CustId: d["Sold-To Name"],
-          CommissionRulesId: d["Sold-To Name"],
+          CustId: 1,
+          CommissionRulesId: 1,
           SoldToName: d["Sold-To Name"],
           SoldToAddress: d["Sold-To Address"],
           SoldToState: d["Sold-To State"],
@@ -328,15 +328,32 @@ export default function Transaction() {
           salesman: selectedSalesmanValue,
           InvoiceNo,
           SaleAmount,
-          GrossCommRate: `${commRate}%`,
-          GrossCommAmt: numberToCurrency(grossComm),
-          SalesmanCommAmt: numberToCurrency(salesmanComm),
+          GrossCommRate: commRate,
+          GrossCommAmt: grossComm,
+          SalesmanCommAmt: salesmanComm,
+          // GrossCommRate: `${commRate}%`,
+          // GrossCommAmt: numberToCurrency(grossComm),
+          // SalesmanCommAmt: numberToCurrency(salesmanComm),
         };
-
+        debugger;
+        let res = JSON.stringify(obj);
         transformedArray.push(obj);
-      } else {
-        alert("Invalid sales record" + d);
-        // return false;
+
+        fetch("http://localhost:57636/api/SalesTrasaction/AddTrasaction", {
+          method: "POST",
+          headers: {
+            Accept: "application/form-data",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            //   alert(obj);
+            if (result["status"] === "ok") {
+              window.location.href = "/";
+            }
+          });
       }
     });
     debugger;
