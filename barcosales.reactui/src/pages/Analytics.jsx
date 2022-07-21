@@ -1,26 +1,12 @@
-import React, { useState, Component, useEffect, forwardRef } from "react";
-import MaterialTable, { Column } from "material-table";
-import { Link } from "react-router-dom";
-import * as XLSX from "xlsx";
+import React, { useState, useEffect, forwardRef } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+
 import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Avatar from "@material-ui/core/Avatar";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { StyledEngineProvider } from "@mui/material/styles";
-import GetAppIcon from "@material-ui/icons/GetApp";
+
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-
+import MaterialTable, { Column } from "material-table";
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -30,20 +16,20 @@ import Clear from "@material-ui/icons/Clear";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
 import Edit from "@material-ui/icons/Edit";
 import FilterList from "@material-ui/icons/FilterList";
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import Remove from "@material-ui/icons/Remove";
+
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
-import PrintIcon from "@material-ui/icons/Print";
-import jsPDF from "jspdf";
 import "jspdf-autotable";
 import FactoriesDropdownlist from "./FactoriesDropdownlist";
 import SalesmanDropdownlist from "./SalesmanDropdownlist";
 import PriorYearDropdownlist from "./PriorYearDropdownlist";
 import SalesMonthsDropdownlist from "./SalesMonthsDropdownlist";
+
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 const useStyles = makeStyles((theme) => ({
@@ -93,24 +79,36 @@ export default function Analytics(props) {
     debugger;
     console.log(selectedSalesmanValue);
   };
+  const [startDatevalue, setStartDatevalue] = useState("");
+  const [endDatevalue, setEndDatevalue] = useState("");
 
-  const data = JSON.parse(localStorage.getItem("salesComissionData"));
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    GetSalesTransaction();
+  }, []);
+
+  const GetSalesTransaction = () => {
+    fetch("http://localhost:57636/api/SalesTrasaction/GetTrasaction")
+      .then((res) => res.json())
+      .then((result) => {
+        debugger;
+        setData(result);
+      });
+  };
+  //  const data = JSON.parse(localStorage.getItem("salesComissionData"));
 
   const columns = [
-    { title: "Customer", field: "customer" },
-    // { title: "ShipToName", field: "shipToName" },
-    // { title: "ShipToAddress", field: "shipToAddress" },
-    // { title: "ShipToCity", field: "shipToCity" },
-    // { title: "ShipToState", field: "shipToState" },
-    { title: "Factory", field: "factory" },
-    { title: "Check", field: "check" },
-    { title: "Month", field: "month" },
-    { title: "Salesman", field: "salesman" },
-    { title: "InvoiceNo", field: "invoiceNo" },
-    { title: "SalesAmt", field: "saleAmount" },
-    { title: "GrossCommRate", field: "commRate" },
-    { title: "GrossComm", field: "grossComm" },
-    { title: "SalesmanComm", field: "salesmanComm" },
+    { title: "Customer", field: "SoldToName" },
+    { title: "Factory", field: "Factory" },
+    { title: "Check", field: "Check" },
+    { title: "Month", field: "Month" },
+    { title: "Salesman", field: "SalesmanName" },
+    { title: "Invoice No", field: "InvoiceNo" },
+    { title: "Sale Amount", field: "SaleAmount" },
+    { title: "Gross CommRate", field: "GrossCommRate" },
+    { title: "Gross Comm", field: "GrossCommAmt" },
+    { title: "Salesman Comm", field: "SalesmanCommAmt" },
   ];
 
   const tableIcons = {
@@ -145,26 +143,33 @@ export default function Analytics(props) {
         <form className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="custName"
-                name="custName"
-                variant="outlined"
-                fullWidth
-                id="custName"
-                label="Enter From Date"
-                autoFocus
-              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="Start Date"
+                  value={startDatevalue}
+                  onChange={(newValue) => {
+                    setStartDatevalue(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField variant="outlined" fullWidth {...params} />
+                  )}
+                />
+              </LocalizationProvider>
             </Grid>
+
             <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="custName"
-                name="custName"
-                variant="outlined"
-                fullWidth
-                id="custName"
-                label="Enter To Date"
-                autoFocus
-              />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+                <DatePicker
+                  label="End Date"
+                  value={endDatevalue}
+                  onChange={(newValue) => {
+                    setEndDatevalue(newValue);
+                  }}
+                  renderInput={(params) => (
+                    <TextField variant="outlined" fullWidth {...params} />
+                  )}
+                />
+              </LocalizationProvider>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
