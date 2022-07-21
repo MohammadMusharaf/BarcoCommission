@@ -78,7 +78,7 @@ export default function Transaction() {
   const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
   const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
   const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
-
+  const [checkValue, setCheckValue] = useState("");
   const FactoryOnchange = (value) => {
     setSelectedFactoryValue(value);
     debugger;
@@ -99,283 +99,6 @@ export default function Transaction() {
     debugger;
     console.log(selectedSalesmanValue);
   };
-
-  const data1 = [
-    {
-      customer: "AIR HYDRAULICS SYSTEMS",
-      //  shipToAddress: "4037 CLARKS RIVER RD", shipToCity: "KY", shipToState: "WALLACE ELECTRICAL SYSTEMS",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10001",
-      saleAmount: "$145.00",
-      commRate: "5",
-      grossComm: "$7.25",
-      salesmanComm: "$3.63",
-    },
-    {
-      customer: "APPLIED IND",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10002",
-      saleAmount: "$30.25",
-      commRate: "5",
-      grossComm: "$7.25",
-      salesmanComm: "$3.63",
-    },
-    {
-      customer: "CREST INDUSTRIES",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10003",
-      saleAmount: "$689.80",
-      commRate: "5",
-      grossComm: "$34.49",
-      salesmanComm: "$17.25",
-    },
-    {
-      customer: "DAKOTA FLUID POWER",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10004",
-      saleAmount: "$120.45",
-      commRate: "5",
-      grossComm: "$6.02",
-      salesmanComm: "$3.01",
-    },
-    {
-      customer: "FASTENAL MISC IA",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10005",
-      saleAmount: "$2, 106.64",
-      commRate: "2.5",
-      grossComm: "$52.67",
-      salesmanComm: "$26.34",
-    },
-    {
-      customer: "FASTENAL MISC IL",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10006",
-      saleAmount: "$642.33",
-      commRate: "2.5",
-      grossComm: "$51.60",
-      salesmanComm: "$8.03",
-    },
-    {
-      customer: "FASTENAL MISC KANSAS",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10007",
-      saleAmount: "$2, 064.05",
-      commRate: "2.5",
-      grossComm: "$51.60",
-      salesmanComm: "$25.80",
-    },
-    {
-      customer: "FASTENAL MISC MO",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10008",
-      saleAmount: "$5, 065.96",
-      commRate: "2.5",
-      grossComm: "$126.65",
-      salesmanComm: "$63.33",
-    },
-    {
-      customer: "FASTENAL MISC NE",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "10009",
-      saleAmount: "1, 451.66",
-      commRate: "2.5",
-      grossComm: "$36.29",
-      salesmanComm: "$18.15",
-    },
-    {
-      customer: "FASTENAL MISC SD",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100010",
-      saleAmount: "$710.21",
-      commRate: "2.5",
-      grossComm: "$17.76",
-      salesmanComm: "$8.88",
-    },
-    {
-      customer: "FRANK FLORI EQUIPMENT MARYLAND HGTS MO",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100011",
-      saleAmount: "$260.70",
-      commRate: "5",
-      grossComm: "$13.04",
-      salesmanComm: "$6.52",
-    },
-    {
-      customer: "HYSPECO INC",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100012",
-      saleAmount: "$73.50",
-      commRate: "5",
-      grossComm: "$3.68",
-      salesmanComm: "$1.84",
-    },
-    {
-      customer: "IBT MISC KS",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100013",
-      saleAmount: "$627.98",
-      commRate: "5",
-      grossComm: "$31.40",
-      salesmanComm: "$15.70",
-    },
-    {
-      customer: "JOHNSON AUTOMATION COMPONENTS",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100014",
-      saleAmount: "$136.98",
-      commRate: "5",
-      grossComm: "$6.85",
-      salesmanComm: "$3.43",
-    },
-    {
-      customer: "KAMAN INDUSTRIAL TECHNOLOGIES",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100015",
-      saleAmount: "$118.78",
-      commRate: "5",
-      grossComm: "$5.94",
-      salesmanComm: "$2.97",
-    },
-    {
-      customer: "LESSIN SUPPLY",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100016",
-      saleAmount: "$60.90",
-      commRate: "5",
-      grossComm: "$3.05",
-      salesmanComm: "$1.53",
-    },
-    {
-      customer: "Midland Metal KANSAS CITY MO",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: " February",
-      salesman: "Barrett B",
-      invoiceNo: "100017",
-      saleAmount: "$8, 901.29",
-      commRate: "2.5",
-      grossComm: "$222.53",
-      salesmanComm: "$111.27",
-    },
-    {
-      customer: "PEERLESS SUPPLY INC",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100018",
-      saleAmount: "$132.03",
-      commRate: "5",
-      grossComm: "$6.60",
-      salesmanComm: "$3.30",
-    },
-    {
-      customer: "Quad Power Products LLC",
-      // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100019",
-      saleAmount: "$186.65",
-      commRate: "5",
-      grossComm: "$9.33",
-      salesmanComm: "$4.67",
-    },
-    {
-      customer: "Tompkins OLATHE",
-      //   shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100020",
-      saleAmount: "$308.80",
-      commRate: "5",
-      grossComm: "$15.44",
-      salesmanComm: "$7.7",
-    },
-
-    {
-      customer: "Total for Principal",
-      //  shipToName: "shipToName1", shipToAddress: "shipToAddress1", shipToCity: "shipToCity1", shipToState: "shipToState1",
-      factory: "AF ALPHA FITTINGS",
-      check: "",
-      month: "February",
-      salesman: "Barrett B",
-      invoiceNo: "100021",
-      saleAmount: "$23,773.46",
-      commRate: " ",
-      grossComm: "$665.14",
-      salesmanComm: "$332.57",
-    },
-  ];
 
   const columns1 = [
     { title: "Customer", field: "customer" },
@@ -579,30 +302,56 @@ export default function Transaction() {
   // const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
   // const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
 
+  // public long TrasactionId { get; set; }
+  // public long? InvoiceNo { get; set; }
+  // public long CustId { get; set; }
+  // public long SalesmId { get; set; }
+  // public long FactoryId { get; set; }
+  // public long CommissionRulesId { get; set; }
+  // public string ShipToName { get; set; }
+  // public string ShipToAddress { get; set; }
+  // public string ShipToCity { get; set; }
+  // public string ShipToState { get; set; }
+  // public decimal? ExtPrice { get; set; }
+  // public decimal GrossCommRate { get; set; }
+  // public decimal GrossCommAmt { get; set; }
+  // public decimal ActualCommAmt { get; set; }
+  // SoldToAddress	SoldToState	ShipToName
+
   const handleClick = () => {
     const transformedArray = [];
     data.forEach((d, i) => {
       let comRate = getcommRate(d);
       debugger;
-      const invoiceNo = i; // Will come from API
-      const saleAmount = d["Sale Amount"];
+      const InvoiceNo = i; // Will come from API
+      const SaleAmount = d["Sale Amount"];
       const commRate = comRate; //i % 2 ? 5 : 7; // Will come from API
       const grossComm = (
-        (Number(saleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
+        (Number(SaleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
         100
       ).toFixed(2);
       const salesmanComm = grossComm / 2;
       const obj = {
-        customer: d["Sold-To Name"],
+        TrasactionId: 0,
+        SalesmId: d["Sold-To Name"],
+        SalesmanName: d["Sold-To Name"],
+        CustId: d["Sold-To Name"],
+        CommissionRulesId: d["Sold-To Name"],
+        SoldToName: d["Sold-To Name"],
+        SoldToAddress: d["Sold-To Address"],
+        SoldToState: d["Sold-To State"],
+        ShipToAddress: d["Ship-To Address"],
+        ShipToCity: d["Ship-To City"],
+        ShipToState: d["Ship-To State"],
         Factory: selectedFactoryValue,
-        Check: "",
-        Month: "",
+        Check: checkValue,
+        Month: selectedSalesMonthsValue,
         salesman: selectedSalesmanValue,
-        invoiceNo,
-        saleAmount,
-        commRate: `${commRate}%`,
-        grossComm: numberToCurrency(grossComm),
-        salesmanComm: numberToCurrency(salesmanComm),
+        InvoiceNo,
+        SaleAmount,
+        GrossCommRate: `${commRate}%`,
+        GrossCommAmt: numberToCurrency(grossComm),
+        SalesmanCommAmt: numberToCurrency(salesmanComm),
       };
       transformedArray.push(obj);
     });

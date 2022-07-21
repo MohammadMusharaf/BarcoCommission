@@ -40,31 +40,43 @@ import "jspdf-autotable";
 
 const EXTENSIONS = ["xlsx", "xls", "csv"];
 export default function CalculateCommission(props) {
+  //Sold-To Address	Sold-To State	Ship-To Name	Ship-To Address	Ship-To City	Ship-To State
 
-  
-
-
+  // TrasactionId:0,
+  // SalesmId:d["Sold-To Name"],
+  // SalesmanName:d["Sold-To Name"],
+  // CustId:d["Sold-To Name"],
+  // CommissionRulesId: d["Sold-To Name"],
+  // SoldToName: d["Sold-To Name"],
+  // SoldToAddress:d["Sold-To Address"],
+  // SoldToState:d["Sold-To State"],
+  // ShipToAddress:d["Ship-To Address"],
+  // ShipToCity:d["Ship-To City"],
+  // ShipToState:d["Ship-To State"],
+  // Factory: selectedFactoryValue,
+  // Check: checkValue,
+  // Month: selectedSalesMonthsValue,
+  // salesman: selectedSalesmanValue,
+  // InvoiceNo,
+  // SaleAmount,
+  // GrossCommRate: `${commRate}%`,
+  // GrossCommAmt: numberToCurrency(grossComm),
+  // SalesmanCommAmt: numberToCurrency(salesmanComm),
 
   const columns = [
-    { title: "Customer", field: "customer" },
-    // { title: "ShipToName", field: "shipToName" },
-    // { title: "ShipToAddress", field: "shipToAddress" },
-    // { title: "ShipToCity", field: "shipToCity" },
-    // { title: "ShipToState", field: "shipToState" },
-    { title: "Factory", field: "factory" },
-    { title: "Check", field: "check" },
-    { title: "Month", field: "month" },
-    { title: "Salesman", field: "salesman" },
-    { title: "Invoice No", field: "invoiceNo" },
-    { title: "Sale Amount", field: "saleAmount" },
-    { title: "Gross CommRate", field: "commRate" },
-    { title: "Gross Comm", field: "grossComm" },
-    { title: "Salesman Comm", field: "salesmanComm" }
+    { title: "Customer", field: "SoldToName" },
+    { title: "Factory", field: "Factory" },
+    { title: "Check", field: "Check" },
+    { title: "Month", field: "Month" },
+    { title: "Salesman", field: "SalesmanName" },
+    { title: "Invoice No", field: "InvoiceNo" },
+    { title: "Sale Amount", field: "SaleAmount" },
+    { title: "Gross CommRate", field: "GrossCommRate" },
+    { title: "Gross Comm", field: "GrossCommAmt" },
+    { title: "Salesman Comm", field: "SalesmanCommAmt" },
   ];
 
   const data = JSON.parse(localStorage.getItem("salesComissionData"));
-  
-
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -95,14 +107,13 @@ export default function CalculateCommission(props) {
       <div>
         {/* <h4>Calculated Sales Commission </h4> */}
         <Button type="submit" fullWidth variant="contained" color="primary">
-        Save Calculated Sales Commission 
+          Save Calculated Sales Commission
         </Button>
         <MaterialTable
           title=""
           columns={columns}
           data={data}
           icons={tableIcons}
-      
           options={{
             sorting: true,
             search: true,
@@ -132,7 +143,7 @@ export default function CalculateCommission(props) {
           }}
         />
         <Button type="submit" fullWidth variant="contained" color="primary">
-        Save Calculated Sales Commission 
+          Save Calculated Sales Commission
         </Button>
       </div>
     </>
