@@ -360,8 +360,6 @@ namespace BarcoSales.EFModel
 
                 entity.ToTable("salestrasaction");
 
-                entity.Property(e => e.ActualCommAmt).HasColumnType("decimal(19,4)");
-
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("timestamp")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -373,6 +371,13 @@ namespace BarcoSales.EFModel
                 entity.Property(e => e.GrossCommAmt).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.GrossCommRate).HasColumnType("decimal(19,4)");
+
+                entity.Property(e => e.SalesmanCommAmt).HasColumnType("decimal(19,4)");
+
+                entity.Property(e => e.SalesmanName)
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
 
                 entity.Property(e => e.ShipToAddress)
                     .HasColumnType("varchar(50)")
@@ -391,6 +396,21 @@ namespace BarcoSales.EFModel
 
                 entity.Property(e => e.ShipToState)
                     .HasColumnType("varchar(50)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToAddress)
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToName)
+                    .HasColumnType("varchar(255)")
+                    .HasCharSet("utf8mb4")
+                    .HasCollation("utf8mb4_0900_ai_ci");
+
+                entity.Property(e => e.SoldToState)
+                    .HasColumnType("varchar(255)")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_0900_ai_ci");
 

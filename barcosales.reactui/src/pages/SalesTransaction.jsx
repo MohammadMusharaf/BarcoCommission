@@ -58,7 +58,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export default function Transaction() {
-  // const Transaction = (props) =>
+  const tableIcons = {
+    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
+    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
+    // DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
+    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
+    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
+    // FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
+    // LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
+    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
+    PreviousPage: forwardRef((props, ref) => (
+      <ChevronLeft {...props} ref={ref} />
+    )),
+    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
+    SortArrow: forwardRef((props, ref) => (
+      <ArrowDownward {...props} ref={ref} />
+    )),
+    // ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
+    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  };
 
   const classes = useStyles();
 
@@ -273,117 +295,55 @@ export default function Transaction() {
     return rowData.CommisionRate;
   };
 
-  // customer: "Quad Power Products LLC",
-  //     // shipToName: "shipToName", shipToAddress: "shipToAddress", shipToCity: "shipToCity", shipToState: "shipToState",
-  //     factory: "AF ALPHA FITTINGS",
-  //     check: "",
-  //     month: "February",
-  //     salesman: "Barrett B",
-  //     invoiceNo: "100019",
-  //     saleAmount: "$186.65",
-  //     commRate: "5",
-  //     grossComm: "$9.33",
-  //     salesmanComm: "$4.67",
-
-  // { title: "Customer", field: "customer" },
-
-  // { title: "Factory", field: "factory" },
-  // { title: "Check", field: "check" },
-  // { title: "Month", field: "month" },
-  // { title: "Salesman", field: "salesman" },
-  // { title: "Invoice No", field: "invoiceNo" },
-  // { title: "Sale Amount", field: "saleAmount" },
-  // { title: "Gross CommRate", field: "commRate" },
-  // { title: "Gross Comm", field: "grossComm" },
-  // { title: "Salesman Comm", field: "salesmanComm" }
-
-  // const [selectedFactoryValue, setSelectedFactoryValue] = useState("");
-  // const [selectedPriorYearValue, setSelectedPriorYearValue] = useState("");
-  // const [selectedSalesMonthsValue, setSelectedSalesMonthsValue] = useState("");
-  // const [selectedSalesmanValue, setSelectedSalesmanValue] = useState("");
-
-  // public long TrasactionId { get; set; }
-  // public long? InvoiceNo { get; set; }
-  // public long CustId { get; set; }
-  // public long SalesmId { get; set; }
-  // public long FactoryId { get; set; }
-  // public long CommissionRulesId { get; set; }
-  // public string ShipToName { get; set; }
-  // public string ShipToAddress { get; set; }
-  // public string ShipToCity { get; set; }
-  // public string ShipToState { get; set; }
-  // public decimal? ExtPrice { get; set; }
-  // public decimal GrossCommRate { get; set; }
-  // public decimal GrossCommAmt { get; set; }
-  // public decimal ActualCommAmt { get; set; }
-  // SoldToAddress	SoldToState	ShipToName
-
   const handleClick = () => {
     const transformedArray = [];
     data.forEach((d, i) => {
       let comRate = getcommRate(d);
-      debugger;
-      const InvoiceNo = i; // Will come from API
-      const SaleAmount = d["Sale Amount"];
-      const commRate = comRate; //i % 2 ? 5 : 7; // Will come from API
-      const grossComm = (
-        (Number(SaleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
-        100
-      ).toFixed(2);
-      const salesmanComm = grossComm / 2;
-      const obj = {
-        TrasactionId: 0,
-        SalesmId: d["Sold-To Name"],
-        SalesmanName: d["Sold-To Name"],
-        CustId: d["Sold-To Name"],
-        CommissionRulesId: d["Sold-To Name"],
-        SoldToName: d["Sold-To Name"],
-        SoldToAddress: d["Sold-To Address"],
-        SoldToState: d["Sold-To State"],
-        ShipToAddress: d["Ship-To Address"],
-        ShipToCity: d["Ship-To City"],
-        ShipToState: d["Ship-To State"],
-        Factory: selectedFactoryValue,
-        Check: checkValue,
-        Month: selectedSalesMonthsValue,
-        salesman: selectedSalesmanValue,
-        InvoiceNo,
-        SaleAmount,
-        GrossCommRate: `${commRate}%`,
-        GrossCommAmt: numberToCurrency(grossComm),
-        SalesmanCommAmt: numberToCurrency(salesmanComm),
-      };
-      transformedArray.push(obj);
+      if (comRate) {
+        debugger;
+        const InvoiceNo = i; // Will come from API
+        const SaleAmount = d["Sale Amount"];
+        const commRate = comRate; //i % 2 ? 5 : 7; // Will come from API
+        const grossComm = (
+          (Number(SaleAmount.replace(/[^0-9.-]+/g, "")) * commRate) /
+          100
+        ).toFixed(2);
+        debugger;
+        const salesmanComm = grossComm / 2;
+        const obj = {
+          TrasactionId: 0,
+          SalesmId: d["Sold-To Name"],
+          SalesmanName: d["Sold-To Name"],
+          CustId: d["Sold-To Name"],
+          CommissionRulesId: d["Sold-To Name"],
+          SoldToName: d["Sold-To Name"],
+          SoldToAddress: d["Sold-To Address"],
+          SoldToState: d["Sold-To State"],
+          ShipToAddress: d["Ship-To Address"],
+          ShipToCity: d["Ship-To City"],
+          ShipToState: d["Ship-To State"],
+          Factory: selectedFactoryValue,
+          Check: checkValue,
+          Month: selectedSalesMonthsValue,
+          salesman: selectedSalesmanValue,
+          InvoiceNo,
+          SaleAmount,
+          GrossCommRate: `${commRate}%`,
+          GrossCommAmt: numberToCurrency(grossComm),
+          SalesmanCommAmt: numberToCurrency(salesmanComm),
+        };
+
+        transformedArray.push(obj);
+      } else {
+        alert("Invalid sales record" + d);
+        // return false;
+      }
     });
     debugger;
     localStorage.setItem(
       "salesComissionData",
       JSON.stringify(transformedArray)
     );
-  };
-
-  const tableIcons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
-    // DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref} />),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref} />),
-    // FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
-    // LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref} />),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
-    PreviousPage: forwardRef((props, ref) => (
-      <ChevronLeft {...props} ref={ref} />
-    )),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
-    SortArrow: forwardRef((props, ref) => (
-      <ArrowDownward {...props} ref={ref} />
-    )),
-    // ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
   };
 
   return (

@@ -75,8 +75,20 @@ export default function CalculateCommission(props) {
     { title: "Gross Comm", field: "GrossCommAmt" },
     { title: "Salesman Comm", field: "SalesmanCommAmt" },
   ];
+  const [data, setData] = useState();
+  useEffect(() => {
+    GetSalesTransaction();
+  }, []);
 
-  const data = JSON.parse(localStorage.getItem("salesComissionData"));
+  const GetSalesTransaction = () => {
+    fetch("http://localhost:57636/api/SalesTrasaction/GetTrasaction")
+      .then((res) => res.json())
+      .then((result) => {
+        setData(JSON.parse(localStorage.getItem("salesComissionData")));
+      });
+  };
+
+  //  const data = JSON.parse(localStorage.getItem("salesComissionData"));
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
