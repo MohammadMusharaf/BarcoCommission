@@ -35,6 +35,7 @@ namespace BarcoSales.DAO
         public Commissionrules IGetCommissionRulesById(int id)
         {
             var commissionRules = dbContext.Commissionrules.FirstOrDefault(x => x.CommissionRulesId == id);
+    
             return commissionRules;
         }
         public Commissionrules IUpdateCommissionRules(Commissionrules commissionRules)

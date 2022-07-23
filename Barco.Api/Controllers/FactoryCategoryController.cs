@@ -53,5 +53,13 @@ namespace Barco.Api.Controllers
         {
             return factoryCategoryService.IGetFactoryCategoryById(id);
         }
+ [HttpGet]
+        [Route("[action]")]
+        [Route("api/factoryCategory/GetCategory")]
+        public Factorycategory GetFactoryCategoryforDll()
+        {
+            return factoryCategoryService.IGetFactoryCategoryforDll();
+        }
+
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BarcoSales.EFModel.ViewModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,10 +25,10 @@ namespace Barco.Api.Controllers
         [HttpGet]
         [Route("[action]")]
         [Route("api/Customer/GetCustomer")]
-        public IEnumerable<Customer> GetCustomer()
+        public string GetCustomer()
         {
-
-            return customerService.IGetCustomer();
+            return customerService.IGetCustomerInfo();
+           // return customerService.IGetCustomer();
         }
         [HttpPost]
         [Route("[action]")]
@@ -58,6 +59,14 @@ namespace Barco.Api.Controllers
         public Customer GetCustomerId(int id)
         {
             return customerService.IGetCustomerById(id);
+        }
+        [HttpPost]
+        [Route("[action]")]
+        [Route("api/Customer/GetCustomerInfo")]
+        public string GetCustomerInfo(CustomerViewModel customerViewModel)
+        {
+
+            return customerService.IGetCustomerInfo(customerViewModel);
         }
     }
 }

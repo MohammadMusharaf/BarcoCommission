@@ -13,6 +13,6 @@ namespace BarcoSales.Repository
         Factorycategory IAddFactoryCategory(Factorycategory factoryCategory);
         Factorycategory IUpdateFactoryCategory(Factorycategory factoryCategory);
         Factorycategory IDeleteFactoryCategory(int id);
-
+ Factorycategory IGetFactoryCategoryforDll();
     }
 }

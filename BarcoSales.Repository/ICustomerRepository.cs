@@ -1,4 +1,5 @@
 ﻿using BarcoSales.EFModel;
+using BarcoSales.EFModel.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +17,7 @@ namespace BarcoSales.Repository
         Customer IAddCustomer(Customer customer);
         Customer IUpdateCustomer(Customer customer);
         Customer IDeleteCustomer(int id);
-
+  string IGetCustomerInfo(CustomerViewModel customerViewModel);
+        string IGetCustomerInfo();
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace BarcoSales.EFModel
+namespace BarcoSales.EFModel.ViewModel
 {
-    public partial class Customer
+
+    public class CustomerViewModel
     {
         public long Cid { get; set; }
         public string CustId { get; set; }
@@ -20,11 +22,15 @@ namespace BarcoSales.EFModel
         public string Phone { get; set; }
         public string Territory { get; set; }
         public long? FactoryId { get; set; }
+        public string FactoryName { get; set; }
+        public string PrincCode { get; set; }
         public DateTime? CreatedDate { get; set; }
         public long? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public long? UpdatedBy { get; set; }
         public bool? IsActive { get; set; }
         public long? SalesmanId { get; set; }
+        public string SalesmanCode { get; set; }
+        public string SalesmanName { get; set; }
     }
 }

@@ -53,7 +53,7 @@ export default function Customers() {
   const classes = useStyles();
 
   const columns = [
-    { title: "SN#", field: "Cid" },
+    { title: "SN#", field: "CId" },
     { title: "CustId", field: "CustId" },
     { title: "CustomerName", field: "CustomerName" },
     { title: "CustAliasName", field: "CustAliasName" },
@@ -64,35 +64,43 @@ export default function Customers() {
     { title: "Zip", field: "Zip" },
     { title: "Contact", field: "Contact" },
     { title: "Phone", field: "Phone" },
-    // { title: "FAX", field: "FAX" },
     { title: "EmailId", field: "EmailId" },
     { title: "Mobile", field: "Mobile" },
     { title: "Territory", field: "Territory" },
-    { title: "SalesmanId", field: "SalesmanId" },
+    { title: "SalesmanCode", field: "SalesmanCode" },
+    { title: "SalesmanName", field: "SalesmanName" },
     { title: "PrincCode", field: "PrincCode" },
+    { title: "FactoryName", field: "FactoryName" },
     { title: "CreationDate", field: "CreatedDate" },
     { title: "IsActive", field: "IsActive" },
   ];
-  //   Address: "LF flan"
-  // City: "CD"
-  // Contact: null
-  // CreatedBy: 101
-  // CreatedDate: "2022-05-11T20:05:12"
-  // CustAliasName: null
-  // CustId: 1
-  // CustomerCode: "ADsys"
-  // CustomerName: "Musharaf"
-  // EmailId: "adsys@gail.com"
-  // IsActive: true
-  // Mobile: null
-  // Phone: null
-  // PrincCode: null
-  // SalesmanId: null
-  // State: "LF"
-  // Territory: null
-  // UpdatedBy: 101
-  // UpdatedDate: "2022-05-11T20:05:12"
-  // Zip: "25533"
+
+  // const objbody = {
+
+  //   CId: 0,
+  //   CustId: 0,
+  //   CustomerName: '',
+  //   CustAliasName: '',
+  //   Branch: '',
+  //   Address: '',
+  //   City: '',
+  //   State: '',
+  //   Zip: '',
+  //   Contact: '',
+  //   Phone: '',
+  //   FactoryId:'',
+  //   FactoryName:'',
+  //   PrincCode: '',
+  //   EmailId: '',
+  //   Mobile: '',
+  //   Territory: '',
+  //   SalesmanId: 0,
+  //   SalesmanCode:'',
+  //   SalesmanName:'',
+  //   CreatedDate: '',
+  //   IsActive: 0,
+
+  // };
 
   const [data, setData] = useState();
   const [salesman, setSalesman] = useState();
@@ -100,30 +108,32 @@ export default function Customers() {
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    //UsersGet()
     GetCustomers();
   }, []);
-
-  const UsersGet = () => {
-    fetch("https://www.mecallapi.com/api/users")
-      .then((res) => res.json())
-      .then((result) => {
-        setUsers(result);
-      });
-  };
 
   const GetCustomers = () => {
     fetch("http://localhost:57636/api/Customer/GetCustomer")
       .then((res) => res.json())
       .then((result) => {
-        debugger;
-        setCustomers(result);
         setData(result);
       });
   };
-
-  const UpdateUser = (id) => {
-    window.location = "/update/" + id;
+  const GetCustomersSearch = () => {
+    fetch("http://localhost:57636/api/Customer/GetCustomerInfo", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(""),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        alert(result["message"]);
+        if (result["status"] === "ok") {
+          // UsersGet();
+        }
+      });
   };
 
   const UserDelete = (id) => {
@@ -142,7 +152,7 @@ export default function Customers() {
       .then((result) => {
         alert(result["message"]);
         if (result["status"] === "ok") {
-          UsersGet();
+          // UsersGet();
         }
       });
   };
