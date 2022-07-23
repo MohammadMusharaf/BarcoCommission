@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MySql.Data.MySqlClient;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace BarcoSales.DAO
 {
@@ -15,6 +18,24 @@ namespace BarcoSales.DAO
         {
 
             dbContext = _db;
+        } 
+        public string IGetFactoryInfo()
+        {
+            
+            string conn = "server=localhost;port=3306;database=barcosalescommission;uid=root;password=root";
+            MySqlConnection sql_conn = new MySqlConnection(conn);
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = sql_conn;
+            // cmd.CommandText = "CALL storedprocname (@para1, @para2)";
+            cmd.CommandText = "CALL SP_GetFactoryInfo()";
+            sql_conn.Open();
+            MySqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            DataTable dt = new DataTable();
+            dt.Load(rdr);
+            string customer;
+            customer = JsonConvert.SerializeObject(dt);
+            return customer;
+
         }
         public IEnumerable<Factory> IGetFactory()
         {

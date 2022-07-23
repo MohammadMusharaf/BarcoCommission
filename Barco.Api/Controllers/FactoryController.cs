@@ -19,13 +19,23 @@ namespace Barco.Api.Controllers
         {
             factoryService = iFactory;
         }
+        //[HttpGet]
+        //[Route("[action]")]
+        //[Route("api/Factory/GetFactory")]
+        //public IEnumerable<Factory> GetFactory()
+        //{
+        //    return factoryService.IGetFactory();
+        //}
+
         [HttpGet]
         [Route("[action]")]
         [Route("api/Factory/GetFactory")]
-        public IEnumerable<Factory> GetFactory()
+        public string GetFactory()
         {
-            return factoryService.IGetFactory();
+            return factoryService.IGetFactoryInfo();
+            // return customerService.IGetCustomer();
         }
+
         [HttpPost]
         [Route("[action]")]
         [Route("api/Factory/AddFactory")]

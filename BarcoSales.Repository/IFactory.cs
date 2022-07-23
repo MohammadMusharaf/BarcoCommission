@@ -9,6 +9,7 @@ namespace BarcoSales.Repository
     {
 
         IEnumerable<Factory> IGetFactory();
+        string IGetFactoryInfo();
         Factory IGetFactoryById(int id);
         Factory IAddFactory(Factory factory);
         Factory IUpdateFactory(Factory factory);

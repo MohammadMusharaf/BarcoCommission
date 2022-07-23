@@ -20,13 +20,21 @@ namespace Barco.Api.Controllers
             salesTrasactionService = IsalesTrasactionService;
 
         }
+        //[HttpGet]
+        //[Route("[action]")]
+        //[Route("api/Trasaction/GetTrasaction")]
+        //public IEnumerable<Salestrasaction> GetTrasaction()
+        //{
+        //    return salesTrasactionService.IGetSalesTrasaction();
+        //}
         [HttpGet]
         [Route("[action]")]
         [Route("api/Trasaction/GetTrasaction")]
-        public IEnumerable<Salestrasaction> GetTrasaction()
+        public string GetTrasaction()
         {
             return salesTrasactionService.IGetSalesTrasaction();
         }
+
         [HttpPost]
         [Route("[action]")]
         [Route("api/Trasaction/AddTrasaction")]

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace BarcoSales.Repository
 {
-   public interface ISalesTrasaction
+    public interface ISalesTrasaction
     {
-
-        IEnumerable<Salestrasaction> IGetSalesTrasaction();
+        string IGetSalesTrasaction();
+       // IEnumerable<Salestrasaction> IGetSalesTrasaction();
         Salestrasaction IGetSalesTrasactionById(int id);
         Salestrasaction IAddSalesTrasaction(Salestrasaction salesTrasaction);
         Salestrasaction IUpdateSalesTrasaction(Salestrasaction salesTrasaction);

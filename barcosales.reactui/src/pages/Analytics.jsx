@@ -99,17 +99,52 @@ export default function Analytics(props) {
   //  const data = JSON.parse(localStorage.getItem("salesComissionData"));
 
   const columns = [
+    { title: "TrasactionId", field: "TrasactionId" },
+    { title: "CustId", field: "CustId" },
     { title: "Customer", field: "SoldToName" },
-    { title: "Factory", field: "Factory" },
+    { title: "FactoryName", field: "FactoryName" },
     { title: "Check", field: "Check" },
     { title: "Month", field: "Month" },
-    { title: "Salesman", field: "SalesmanName" },
-    { title: "Invoice No", field: "InvoiceNo" },
-    { title: "Sale Amount", field: "SaleAmount" },
-    { title: "Gross CommRate", field: "GrossCommRate" },
-    { title: "Gross Comm", field: "GrossCommAmt" },
-    { title: "Salesman Comm", field: "SalesmanCommAmt" },
+    { title: "SalesmanName", field: "SalesmanName" },
+    { title: "InvoiceNo", field: "InvoiceNo" },
+    { title: "SaleAmount", field: "ExtPrice" },
+    { title: "GrossCommRate", field: "GrossCommRate" },
+    { title: "GrossCommAmt", field: "GrossCommAmt" },
+    { title: "SalesmanCommAmt", field: "SalesmanCommAmt" },
+    { title: "SoldToAddress", field: "ShipToAddress" },
+    { title: "SoldToState", field: "ShipToCity" },
+    { title: "ShipToName", field: "ShipToName" },
+    { title: "ShipToAddress", field: "ShipToAddress" },
+    { title: "ShipToCity", field: "ShipToCity" },
+    { title: "ShipToState", field: "ShipToState" },
   ];
+
+  //   t.TrasactionId ,
+  // t.InvoiceNo,
+  // t.CustId,
+  // t.SoldToName,
+  // t.SoldToAddress,
+  // t.SoldToState ,
+  // t.SalesmId ,
+  // s.SalesmanName,
+  // t.SalesmanName ,
+  // t.FactoryId,
+  // f.FactoryName,
+  // t.CommissionRulesId,
+  // t.ShipToName ,
+  // t.ShipToAddress,
+  // t.ShipToCity ,
+  // t.ShipToState ,
+  // t.ExtPrice,
+  // t.GrossCommRate ,
+  // t.GrossCommAmt ,
+  // t.SalesmanCommAmt,
+  // t.CreatedDate ,
+  // t.CreatedBy ,
+  // t.UpdatedDate ,
+  // t.UpdatedBy ,
+  // t.IsActive ,
+  // t.FinYear
 
   const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -203,14 +238,6 @@ export default function Analytics(props) {
           columns={columns}
           data={data}
           icons={tableIcons}
-          // actions={[
-          //   {
-          //     icon: () => <PrintIcon />, // you can pass icon too
-          //     tooltip: "Export to Pdf",
-          //     onClick: () => downloadPdf(),
-          //     isFreeAction: true,
-          //   },
-          // ]}
           options={{
             sorting: true,
             search: true,

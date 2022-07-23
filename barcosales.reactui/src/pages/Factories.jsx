@@ -122,18 +122,28 @@ export default function Factories(props) {
     fetch("http://localhost:57636/api/Factory/GetFactory")
       .then((res) => res.json())
       .then((result) => {
+        debugger;
         setData(result);
       });
   };
 
   const columns = [
     { title: "FactoryId", field: "FactoryId" },
-    { title: "FactoryCategoryId", field: "FactoryCategoryId" },
+    { title: "FactoryCategoryName", field: "FactoryCategoryName" },
     { title: "FactoryName", field: "FactoryName" },
     { title: "PrincCode", field: "PrincCode" },
     { title: "IsActive", field: "IsActive" },
   ];
-
+  //   f.FactoryId,
+  //   c.FactoryCategoryId,
+  //   c.FactoryCategoryName,
+  //   f.FactoryName,
+  //   f.PrincCode,
+  //   f.CreatedDate,
+  //   f.CreatedBy,
+  //   f.UpdatedDate,
+  //   f.UpdatedBy,
+  //   f.IsActive
   const downloadPdf = () => {
     const doc = new jsPDF();
     doc.text("Sales Commission Details", 20, 10);
