@@ -9,7 +9,8 @@ namespace BarcoSales.Repository
   public  interface ICommissionRules
     {
 
-        IEnumerable<Commissionrules> IGetCommissionRules();
+        // IEnumerable<Commissionrules> IGetCommissionRules();
+      string IGetCommissionRules();
         Commissionrules IGetCommissionRulesById(int id);
         Commissionrules IAddCommissionRules(Commissionrules commissionRules);
         Commissionrules IUpdateCommissionRules(Commissionrules commissionRules);

@@ -21,10 +21,18 @@ namespace Barco.Api.Controllers
             commissionRulesService = iICommissionRules;
 
         }
+        //[HttpGet]
+        //[Route("[action]")]
+        //[Route("api/CommissionRules/GetCommissionRules")]
+        //public IEnumerable<Commissionrules> GetCommissionRules()
+        //{
+
+        //    return commissionRulesService.IGetCommissionRules();
+        //}
         [HttpGet]
         [Route("[action]")]
         [Route("api/CommissionRules/GetCommissionRules")]
-        public IEnumerable<Commissionrules> GetCommissionRules()
+        public string GetCommissionRules()
         {
 
             return commissionRulesService.IGetCommissionRules();

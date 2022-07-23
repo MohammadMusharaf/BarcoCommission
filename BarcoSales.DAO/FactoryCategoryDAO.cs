@@ -81,8 +81,8 @@ namespace BarcoSales.DAO
             MySqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             DataTable dt = new DataTable();
             dt.Load(rdr);
-            string JSONresult;
-            JSONresult = JsonConvert.SerializeObject(dt);
+
+            string JSONresult = JsonConvert.SerializeObject(dt);
             //var factoryCategory = dbContext.Factorycategory.FirstOrDefault(x => x.FactoryCategoryId == id);
             //dbContext.Entry(factoryCategory).State = EntityState.Deleted;
             //dbContext.SaveChanges();

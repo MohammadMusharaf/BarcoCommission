@@ -98,13 +98,28 @@ export default function CommissonRules(props) {
   const [data, setData] = useState([]);
   const columns = [
     { title: "CommissionRulesId", field: "CommissionRulesId" },
-    { title: "CustId", field: "CustId" },
-    { title: "SalesmanId", field: "SalesmanId" },
-    { title: "FactoryId", field: "FactoryId" },
+    { title: "CustomerName", field: "CustomerName" },
+    { title: "SalesmanName", field: "SalesmanName" },
+    { title: "FactoryName", field: "FactoryName" },
     { title: "CommisionRate", field: "CommisionRate" },
-    { title: "FinYearId", field: "FinYearId" },
+    // { title: "FinYearId", field: "FinYearId" },
     { title: "IsActive", field: "IsActive" },
   ];
+
+  //   r.CommissionRulesId,
+  // r.CustId,
+  // c.CustomerName,
+  // r.SalesmId ,
+  // s.SalesmanName,
+  // r.FactoryId,
+  // f.FactoryName,
+  // r.CommisionRate,
+  // r.CreatedDate ,
+  // r.CreatedBy ,
+  // r.UpdatedDate ,
+  // r.UpdatedBy ,
+  // r.IsActive ,
+  // r.FinYear
 
   const [finYear, setFinYear] = useState("");
   const [factoryName, setFactoryName] = useState("");

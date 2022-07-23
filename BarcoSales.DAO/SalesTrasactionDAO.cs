@@ -38,9 +38,9 @@ namespace BarcoSales.DAO
             MySqlDataReader rdr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             DataTable dt = new DataTable();
             dt.Load(rdr);
-            string customer;
-            customer = JsonConvert.SerializeObject(dt);
-            return customer;
+             
+            string Result = JsonConvert.SerializeObject(dt);
+            return Result;
 
         }
         public Salestrasaction IAddSalesTrasaction(Salestrasaction salesTrasaction)
